@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FontFamily x:Key="DefaultFontFamily">Resources/Fonts/#Viking</FontFamily>
+    <!--LED字体-->
+    <FontFamily x:Key="QuartzFontFamily">Resources/Fonts/#Quartz</FontFamily>
+    <!--图标字体-->
+    <FontFamily x:Key="AwesomeFontFamily">Resources/Fonts/#FontAwesome</FontFamily>
+</ResourceDictionary>

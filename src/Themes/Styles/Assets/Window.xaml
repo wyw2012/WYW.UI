@@ -1,0 +1,219 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:attach="clr-namespace:WYW.UI.Controls.Attach"
+                    xmlns:control="clr-namespace:WYW.UI.Controls"
+                    xmlns:command="clr-namespace:WYW.UI.Commands">
+    <Style x:Key="WindowNormalStyle" TargetType="{x:Type Window}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
+        <Setter Property="Background" Value="{StaticResource Control.Background}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}"/>
+        <Setter Property="WindowChrome.WindowChrome" >
+            <Setter.Value>
+                <WindowChrome CaptionHeight="35"  ResizeBorderThickness="5"  />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Window">
+                    <Border SnapsToDevicePixels="True" 
+                            CornerRadius="{Binding Path=(attach:WindowElement.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            Background="{TemplateBinding Background}" >
+                        <Grid Margin="{TemplateBinding Padding}"  ClipToBounds="True">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35" />
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid Background="{TemplateBinding Background}"  >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="1" Name="ButtonPanel" WindowChrome.IsHitTestVisibleInChrome="True" UseLayoutRounding="True" 
+                                            HorizontalAlignment="Right" Orientation="Horizontal" Background="Transparent">
+                                    <Button Width="45" attach:ButtonElement.IcoGeometry="{StaticResource  WindowMinGeometry}"  Style="{StaticResource SystemButtonStyle}"
+                                            x:Name="ButtonMin" Command="{x:Static command:WindowCommand.MinimizeWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                                    <Button Width="45" attach:ButtonElement.IcoGeometry="{StaticResource  WindowMaxGeometry}"  Style="{StaticResource SystemButtonStyle}"
+                                            x:Name="ButtonMax" Command="{x:Static command:WindowCommand.MaximizeWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                                    <Button Width="45" attach:ButtonElement.IcoGeometry="{StaticResource  WindowRestoreGeometry}"  Style="{StaticResource SystemButtonStyle}"
+                                            x:Name="ButtonRestore" Command="{x:Static command:WindowCommand.RestoreWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                                    <Button Width="45" attach:ButtonElement.IcoGeometry="{StaticResource  CloseGeometry}"     Style="{StaticResource SystemButtonStyle}"
+                                            x:Name="ButtonClose" Command="{x:Static command:WindowCommand.CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                                </StackPanel>
+                                <Grid Grid.Column="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="{TemplateBinding Icon}" x:Name="Icon" Margin="10,6,0,6"/>
+                                    <TextBlock Grid.Column="1" Text="{TemplateBinding Title}" Padding="10,0,0,0" Name="Title" VerticalAlignment="Center"/>
+                                    <ContentPresenter WindowChrome.IsHitTestVisibleInChrome="True" Grid.Column="2" 
+                                                      x:Name="ContentPresenterMain" Margin="10,0,0,0" 
+                                                      VerticalAlignment="Center"
+                                                      Content="{Binding Path=(attach:WindowElement.TitleAreaContent),RelativeSource={RelativeSource TemplatedParent}}"/>
+                                </Grid>
+                            </Grid>
+                            <AdornerDecorator Grid.Row="1">
+                                <ContentPresenter ClipToBounds="True"/>
+                            </AdornerDecorator>
+                            <ResizeGrip Width="10" Height="10" x:Name="ResizeGrip" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" IsTabStop="False" Visibility="Collapsed" WindowChrome.ResizeGripDirection="BottomRight" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter Property="Opacity" Value="0.8" TargetName="ContentPresenterMain"/>
+                            <Setter Property="Opacity" Value="0.8" TargetName="ButtonPanel"/>
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter Property="Padding" Value="10"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
+                            <Setter Property="Visibility" Value="Visible" TargetName="ButtonRestore"/>
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Normal">
+                            <Setter Property="Visibility" Value="Visible" TargetName="ButtonMax"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonRestore"/>
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="NoResize">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMin"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonRestore"/>
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="CanMinimize">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonRestore"/>
+                        </Trigger>
+                        <Trigger Property="WindowStyle" Value="ToolWindow">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMin"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonRestore"/>
+                        </Trigger>
+                        <Trigger Property="WindowStyle" Value="None">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonPanel"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True" SourceName="ButtonClose">
+                            <Setter Property="Background" TargetName="ButtonClose" Value="#ffe81123"/>
+                            <Setter Property="Foreground" TargetName="ButtonClose" Value="white"/>
+                        </Trigger>
+                        <Trigger Property="Icon" Value="{x:Null}">
+                            <Setter Property="Visibility" TargetName="Icon" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="Title" Value="">
+                            <Setter Property="Visibility" TargetName="Title" Value="Collapsed"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ResizeMode" Value="CanResizeWithGrip"/>
+                                <Condition Property="WindowState" Value="Normal" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ResizeGrip" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--无标题栏的Window-->
+    <Style x:Key="WindowNoChromeStyle" TargetType="{x:Type Window}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
+        <Setter Property="Background" Value="{StaticResource Control.Background}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}"/>
+        <Setter Property="WindowChrome.WindowChrome" >
+            <Setter.Value>
+                <WindowChrome CaptionHeight="35"  ResizeBorderThickness="5"  />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Window">
+                    <Border SnapsToDevicePixels="True" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            Background="{TemplateBinding Background}" 
+                            CornerRadius="{Binding Path=(attach:WindowElement.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <ContentPresenter ClipToBounds="True"/>
+                            <AdornerDecorator>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition MinHeight="35"/>
+                                        <RowDefinition Height="21*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid  Name="ButtonPanel" WindowChrome.IsHitTestVisibleInChrome="True" UseLayoutRounding="True" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="30*"/>
+                                                <ColumnDefinition MinWidth="45"/>
+                                                <ColumnDefinition MinWidth="45"/>
+                                                <ColumnDefinition MinWidth="45"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Grid.Column="1"  attach:ButtonElement.IcoGeometry="{StaticResource  WindowMinGeometry}"  Style="{StaticResource SystemButtonStyle}"
+                                            x:Name="ButtonMin" Command="{x:Static command:WindowCommand.MinimizeWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                                            <Button Grid.Column="2" attach:ButtonElement.IcoGeometry="{StaticResource  WindowMaxGeometry}" Style="{StaticResource SystemButtonStyle}"
+                                            x:Name="ButtonMax" Command="{x:Static command:WindowCommand.MaximizeWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                                            <Button Grid.Column="2"  attach:ButtonElement.IcoGeometry="{StaticResource  WindowRestoreGeometry}"  Style="{StaticResource SystemButtonStyle}"
+                                            x:Name="ButtonRestore" Command="{x:Static command:WindowCommand.RestoreWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                                            <Button Grid.Column="3"  attach:ButtonElement.IcoGeometry="{StaticResource  CloseGeometry}"   Style="{StaticResource SystemButtonStyle}"
+                                            x:Name="ButtonClose" Command="{x:Static command:WindowCommand.CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </AdornerDecorator>
+                            <ResizeGrip Width="10" Height="10" x:Name="ResizeGrip" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" IsTabStop="False" Visibility="Collapsed" WindowChrome.ResizeGripDirection="BottomRight" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter Property="Opacity" Value="0.8" TargetName="ButtonPanel"/>
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter Property="Padding" Value="10"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
+                            <Setter Property="Visibility" Value="Visible" TargetName="ButtonRestore"/>
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Normal">
+                            <Setter Property="Visibility" Value="Visible" TargetName="ButtonMax"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonRestore"/>
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="NoResize">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMin"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonRestore"/>
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="CanMinimize">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonRestore"/>
+                        </Trigger>
+                        <Trigger Property="WindowStyle" Value="ToolWindow">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMin"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonRestore"/>
+                        </Trigger>
+                        <Trigger Property="WindowStyle" Value="None">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonPanel"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True" SourceName="ButtonClose">
+                            <Setter Property="Background" TargetName="ButtonClose" Value="#ffe81123"/>
+                            <Setter Property="Foreground" TargetName="ButtonClose" Value="white"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ResizeMode" Value="CanResizeWithGrip"/>
+                                <Condition Property="WindowState" Value="Normal" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ResizeGrip" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

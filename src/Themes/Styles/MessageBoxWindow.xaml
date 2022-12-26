@@ -1,0 +1,209 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:attach="clr-namespace:WYW.UI.Controls.Attach"
+                    xmlns:control="clr-namespace:WYW.UI.Controls"
+                    xmlns:command="clr-namespace:WYW.UI.Commands">
+    <Style x:Key="ControlOK" TargetType="Control">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Control">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="1" Content="{Binding OKButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
+                                Command="{x:Static command:CustomCommand.OKCommand}" IsDefault="True" 
+                                attach:ButtonElement.CornerRadius="5" x:Name="ButtonOK"/>
+                        <TextBlock Grid.Column="1" Text="{Binding CountDown,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow},StringFormat={}( {0}s )}" 
+                                   Margin="0,0,10,0" HorizontalAlignment="Right" Foreground="{Binding Foreground,ElementName=ButtonOK}"
+                                   Visibility="{Binding IsAutoClose,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow},Converter={StaticResource ConstToVisibilityConverter}}"/>
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ControlOKCancel" TargetType="Control">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Control">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.4*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.3*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="1" Content="{Binding OKButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
+                                Command="{x:Static command:CustomCommand.OKCommand}" 
+                                attach:ButtonElement.CornerRadius="5"/>
+                        <Button Grid.Column="3" Content="{Binding CancelButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
+                                Command="{x:Static command:CustomCommand.CancelCommand}" 
+                                attach:ButtonElement.CornerRadius="5"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ControlYesNo" TargetType="Control">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Control">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.4*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.3*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="1" Content="{Binding YesButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
+                                Command="{x:Static command:CustomCommand.YesCommand}" 
+                                attach:ButtonElement.CornerRadius="5"/>
+                        <Button Grid.Column="3"  Content="{Binding NoButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
+                                Command="{x:Static command:CustomCommand.NoCommand}"  
+                                attach:ButtonElement.CornerRadius="5"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ControlYesNoCancel" TargetType="Control">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Control">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.4*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.4*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.3*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="1" Content="{Binding YesButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
+                                Command="{x:Static command:CustomCommand.YesCommand}"
+                                attach:ButtonElement.CornerRadius="5"/>
+                        <Button Grid.Column="3"  Content="{Binding NoButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
+                                Command="{x:Static command:CustomCommand.NoCommand}" 
+                                attach:ButtonElement.CornerRadius="5"/>
+                        <Button Grid.Column="5"  Content="{Binding CancelButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
+                                Command="{x:Static command:CustomCommand.CancelCommand}" 
+                                attach:ButtonElement.CornerRadius="5"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="MessageBoxWindowStyle" TargetType="control:MessageBoxWindow">
+        <Setter Property="Height" Value="260"/>
+        <Setter Property="Width" Value="450"/>
+        <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="MinWidth" Value="40"/>
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="AllowsTransparency" Value="True"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="#FF1388F5"/>
+        <Setter Property="Background" Value="{StaticResource Control.Background}"/>
+        <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="WindowChrome.WindowChrome" >
+            <Setter.Value>
+                <WindowChrome CaptionHeight="30"  ResizeBorderThickness="5"  />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="control:MessageBoxWindow">
+                    <Border SnapsToDevicePixels="True" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="5" Opacity="{TemplateBinding Opacity}"
+                            UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            <Grid >
+                                <TextBlock Text="{TemplateBinding Title}" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                <Button Width="45" BorderThickness="0" Background="Transparent"
+                                        HorizontalAlignment="Right"
+                                        attach:ButtonElement.CornerRadius="0,5,0,0"
+                                        attach:ButtonElement.IcoGeometry="{StaticResource  CloseGeometry}"    
+                                        attach:ButtonElement.IcoHeight="12"
+                                        WindowChrome.IsHitTestVisibleInChrome="True" 
+                                        x:Name="ButtonClose" 
+                                        Command="{x:Static command:CustomCommand.CloseCommand}"
+                                        />
+                            </Grid>
+                            <Grid Grid.Row="1" Margin="40,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" x:Name="IconWidth"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Viewbox HorizontalAlignment="Center" Margin="0,0,20,0">
+                                    <TextBlock FontFamily="{StaticResource AwesomeFontFamily}" 
+                                               Foreground="{TemplateBinding ImageBackground}" 
+                                               Text="{TemplateBinding ImageText}"
+                                               x:Name="Icon"/>
+                                </Viewbox>
+                                <ScrollViewer Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Margin="0,5"
+                                              VerticalScrollBarVisibility="Auto">
+                                    <TextBlock TextWrapping="Wrap" FontSize="{TemplateBinding FontSize}"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" FontFamily="{TemplateBinding FontFamily}"
+                                               Text="{Binding Message, RelativeSource={RelativeSource TemplatedParent}}" 
+                                               LineHeight="{Binding FontSize,RelativeSource={RelativeSource Self},Converter={StaticResource MultiplicationConverter},ConverterParameter=1.5}" />
+                                </ScrollViewer>
+
+                            </Grid>
+                            <Grid  Grid.Row="3" >
+                                <Control x:Name="MessageBoxButtonGroup" />
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True" SourceName="ButtonClose">
+                            <Setter Property="Background" TargetName="ButtonClose" Value="#ffe81123"/>
+                            <Setter Property="Foreground" TargetName="ButtonClose" Value="white"/>
+                        </Trigger>
+                        <Trigger Property="MessageBoxButton" Value="OK">
+                            <Setter TargetName="MessageBoxButtonGroup" Property="Style" 
+                                    Value="{StaticResource ControlOK}" />
+                        </Trigger>
+                        <Trigger Property="MessageBoxButton" Value="OKCancel">
+                            <Setter TargetName="MessageBoxButtonGroup" Property="Style"
+                                    Value="{StaticResource ControlOKCancel}" />
+                        </Trigger>
+                        <Trigger Property="MessageBoxButton" Value="YesNo">
+                            <Setter TargetName="MessageBoxButtonGroup" Property="Style"
+                                    Value="{StaticResource ControlYesNo}" />
+                        </Trigger>
+                        <Trigger Property="MessageBoxButton" Value="YesNoCancel">
+                            <Setter TargetName="MessageBoxButtonGroup" Property="Style"
+                                    Value="{StaticResource ControlYesNoCancel}" />
+                        </Trigger>
+                        <Trigger Property="HasImage" Value="False">
+                            <Setter Property="Width" TargetName="IconWidth" Value="0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+</ResourceDictionary>

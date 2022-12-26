@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converter="clr-namespace:WYW.UI.Converters">
+    <converter:CircleCornerRadiusConverter x:Key="CircleCornerRadiusConverter"/>
+    <converter:CircleRadiusConverter x:Key="CircleRadiusConverter"/>
+    <converter:ConstToBooleanConverter x:Key="ConstToBooleanConverter"/>
+    <converter:ConstToReverseBooleanConverter x:Key="ConstToReverseBooleanConverter"/>
+    <converter:ConstToReverseVisibilityConverter x:Key="ConstToReverseVisibilityConverter"/>
+    <converter:ConstToVisibilityConverter x:Key="ConstToVisibilityConverter"/>
+    <converter:MultiBoolConverter x:Key="MultiBoolConverter"/>
+    <converter:MultiCommandParametersConverter x:Key="MultiCommandParametersConverter"/>
+    <converter:MultiplicationConverter x:Key="MultiplicationConverter"/>
+    <converter:ProgressBarCornerRadiusConverter x:Key="ProgressBarCornerRadiusConverter"/>
+    <converter:ReverseConverter x:Key="ReverseConverter"/>
+    <converter:StringFormatConverter x:Key="StringFormatConverter"/>
+    
+</ResourceDictionary>

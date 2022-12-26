@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <SolidColorBrush x:Key="BorderBrush" Color="#FF333333"/>
+    <SolidColorBrush x:Key="BorderBrushHover" Color="#FF444444"/>
+    <SolidColorBrush x:Key="BorderBrushFocused" Color="#FF0075CC"/>
+
+    <SolidColorBrush x:Key="Foreground" Color="#FFd0d0d0"/>
+    <SolidColorBrush x:Key="ForegroundReadOnly" Color="#FFAAAAAA"/>
+    <SolidColorBrush x:Key="ForegroundHover" Color="#FFeeeeee"/>
+    <SolidColorBrush x:Key="ForegroundDisabled" Color="#FF888888"/>
+
+    <SolidColorBrush x:Key="Control.Background" Color="#FF111111"/>
+    <SolidColorBrush x:Key="Control.BackgroundHover" Color="#FF222222"/>
+    <SolidColorBrush x:Key="Control.BackgroundDisabled" Color="#FF555555"/>
+
+    <SolidColorBrush x:Key="Item.BackgroundAlternation" Color="#FF181818"/>
+    <SolidColorBrush x:Key="Item.BackgroundHover" Color="#FF242424"/>
+    <SolidColorBrush x:Key="Item.BackgroundSelected" Color="#FF0075CC"/>
+    <SolidColorBrush x:Key="Item.ForegroundSelected" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="Header.Background" Color="#FF181818"/>
+  
+
+    <SolidColorBrush x:Key="TextBox.BackgroundValidationError" Color="#FFDC000C"/>
+    <SolidColorBrush x:Key="TextBox.ForegroundValidationError" Color="#ffffffff"/>
+    <SolidColorBrush x:Key="Thumb.Background" Color="#FF111111"/>
+    <SolidColorBrush x:Key="Thumb.BackgroundHover" Color="#FF080808"/>
+    <SolidColorBrush x:Key="Thumb.BackgroundDragging" Color="#FF000000"/>
+    <SolidColorBrush x:Key="Thumb.BackgroundDisabled" Color="#ffdddddd"/>
+    
+    <SolidColorBrush x:Key="Ticker.Background" Color="#FF444444"/>
+    
+
+</ResourceDictionary>

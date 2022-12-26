@@ -1,0 +1,99 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:control="clr-namespace:Mega.UI.Controls"
+                    xmlns:attach="clr-namespace:Mega.UI.Controls.Attach">
+    <Style x:Key="BoardBoxItemStyle" TargetType="ListBoxItem">
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+        <Setter Property="Foreground" Value="{Binding Foreground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+
+                    <Grid Margin="{TemplateBinding Padding}" >
+                        <Path Data="{StaticResource EllipseGeometry}" 
+                                       Fill="{Binding Background}" 
+                                       Stroke="{StaticResource BorderBrush}"
+                                       StrokeThickness="1"
+                                       Stretch="Uniform" x:Name="PathInner"/>
+                        <TextBlock Text="{Binding Text}"  Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PathInner" Property="Fill" Value="{StaticResource Item.BackgroundHover}" />
+                            <!--<Setter Property="Foreground" Value="{StaticResource Item.ForegroundSelected}" />-->
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Stroke" TargetName="PathInner" Value="{StaticResource BorderBrushFocused}" />
+                            <Setter Property="StrokeThickness" TargetName="PathInner" Value="2" />
+                            <!--<Setter Property="Foreground" Value="{StaticResource Item.ForegroundSelected}" />-->
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.6" />
+                        </Trigger>
+                        
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="control:BoardBox">
+        <Setter Property="Background" Value="{StaticResource Control.Background}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="SelectionMode" Value="Extended"/>
+        <!--<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>-->
+        <Setter Property="ItemContainerStyle" Value="{StaticResource BoardBoxItemStyle}"/>
+
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="{Binding BoardRows,RelativeSource={RelativeSource AncestorType=control:BoardBox}}" 
+                                 Columns="{Binding BoardColumns,RelativeSource={RelativeSource AncestorType=control:BoardBox}}" 
+                                 IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <ItemsControl Grid.Row="0" Grid.Column="1">
+                            
+                        </ItemsControl>
+                        <UniformGrid  Name="PART_Horizontal"  Rows="1"/>
+                        <UniformGrid Grid.Row="1" Grid.Column="0" Name="PART_Vertical"  Columns="1" />
+                        <Border Grid.Row="1" Grid.Column="1" Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Padding="{TemplateBinding Padding}">
+                            <ScrollViewer  Focusable="false"
+                                           VerticalScrollBarVisibility="Disabled"
+                                           HorizontalScrollBarVisibility="Disabled">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </ScrollViewer>
+                        </Border>
+                    </Grid>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

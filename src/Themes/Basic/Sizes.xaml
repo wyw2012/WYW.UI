@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!--该值为1920*1080分辨率下的默认值-->
+    <sys:Double x:Key="TextElement.Height">32.0</sys:Double>
+    <sys:Double x:Key="Header.Height">40.0</sys:Double>
+    <Thickness x:Key="Panel.Padding">20,10</Thickness>
+    <Thickness x:Key="VerticalMargin">0,5</Thickness>
+    <Thickness x:Key="HorizontalMargin">5,0</Thickness>
+    <CornerRadius x:Key="Control.CornerRadius">3</CornerRadius>
+
+</ResourceDictionary>

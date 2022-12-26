@@ -1,0 +1,232 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:attach="clr-namespace:WYW.UI.Controls.Attach"
+                    xmlns:command="clr-namespace:WYW.UI.Commands">
+
+    <!--TabItem宽度根据TabControl宽度均分-->
+    <Style x:Key="DivideTabItemStyle" TargetType="{x:Type TabItem}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="MinHeight" Value="{StaticResource Header.Height}"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
+        <Setter Property="attach:TabItemElement.HeaderForeground" Value="{StaticResource Foreground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,1,0"/>
+        <Setter Property="Padding" Value="0,0,-1,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            Background="{TemplateBinding Background}"
+                                            Margin="{TemplateBinding Padding}"
+                              TextElement.Foreground="{Binding Path=(attach:TabItemElement.HeaderForeground),RelativeSource={RelativeSource TemplatedParent}}">
+                        <Grid  Margin="10,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid x:Name="GridIco"  Margin="0,0,10,0"
+                                       Height="{Binding Path=(attach:TabItemElement.IcoHeight),RelativeSource={RelativeSource TemplatedParent}}"
+                                       Width="{Binding Path=(attach:TabItemElement.IcoWidth),RelativeSource={RelativeSource TemplatedParent}}">
+                                <Path Fill="{Binding Path=(attach:TabItemElement.HeaderForeground),RelativeSource={RelativeSource TemplatedParent}}"
+                                      Data="{Binding Path=(attach:TabItemElement.IcoGeometry),RelativeSource={RelativeSource TemplatedParent}}" 
+                                      Stretch="Uniform"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"/>
+                            </Grid>
+                            <ContentPresenter Grid.Column="1" x:Name="contentPresenter"
+                                              ContentSource="Header"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                            
+                                              HorizontalAlignment="{Binding Path=(attach:TabItemElement.HeaderHorizontalAlignment),RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Button Grid.Column="2" Width="12" Background="Transparent"
+                                    attach:ButtonElement.IcoGeometry="{StaticResource CloseGeometry}"
+                                    attach:ButtonElement.IsNoBorder="True"
+                                    attach:ButtonElement.IcoWidth="10"
+                                    attach:ButtonElement.IcoHeight="10"
+                                    Foreground="{Binding Path=(attach:TabItemElement.HeaderForeground),RelativeSource={RelativeSource TemplatedParent}}"
+                                    Command="{x:Static command:TabControlCommand.CloseTabItemCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    Visibility="{Binding Path=(attach:TabControlElement.ShowCloseButton),RelativeSource={RelativeSource  AncestorType=TabControl},Converter={StaticResource ConstToVisibilityConverter}}"/>
+                        </Grid>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ForegroundDisabled}" />
+                            <Setter Property="BorderThickness" Value="0" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType=TabControl}}" Value="Left">
+                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                            <Setter Property="Padding" Value="0,0,-1,0"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType=TabControl}}" Value="Right">
+                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                        </DataTrigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="{StaticResource Control.BackgroundHover}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Background" Value="{StaticResource Item.BackgroundSelected}" />
+                            <Setter Property="attach:TabItemElement.HeaderForeground" Value="{StaticResource Item.ForegroundSelected}" />
+                        </Trigger>
+                        <Trigger Property="attach:TabItemElement.IcoGeometry" Value="{x:Null}">
+                            <Setter Property="Visibility" TargetName="GridIco" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MenuTabItemStyle" TargetType="{x:Type TabItem}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="MinHeight" Value="{StaticResource Header.Height}"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="attach:TabItemElement.HeaderForeground" Value="{StaticResource Foreground}"/>
+        <Setter Property="attach:TabItemElement.IcoWidth" Value="30"/>
+        <Setter Property="attach:TabItemElement.IcoHeight" Value="30"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            Background="{TemplateBinding Background}"
+                                            Margin="{TemplateBinding Padding}"
+                              TextElement.Foreground="{Binding Path=(attach:TabItemElement.HeaderForeground),RelativeSource={RelativeSource TemplatedParent}}">
+                        <Grid  Margin="10,15,10,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid x:Name="GridIco">
+                                <Path Fill="{Binding Path=(attach:TabItemElement.HeaderForeground),RelativeSource={RelativeSource TemplatedParent}}"
+                                      Data="{Binding Path=(attach:TabItemElement.IcoGeometry),RelativeSource={RelativeSource TemplatedParent}}" 
+                                      Height="{Binding Path=(attach:TabItemElement.IcoHeight),RelativeSource={RelativeSource TemplatedParent}}" 
+                                      Width="{Binding Path=(attach:TabItemElement.IcoWidth),RelativeSource={RelativeSource TemplatedParent}}" 
+
+                                      Stretch="Uniform"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"/>
+                            </Grid>
+                            <ContentPresenter Grid.Row="1" x:Name="contentPresenter" Margin="0,10,0,0"
+                                              ContentSource="Header"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                              HorizontalAlignment="{Binding Path=(attach:TabItemElement.HeaderHorizontalAlignment),RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Grid>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="attach:TabItemElement.HeaderForeground" Value="{StaticResource ForegroundDisabled}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="attach:TabItemElement.HeaderForeground" Value="{StaticResource ForegroundHover}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="attach:TabItemElement.HeaderForeground" Value="{StaticResource Item.BackgroundSelected}" />
+                        </Trigger>
+     
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TabItem}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="MinHeight" Value="{StaticResource Header.Height}"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
+        <Setter Property="attach:TabItemElement.HeaderForeground" Value="{StaticResource Foreground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1,1,1,0"/>
+        <Setter Property="Padding" Value="-1,0,0,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            Background="{TemplateBinding Background}"
+                                            Margin="{TemplateBinding Padding}"
+                                            SnapsToDevicePixels="True"
+                              TextElement.Foreground="{Binding Path=(attach:TabItemElement.HeaderForeground),RelativeSource={RelativeSource TemplatedParent}}">
+                        <Grid  Margin="10,0"  >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid x:Name="GridIco"  Margin="0,0,10,0"
+                                       Height="{Binding Path=(attach:TabItemElement.IcoHeight),RelativeSource={RelativeSource TemplatedParent}}"
+                                       Width="{Binding Path=(attach:TabItemElement.IcoWidth),RelativeSource={RelativeSource TemplatedParent}}">
+                                <Path Fill="{Binding Path=(attach:TabItemElement.HeaderForeground),RelativeSource={RelativeSource TemplatedParent}}"
+                                      Data="{Binding Path=(attach:TabItemElement.IcoGeometry),RelativeSource={RelativeSource TemplatedParent}}" 
+                                      Stretch="Uniform"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"/>
+                            </Grid>
+                            <ContentPresenter Grid.Column="1" x:Name="contentPresenter"
+                                              ContentSource="Header"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                              HorizontalAlignment="{Binding Path=(attach:TabItemElement.HeaderHorizontalAlignment),RelativeSource={RelativeSource TemplatedParent}}" />
+
+
+                            <Button Grid.Column="2" Width="12" Background="Transparent"  Margin="10,0,0,0"
+                                    attach:ButtonElement.IcoGeometry="{StaticResource CloseGeometry}"
+                                    attach:ButtonElement.IsNoBorder="True"
+                                    attach:ButtonElement.IcoWidth="10"
+                                    attach:ButtonElement.IcoHeight="10"
+                                    Foreground="{Binding Path=(attach:TabItemElement.HeaderForeground),RelativeSource={RelativeSource TemplatedParent}}"
+                                    Command="{x:Static command:TabControlCommand.CloseTabItemCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                    Visibility="{Binding Path=(attach:TabControlElement.ShowCloseButton),RelativeSource={RelativeSource AncestorType=TabControl},Converter={StaticResource ConstToVisibilityConverter}}"/>
+                        </Grid>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ForegroundDisabled}" />
+                            <Setter Property="BorderThickness" Value="0" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType=TabControl}}" Value="Left">
+                            <Setter Property="BorderThickness" Value="1,0,0,1" />
+               
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType=TabControl}}" Value="Right">
+                            <Setter Property="BorderThickness" Value="0,0,1,1" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType=TabControl}}" Value="Bottom">
+                            <Setter Property="BorderThickness" Value="0,0,1,1" />
+                        </DataTrigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="{StaticResource Control.BackgroundHover}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Background" Value="{StaticResource Item.BackgroundSelected}" />
+                            <Setter Property="attach:TabItemElement.HeaderForeground" Value="{StaticResource Item.ForegroundSelected}" />
+                        </Trigger>
+                        <Trigger Property="attach:TabItemElement.IcoGeometry" Value="{x:Null}">
+                            <Setter Property="Visibility" TargetName="GridIco" Value="Collapsed"/>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

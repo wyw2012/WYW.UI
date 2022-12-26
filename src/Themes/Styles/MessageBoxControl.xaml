@@ -1,0 +1,77 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:control="clr-namespace:WYW.UI.Controls"
+                    xmlns:attach="clr-namespace:WYW.UI.Controls.Attach"
+                   xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+                    xmlns:command="clr-namespace:WYW.UI.Commands">
+    <Style TargetType="control:MessageBoxControl">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="{StaticResource Control.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
+        <Setter Property="Height" Value="100"/>
+        <Setter Property="Width" Value="400"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Effect" Value="{StaticResource EffectOuterShadow}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="control:MessageBoxControl">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True"
+                            CornerRadius="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                        
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Style="{StaticResource TransparentButtonStyle}" 
+                                    Command="{x:Static command:CustomCommand.RemoveCommand}">
+                                <Viewbox HorizontalAlignment="Center" Margin="10,20">
+                                    <TextBlock FontFamily="{StaticResource AwesomeFontFamily}" 
+                                               Foreground="{TemplateBinding ImageBackground}" 
+                                               Text="{TemplateBinding ImageText}"
+                                               x:Name="Icon"/>
+                                </Viewbox>
+                            </Button>
+                          
+                            <Grid Grid.Column="1" Margin="0,10">
+                                <ScrollViewer Grid.Column="1" Grid.Row="0"   
+                                              VerticalScrollBarVisibility="Auto">
+                                    <TextBlock TextWrapping="Wrap" FontSize="{TemplateBinding FontSize}"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center" FontFamily="{TemplateBinding FontFamily}"
+                                               Text="{TemplateBinding Message}" 
+                                               LineHeight="{Binding FontSize,RelativeSource={RelativeSource Self},Converter={StaticResource MultiplicationConverter},ConverterParameter=1.5}" />
+                                </ScrollViewer>
+                                <!--<TextBlock Grid.Row="1" HorizontalAlignment="Right" Text="{Binding Source={x:Static  sys:DateTime.Now},StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}"/>-->
+                            </Grid>
+                            <Button Grid.Column="2" attach:ButtonElement.IsNoBorder="True" 
+                                    attach:ButtonElement.IcoGeometry="{StaticResource RemoveGeometry}"
+                                    attach:ButtonElement.IcoHeight="20"
+                                    attach:ButtonElement.IcoWidth="20"
+                                    Command="{x:Static command:CustomCommand.RemoveCommand}"
+                                    x:Name="ButtonClose" 
+                                    Visibility="Collapsed"/>
+
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Visibility" TargetName="ButtonClose" Value="Visible"/>
+                        </Trigger>
+
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

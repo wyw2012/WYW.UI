@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\Button.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Calendar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CheckBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CircleProgressBar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ComboBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ContextMenu.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DataGrid.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DatePicker.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DocumentViewer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Expander.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\GroupBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Hyperlink.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Image.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Label.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ListBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Menu.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MessageBoxControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MessageBoxWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NumericUpDown.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\PasswordBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ProgressBar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ProgressRing.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RadioButton.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Slider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\StatusBar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\TabControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\TextBlock.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\TextBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ToggleButton.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ToolBar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ToolTip.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\TreeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Window.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Button.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Calendar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CheckBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CircleProgressBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ComboBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ContextMenu.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DataGrid.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DatePicker.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DocumentViewer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Expander.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\GroupBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Hyperlink.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Image.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Label.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ListBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ListView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Menu.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MessageBoxControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MessageBoxWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NumericUpDown.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\PasswordBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ProgressBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ProgressRing.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\RadioButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Slider.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\StatusBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\TabControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\TextBlock.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\TextBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ToggleButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ToolBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ToolTip.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\TreeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Window.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

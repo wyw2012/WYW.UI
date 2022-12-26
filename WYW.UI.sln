@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYW.UI", "src\WYW.UI.csproj", "{A0A29527-26B0-4FF6-A6A9-4002BBBA1D88}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WYW.UI.Test", "test\WYW.UI.Test.csproj", "{B22D7CB1-5618-4DA8-A473-8261CFF03A7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0A29527-26B0-4FF6-A6A9-4002BBBA1D88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0A29527-26B0-4FF6-A6A9-4002BBBA1D88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0A29527-26B0-4FF6-A6A9-4002BBBA1D88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0A29527-26B0-4FF6-A6A9-4002BBBA1D88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B22D7CB1-5618-4DA8-A473-8261CFF03A7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B22D7CB1-5618-4DA8-A473-8261CFF03A7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B22D7CB1-5618-4DA8-A473-8261CFF03A7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B22D7CB1-5618-4DA8-A473-8261CFF03A7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9E993AEF-C43E-4B72-8204-04673BD39CF1}
+	EndGlobalSection
+EndGlobal

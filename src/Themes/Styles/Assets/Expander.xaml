@@ -1,0 +1,204 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  
+    <ControlTemplate x:Key="ExpanderDownTemplate" TargetType="Expander">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border x:Name="BorderHeader" 
+                    CornerRadius="3" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}">
+                <ToggleButton Style="{StaticResource ExpanderDownToggleButton}"
+                              Content="{TemplateBinding Header}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+
+            </Border>
+            <Border  Grid.Row="1" Name="ExpandSite" Visibility="Collapsed"
+                     BorderBrush="{TemplateBinding BorderBrush}"
+                     Background="{TemplateBinding Background}"
+                     BorderThickness="1,0,1,1"
+                     CornerRadius="0,0,3,3">
+                <Grid Margin="{TemplateBinding Padding}">
+                    <ContentPresenter/>
+                </Grid>
+            </Border>
+          
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsExpanded" Value="true">
+                <Setter Property="CornerRadius" TargetName="BorderHeader" Value="3,3,0,0"/>
+                <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter TargetName="BorderHeader" Property="TextElement.FontWeight" Value="Bold" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Opacity" TargetName="ExpandSite" Value="0.6" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ExpanderUpTemplate" TargetType="Expander">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Border  Grid.Row="0" Name="ExpandSite" Visibility="Collapsed"
+                     BorderBrush="{TemplateBinding BorderBrush}"
+                     Background="{TemplateBinding Background}"
+                     BorderThickness="1,1,1,0"
+                     CornerRadius="3,3,0,0">
+                <Grid Margin="{TemplateBinding Padding}">
+                    <ContentPresenter/>
+                </Grid>
+            </Border>
+            <Border x:Name="BorderHeader" Grid.Row="1"
+                    CornerRadius="3" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}">
+                <ToggleButton Style="{StaticResource ExpanderUpToggleButton}"
+                              Content="{TemplateBinding Header}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsExpanded" Value="true">
+                <Setter Property="CornerRadius" TargetName="BorderHeader" Value="0,0,3,3"/>
+                <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter TargetName="BorderHeader" Property="TextElement.FontWeight" Value="Bold" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Opacity" TargetName="ExpandSite" Value="0.6" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ExpanderLeftTemplate" TargetType="Expander">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <Border  Grid.Column="0" Name="ExpandSite" Visibility="Collapsed"
+                     BorderBrush="{TemplateBinding BorderBrush}"
+                     Background="{TemplateBinding Background}"
+                     BorderThickness="1,1,0,1"
+                     CornerRadius="3,0,0,3">
+                <Grid Margin="{TemplateBinding Padding}">
+                    <ContentPresenter/>
+                </Grid>
+            </Border>
+            <Border x:Name="BorderHeader" Grid.Column="1"
+                    CornerRadius="3" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}">
+                <ToggleButton Style="{StaticResource ExpanderLeftToggleButton}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                              HorizontalContentAlignment="Center"
+                              IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                    <TextBlock Text="{TemplateBinding Header}" 
+                               TextWrapping="Wrap"
+                               LineHeight="2"
+                               Width="{TemplateBinding FontSize}"/>
+                </ToggleButton>
+
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsExpanded" Value="true">
+                <Setter Property="CornerRadius" TargetName="BorderHeader" Value="0,3,3,0"/>
+                <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter TargetName="BorderHeader" Property="TextElement.FontWeight" Value="Bold" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Opacity" TargetName="ExpandSite" Value="0.6" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="ExpanderRightTemplate" TargetType="Expander">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border  Grid.Column="1" Name="ExpandSite" Visibility="Collapsed"
+                     BorderBrush="{TemplateBinding BorderBrush}"
+                     Background="{TemplateBinding Background}"
+                     BorderThickness="0,1,1,1"
+                     CornerRadius="0,3,3,0">
+                <Grid Margin="{TemplateBinding Padding}">
+                    <ContentPresenter/>
+                </Grid>
+            </Border>
+            <Border x:Name="BorderHeader" Grid.Column="0"
+                    CornerRadius="3" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}">
+                <ToggleButton Style="{StaticResource ExpanderRightToggleButton}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                              HorizontalContentAlignment="Center"
+                              IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                    <TextBlock Text="{TemplateBinding Header}" 
+                               TextWrapping="Wrap"
+                               LineHeight="2"
+                               Width="{TemplateBinding FontSize}"/>
+                </ToggleButton>
+
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsExpanded" Value="true">
+                <Setter Property="CornerRadius" TargetName="BorderHeader" Value="3,0,0,3"/>
+                <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter TargetName="BorderHeader" Property="TextElement.FontWeight" Value="Bold" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Opacity" TargetName="ExpandSite" Value="0.6" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style  TargetType="Expander">
+        <Setter Property="Foreground" Value="{StaticResource Foreground}" />
+        <Setter Property="Background" Value="{StaticResource Control.Background}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="{StaticResource Panel.Padding}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        
+        <Setter Property="Template" Value="{StaticResource ExpanderDownTemplate}"/>
+       
+        <Style.Triggers>
+            <Trigger Property="ExpandDirection" Value="Left">
+                <Setter Property="Template" Value="{StaticResource ExpanderLeftTemplate}"/>
+            </Trigger>
+            <Trigger Property="ExpandDirection" Value="Up">
+                <Setter Property="Template" Value="{StaticResource ExpanderUpTemplate}"/>
+            </Trigger>
+            <Trigger Property="ExpandDirection" Value="Right">
+                <Setter Property="Template" Value="{StaticResource ExpanderRightTemplate}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
