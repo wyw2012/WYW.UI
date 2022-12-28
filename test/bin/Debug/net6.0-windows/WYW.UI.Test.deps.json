@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "WYW.UI.Test/1.0.0": {
+        "dependencies": {
+          "WYW.UI": "1.0.0"
+        },
+        "runtime": {
+          "WYW.UI.Test.dll": {}
+        }
+      },
+      "WYW.UI/1.0.0": {
+        "runtime": {
+          "WYW.UI.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WYW.UI.Test/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WYW.UI/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
