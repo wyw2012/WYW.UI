@@ -23,6 +23,7 @@ namespace WYW.UI.Test.Views
         public ListView()
         {
             InitializeComponent();
+            this.DataContext = new ListViewViewModel();
         }
     }
 }

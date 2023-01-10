@@ -18,7 +18,7 @@
                 <ProgressBar   Margin="0,5"  Value="90"  />
                 <ProgressBar   Margin="0,5" IsIndeterminate="True" />
 
-                <ProgressBar   Margin="0,5"  Value="95"  Orientation="Vertical" Height="200" Width="100"  />
+                <ProgressBar   Margin="0,5"  Value="95"  Orientation="Vertical" Height="200"   />
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Column="2" Header="高级用法">
