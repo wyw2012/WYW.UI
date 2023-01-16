@@ -64,6 +64,12 @@
     <Compile Update="Views\MessageBoxWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Windows\CornerRadiusWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Windows\DefaultWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\NumericUpDown.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -106,7 +112,16 @@
     <Compile Update="Views\TreeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Window.xaml.cs">
+    <Compile Update="Views\V_Window.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Windows\NoTitleBarWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Windows\NormalWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Windows\WithMenuWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -171,6 +186,12 @@
     <Page Update="Views\MessageBoxWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Windows\CornerRadiusWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Windows\DefaultWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\NumericUpDown.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -213,7 +234,16 @@
     <Page Update="Views\TreeView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Window.xaml">
+    <Page Update="Views\V_Window.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Windows\NoTitleBarWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Windows\NormalWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Windows\WithMenuWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

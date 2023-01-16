@@ -97,7 +97,7 @@
                 <view:TreeView/>
             </TabItem>
             <TabItem Header="Window">
-                <view:Window/>
+                <view:V_Window/>
             </TabItem>
             <TabItem Header="MessageBoxWindow"
                      wyw:TabItemElement.IcoGeometry="{StaticResource NewGeometry}"

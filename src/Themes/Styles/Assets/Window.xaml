@@ -119,7 +119,7 @@
     </Style>
 
     <!--无标题栏的Window-->
-    <Style x:Key="WindowNoChromeStyle" TargetType="{x:Type Window}">
+    <Style x:Key="WindowNoTitleBarStyle" TargetType="{x:Type Window}">
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
