@@ -23,26 +23,9 @@ namespace WYW.UI.Test
     {
         public MainWindow()
         {
+            var s = new TextBox();
+            var m= new ComboBox();
             InitializeComponent();
-
-
-
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Slider slider = new Slider();
-           
-            Thumb thumb=new Thumb();
-           Button btn=new Button();
-            var s = btn.IsPressed;
-
-        }
-
-        private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-
         }
     }
 }

@@ -8,7 +8,10 @@ using System.Windows.Data;
 
 namespace WYW.UI.Converters
 {
-    public class ConstToReverseBooleanConverter : IValueConverter
+    /// <summary>
+    /// 常量值与布尔值的逆向转换，例如：1=false；0=true
+    /// </summary>
+    internal class ConstToReverseBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -16,7 +19,7 @@ namespace WYW.UI.Converters
             {
                 if (parameter == null)
                 {
-                    if(value is Boolean b)
+                    if (value is Boolean b)
                     {
                         return !b;
                     }
@@ -28,7 +31,7 @@ namespace WYW.UI.Converters
                         }
                     }
                 }
-           
+
                 else
                 {
                     if (value.ToString() == parameter.ToString())

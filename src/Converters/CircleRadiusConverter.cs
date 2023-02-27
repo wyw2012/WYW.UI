@@ -12,7 +12,8 @@ namespace WYW.UI.Converters
     /// <summary>
     /// 根据控件的高度获取圆角需要的半径
     /// </summary>
-    public class CircleRadiusConverter : IValueConverter
+    /// <remarks>返回value/2+parameter，例如value=40，parameter=2，则返回22</remarks>
+    internal class CircleRadiusConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

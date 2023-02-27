@@ -2,6 +2,9 @@
 
 namespace WYW.UI.Commands
 {
+    /// <summary>
+    /// TabControl命令
+    /// </summary>
     class TabControlCommand
     {
         public static readonly RelayCommand<TabControl> CloseTabItemCommand = new RelayCommand<TabControl>((e) =>

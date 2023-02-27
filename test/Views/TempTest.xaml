@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="WYW.UI.Test.Views.TempTest"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WYW.UI.Test.Views"
+             xmlns:wyw="http://wangyanwei.com/ui"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox Text="{Binding Name}" wyw:TextBoxElement.ShowClearButton="True"/>
+        <Button Grid.Row="1" Click="Button_Click"/>
+        <wyw:CircleMenu Grid.Row="2" 
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                         >
+            <wyw:CircleMenuItem Header="1" >
+                <wyw:CircleMenuItem Header="1.1"/>
+                <wyw:CircleMenuItem Header="1.2">
+                    <wyw:CircleMenuItem Header="1.2.1"/>
+                    <wyw:CircleMenuItem Header="1.2.2"/>
+                    <wyw:CircleMenuItem Header="1.2.3"/>
+                </wyw:CircleMenuItem>
+                <wyw:CircleMenuItem Header="1.3"/>
+                <wyw:CircleMenuItem Header="1.4"/>
+                <wyw:CircleMenuItem Header="1.5"/>
+                <wyw:CircleMenuItem Header="1.6"/>
+                <wyw:CircleMenuItem Header="1.7"/>
+                <wyw:CircleMenuItem Header="1.8"/>
+            </wyw:CircleMenuItem>
+            <wyw:CircleMenuItem Header="" ImageSource="resources\\background.jpg"/>
+            <wyw:CircleMenuItem Header="3"/>
+            <wyw:CircleMenuItem Header="测试圆形菜单">
+                <wyw:CircleMenuItem Header="5.1"/>
+                <wyw:CircleMenuItem Header="5.2"/>
+            </wyw:CircleMenuItem>
+        </wyw:CircleMenu>
+       
+    </Grid>
+</UserControl>

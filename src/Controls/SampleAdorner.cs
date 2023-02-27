@@ -11,7 +11,7 @@ using System.Windows.Media;
 namespace WYW.UI.Controls
 {
     /// <summary>
-    /// 
+    /// 简单装饰器
     /// </summary>
     public class SampleAdorner : Adorner
     {

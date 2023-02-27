@@ -8,7 +8,10 @@ using System.Windows.Data;
 
 namespace WYW.UI.Converters
 {
-    public class ConstToBooleanConverter : IValueConverter
+    /// <summary>
+    /// 常量值与布尔值的正向转换，例如：1=true；0=false
+    /// </summary>
+    internal class ConstToBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

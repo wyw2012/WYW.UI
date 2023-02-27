@@ -12,9 +12,9 @@ using System.Windows.Media;
 namespace WYW.UI.Converters
 {
     /// <summary>
-    /// 反向转换器，根据绑定值的类型自动反向转换
+    /// 反向转换器，根据绑定值的类型自动反向转换。例如将true和false的互转、Visibility.Visible和Visibility.Collapsed的互转
     /// </summary>
-    public class ReverseConverter:IValueConverter
+    internal class ReverseConverter:IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

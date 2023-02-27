@@ -6,7 +6,7 @@ using System.Windows.Data;
 namespace WYW.UI.Converters
 {
     /// <summary>
-    /// 常量值与Visibility的映射，如果绑定值与参数相反，则返回Visibility.Visible
+    /// 常量值与Visibility的正向向转换，例如：1=true=Visibility.Visible；0=false=Visibility.Collapsed；
     /// </summary>
     public class ConstToVisibilityConverter : IValueConverter
     {

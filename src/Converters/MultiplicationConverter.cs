@@ -6,7 +6,7 @@ using System.Windows.Data;
 namespace WYW.UI.Converters
 {
     /// <summary>
-    /// 乘法转换器，返回绑定值与参数值的乘积
+    /// 乘法转换器，返回value与parameter的乘积
     /// </summary>
     public class MultiplicationConverter : IValueConverter
     {

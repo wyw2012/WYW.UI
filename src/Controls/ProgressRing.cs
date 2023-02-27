@@ -12,8 +12,7 @@ namespace WYW.UI.Controls
 
     [TemplateVisualState(GroupName = GroupActiveStates, Name = StateInactive)]
     [TemplateVisualState(GroupName = GroupActiveStates, Name = StateActive)]
-    public class ProgressRing
-        : Control
+    public class ProgressRing: Control
     {
         private const string GroupActiveStates = "ActiveStates";
         private const string StateInactive = "Inactive";
@@ -49,10 +48,6 @@ namespace WYW.UI.Controls
 
         public static readonly DependencyProperty RingStyleProperty =
             DependencyProperty.Register("RingStyle", typeof(TemplateStyle), typeof(ProgressRing), new PropertyMetadata(default(TemplateStyle)));
-
-
-
-
 
 
         public enum TemplateStyle

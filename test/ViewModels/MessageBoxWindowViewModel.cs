@@ -22,9 +22,9 @@ namespace WYW.UI.Test.ViewModels
             MessageBoxWindow.Error("执行失败", "错误");
         });
         public RelayCommand SucessCommand { get; } = new RelayCommand(() =>
-		{
-			MessageBoxWindow.Success("任务完成","提示");
-		});
+        {
+            MessageBoxWindow.Success("任务完成", "提示");
+        });
         public RelayCommand AutoCloseCommand { get; } = new RelayCommand(() =>
         {
             MessageBoxWindow.Success("消息框在5秒后自动关闭", "提示",isAutoClose:true);

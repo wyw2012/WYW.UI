@@ -29,7 +29,7 @@ namespace WYW.UI.Test.Views
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             XpsDocument doc = new XpsDocument("docs\\demo.xps", System.IO.FileAccess.Read);
-            documentViewer1.Document = doc.GetFixedDocumentSequence();
+           // documentViewer1.Document = doc.GetFixedDocumentSequence();
         }
     }
 }

@@ -9,14 +9,148 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace WYW.UI.Controls
 {
+    /// <summary>
+    /// 消息窗体，用于替代ystem.Windows.MessageBox
+    /// </summary>
     public class MessageBoxWindow : Window
     {
-        #region Win32
+        #region 公开
+        /// <summary>
+        /// 显示消息对话框
+        /// </summary>
+        /// <param name="text">消息框正文</param>
+        /// <param name="caption">消息框标题</param>
+        /// <param name="button">按钮格式</param>
+        /// <param name="icon">图标格式</param>
+        /// <param name="isAutoClose">是否自动关闭</param>
+        /// <param name="windowKeepTime">自动关闭模式下消息框显示的时间</param>
+        /// <param name="okButtonText">OK按钮显示的文字，默认显示"确定"</param>
+        /// <param name="yesButtonText">Yes按钮显示的文字，默认显示"是"</param>
+        /// <param name="noButtonText">No按钮显示的文字，默认显示"否"</param>
+        /// <param name="cancelButtonText">Cancel按钮显示的文字，默认显示"取消"</param>
+        /// <param name="showDialog">是否以模态模式弹出，默认为true。如果不希望阻塞UI线程，可设置为false</param>
+        /// <param name="imageText">自定义图标内容，FontAwesome字体的Unicode码，例如"\uf118"。仅在icon = MessageBoxImage.Custom下有效</param>
+        /// <param name="imageColor">自定义图标颜色，例如"#ffffffff"。仅在icon = MessageBoxImage.Custom下有效</param>
+        /// <returns></returns>
+        public static MessageBoxResult Show(string text, string caption = "",
+            MessageBoxButton button = MessageBoxButton.OK, MessageBoxImage icon = MessageBoxImage.None,
+            bool isAutoClose = false, int windowKeepTime = 5,
+            string okButtonText = null, string yesButtonText = null, string noButtonText = null, string cancelButtonText = null, bool showDialog = true,
+            string imageText = null, string imageColor = "#ffffff")
+        {
+            MessageBoxResult result = MessageBoxResult.None;
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                MessageBoxWindow window = new MessageBoxWindow(text, caption, button, icon, isAutoClose, windowKeepTime, imageText, imageColor);
+                if (!string.IsNullOrEmpty(okButtonText))
+                {
+                    window.OKButtonText = okButtonText;
+                }
+                if (!string.IsNullOrEmpty(yesButtonText))
+                {
+                    window.YesButtonText = yesButtonText;
+                }
+                if (!string.IsNullOrEmpty(noButtonText))
+                {
+                    window.NoButtonText = noButtonText;
+                }
+                if (!string.IsNullOrEmpty(cancelButtonText))
+                {
+                    window.CancelButtonText = cancelButtonText;
+                }
+                if (showDialog)
+                {
+                    window.ShowDialog();
+                }
+                else
+                {
+                    window.Show();
+                }
+                if (window != null)
+                    result = window.MessageResult;
+            }));
+            return result;
+        }
+        /// <summary>
+        /// 消息框显示自定义图标
+        /// </summary>
+        /// <param name="messageBoxText">正文</param>
+        /// <param name="caption">标题</param>
+        /// <param name="imageText">自定义图标内容，FontAwesome字体的Unicode码，例如"\uf118"</param>
+        /// <param name="imageColor">自定义图标颜色，例如"#ffffffff"</param>
+        /// <param name="isAutoClose">是否自动关闭，默认false</param>
+        /// <param name="windowKeepTime">如果自动关闭为true，则等待的时间，单位为s，默认为5s</param>
+        /// <returns></returns>
+        public static MessageBoxResult Custom(string messageBoxText, string caption = "", string imageText = null, string imageColor = "#ffffff", bool isAutoClose = false, int windowKeepTime = 5)
+        {
+            return Show(messageBoxText, caption, MessageBoxButton.OK, MessageBoxImage.Custom, isAutoClose, windowKeepTime, imageText: imageText, imageColor: imageColor);
+        }
+        /// <summary>
+        /// 消息框显示 √ 图标
+        /// </summary>
+        /// <param name="messageBoxText">正文</param>
+        /// <param name="caption">标题</param>
+        /// <param name="isAutoClose">是否自动关闭，默认false</param>
+        /// <param name="windowKeepTime">如果自动关闭为true，则等待的时间，单位为s，默认为5s</param>
+        /// <returns></returns>
+        public static MessageBoxResult Success(string messageBoxText, string caption = "", bool isAutoClose = false, int windowKeepTime = 5)
+        {
+            return Show(messageBoxText, caption, MessageBoxButton.OK, MessageBoxImage.Sucess, isAutoClose, windowKeepTime);
+        }
+        /// <summary>
+        /// 消息框显示 ? 图标
+        /// </summary>
+        /// <param name="messageBoxText">正文</param>
+        /// <param name="caption">标题</param>
+        /// <returns></returns>
+        public static MessageBoxResult Question(string messageBoxText, string caption = "")
+        {
+            return Show(messageBoxText, caption, MessageBoxButton.YesNo, MessageBoxImage.Question);
+        }
+        /// <summary>
+        /// 消息框显示 ! 图标
+        /// </summary>
+        /// <param name="messageBoxText">正文</param>
+        /// <param name="caption">标题</param>
+        /// <param name="isAutoClose">是否自动关闭，默认false</param>
+        /// <param name="windowKeepTime">如果自动关闭为true，则等待的时间，单位为s，默认为5s</param>
+        /// <returns></returns>
+        public static MessageBoxResult Warning(string messageBoxText, string caption = "", bool isAutoClose = false, int windowKeepTime = 5)
+        {
+            return Show(messageBoxText, caption, MessageBoxButton.OK, MessageBoxImage.Warning, isAutoClose, windowKeepTime);
+        }
+        /// <summary>
+        /// 消息框显示 x 图标
+        /// </summary>
+        /// <param name="messageBoxText">正文</param>
+        /// <param name="caption">标题</param>
+        /// <param name="isPlaySound">是否播放声音提示</param>
+        /// <returns></returns>
+        public static MessageBoxResult Error(string messageBoxText, string caption = "", bool isPlaySound = false)
+        {
+            SoundPlayer soundPlayer = null;
+            if (isPlaySound)
+            {
+                soundPlayer = new SoundPlayer(UI.Resources.Warn);
+                soundPlayer.PlayLooping();
+            }
+
+            var result = Show(messageBoxText, caption, MessageBoxButton.OK, MessageBoxImage.Error);
+            if (isPlaySound)
+            {
+                soundPlayer.Stop();
+                soundPlayer.Dispose();
+            }
+            return result;
+        }
+        #endregion
+
+        #region 内部
+        #region Win32，目的是使该窗体永不成为激活窗体
 
         private const int GWL_STYLE = -16;
         private const int WS_CHILD = 0x40000000;
@@ -30,10 +164,15 @@ namespace WYW.UI.Controls
         private static extern int GetWindowLong(IntPtr hwnd, int oldStyle);
 
         #endregion
+
         private bool isClosed;
-        internal MessageBoxWindow()
+        private MessageBoxResult MessageResult { get; set; } = MessageBoxResult.None;
+
+        #region 构造函数
+        private MessageBoxWindow()
         {
             Style = Application.Current.Resources["MessageBoxWindowStyle"] as Style;
+            // 将当前窗体弹出设置为活动窗体的中央
             Window activedWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             if (activedWindow != null)
             {
@@ -51,13 +190,13 @@ namespace WYW.UI.Controls
             CommandBindings.Add(new CommandBinding(CustomCommand.YesCommand, OnYes));
             CommandBindings.Add(new CommandBinding(CustomCommand.CancelCommand, OnCancel));
             CommandBindings.Add(new CommandBinding(CustomCommand.CloseCommand, OnClose));
-    }
-        internal MessageBoxWindow(string messageBoxText = "", string caption = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxImage icon = MessageBoxImage.None, bool isAutoClose = false, int windowKeepTime = 5,string imageText=null,string imageColor="#ffffff") : this()
+        }
+        private MessageBoxWindow(string messageBoxText = "", string caption = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxImage icon = MessageBoxImage.None, bool isAutoClose = false, int windowKeepTime = 5, string imageText = null, string imageColor = "#ffffff") : this()
         {
             Message = messageBoxText;
             Title = caption;
             MessageBoxButton = button;
-        
+
             IsAutoClose = isAutoClose;
             WindowKeepTime = windowKeepTime;
             if (button == MessageBoxButton.OK)
@@ -72,7 +211,7 @@ namespace WYW.UI.Controls
             {
                 IsAutoClose = false;
             }
-            switch(icon)
+            switch (icon)
             {
                 case MessageBoxImage.None:
                     HasImage = false;
@@ -94,7 +233,7 @@ namespace WYW.UI.Controls
                     ImageBackground = (SolidColorBrush)new BrushConverter().ConvertFrom("#ffe81123");
                     break;
                 case MessageBoxImage.Custom:
-                    if(string.IsNullOrEmpty(imageText))
+                    if (string.IsNullOrEmpty(imageText))
                     {
                         HasImage = false;
                     }
@@ -114,199 +253,108 @@ namespace WYW.UI.Controls
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
-            var wih = new WindowInteropHelper(this);
-            var style = GetWindowLong(wih.Handle, GWL_STYLE);
-            SetWindowLong(wih.Handle, GWL_STYLE, style | WS_CHILD); // 非激活窗体
-        }
-
-        #region 静态方法
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text">消息框正文</param>
-        /// <param name="caption">消息框标题</param>
-        /// <param name="button">按钮格式</param>
-        /// <param name="icon">图标格式</param>
-        /// <param name="isAutoClose">是否自动关闭</param>
-        /// <param name="windowKeepTime">自动关闭模式下消息框显示的时间</param>
-        /// <param name="okButtonText">OK按钮显示的文字，默认显示"确定"</param>
-        /// <param name="yesButtonText">Yes按钮显示的文字，默认显示"是"</param>
-        /// <param name="noButtonText">No按钮显示的文字，默认显示"否"</param>
-        /// <param name="cancelButtonText">Cancel按钮显示的文字，默认显示"取消"</param>
-        /// <param name="showDialog">是否以模态模式弹出，默认为true。如果不希望阻塞UI线程，可设置为false</param>
-        /// <param name="imageText">自定义图标内容，FontAwesome字体的Unicode码，例如"\uf118"。仅在icon = MessageBoxImage.Custom下有效</param>
-        /// <param name="imageColor">自定义图标颜色，例如"#ffffffff"。仅在icon = MessageBoxImage.Custom下有效</param>
-        /// <returns></returns>
-        public static MessageBoxResult Show(string text, string caption = "", 
-            MessageBoxButton button = MessageBoxButton.OK, MessageBoxImage icon = MessageBoxImage.None, 
-            bool isAutoClose = false, int windowKeepTime = 5, 
-            string okButtonText = null, string yesButtonText = null, string noButtonText = null, string cancelButtonText = null, bool showDialog = true,
-            string imageText = null, string imageColor = "#ffffff")
-        {
-            MessageBoxWindow window = null;
-            Application.Current.Dispatcher.Invoke(new Action(() =>
-            {
-                window = new MessageBoxWindow(text, caption, button, icon, isAutoClose, windowKeepTime,imageText,imageColor);
-                if(!string.IsNullOrEmpty(okButtonText))
-                {
-                    window.OKButtonText = okButtonText;
-                }
-                if (!string.IsNullOrEmpty(yesButtonText))
-                {
-                    window.YesButtonText = yesButtonText;
-                }
-                if (!string.IsNullOrEmpty(noButtonText))
-                {
-                    window.NoButtonText = noButtonText;
-                }
-                if (!string.IsNullOrEmpty(cancelButtonText))
-                {
-                    window.CancelButtonText = cancelButtonText;
-                }
-                if(showDialog)
-                {
-                    window.ShowDialog();
-                }
-                else
-                {
-                    window.Show();
-                }
-               
-            }));
-            return window != null ? window.MessageResult : MessageBoxResult.None;
-        }
-        /// <summary>
-        /// 消息框显示自定义图标
-        /// </summary>
-        /// <param name="messageBoxText"></param>
-        /// <param name="caption"></param>
-        /// <returns></returns>
-        public static MessageBoxResult Custom(string messageBoxText, string caption = "", string imageText = null, string imageColor = "#ffffff", bool isAutoClose = false, int windowKeepTime = 5)
-        {
-            return Show(messageBoxText, caption, MessageBoxButton.OK, MessageBoxImage.Custom, isAutoClose, windowKeepTime,imageText:imageText,imageColor:imageColor);
-        }
-        /// <summary>
-        /// 消息框显示 √ 图标
-        /// </summary>
-        /// <param name="messageBoxText"></param>
-        /// <param name="caption"></param>
-        /// <returns></returns>
-        public static MessageBoxResult Success(string messageBoxText, string caption = "", bool isAutoClose = false, int windowKeepTime = 5)
-        {
-            return Show(messageBoxText, caption, MessageBoxButton.OK, MessageBoxImage.Sucess, isAutoClose, windowKeepTime);
-        }
-        /// <summary>
-        /// 消息框显示 ? 图标
-        /// </summary>
-        /// <param name="messageBoxText"></param>
-        /// <param name="caption"></param>
-        /// <returns></returns>
-        public static MessageBoxResult Question(string messageBoxText, string caption = "")
-        {
-            return Show(messageBoxText, caption, MessageBoxButton.YesNo, MessageBoxImage.Question);
-        }
-        /// <summary>
-        /// 消息框显示 ! 图标
-        /// </summary>
-        /// <param name="messageBoxText"></param>
-        /// <param name="caption"></param>
-        /// <returns></returns>
-        public static MessageBoxResult Warning(string messageBoxText, string caption = "", bool isAutoClose = false, int windowKeepTime = 5)
-        {
-            return Show(messageBoxText, caption, MessageBoxButton.OK, MessageBoxImage.Warning, isAutoClose, windowKeepTime);
-        }
-        /// <summary>
-        /// 消息框显示 x 图标
-        /// </summary>
-        /// <param name="messageBoxText"></param>
-        /// <param name="caption"></param>
-        /// <returns></returns>
-        public static MessageBoxResult Error(string messageBoxText, string caption = "",bool isPlaySound=false)
-        {
-            SoundPlayer soundPlayer = null;
-            if (isPlaySound)
-            {
-                soundPlayer = new SoundPlayer(UI.Resources.Warn);
-                soundPlayer.PlayLooping();
-            }
-
-            var result = Show(messageBoxText, caption, MessageBoxButton.OK, MessageBoxImage.Error);
-            if (isPlaySound)
-            {
-                soundPlayer.Stop();
-                soundPlayer.Dispose();
-            }
-            return result;
+            // 2023-02-03 王彦为屏蔽如下代码，原因是MessageBoxWindow可以为激活窗体。
+            //var wih = new WindowInteropHelper(this);
+            //var style = GetWindowLong(wih.Handle, GWL_STYLE);
+            //SetWindowLong(wih.Handle, GWL_STYLE, style | WS_CHILD); // 非激活窗体
         }
         #endregion
 
-        #region 属性
-        /// <summary>
-        /// 显示的消息正文
-        /// </summary>
-        public string Message { get; set; }
-        /// <summary>
-        /// 自动关闭模式下，窗口的显示时间，单位秒
-        /// </summary>
-
-        /// <summary>
-        /// 是否自动关闭，仅对MessageBoxButton=MessageBoxButton.OK有效
-        /// </summary>
-        public bool IsAutoClose { get; set; }
-
-        public string YesButtonText { get; set; } = CultureInfo.CurrentUICulture.Name== "zh-CN"?"是":"Yes";
-        public string NoButtonText { get; set; } = CultureInfo.CurrentUICulture.Name == "zh-CN" ? "否" : "NO";
-        public string CancelButtonText { get; set; } = CultureInfo.CurrentUICulture.Name == "zh-CN" ? "取消" : "Cancel";
-        public string OKButtonText { get; set; } = CultureInfo.CurrentUICulture.Name == "zh-CN" ? "确定" : "OK";
-
-        MessageBoxResult MessageResult { get; set; } = MessageBoxResult.None;
-        public int WindowKeepTime { get; set; } = 5;
-
-
-        #endregion
 
         #region 依赖属性
-        public static readonly DependencyProperty CountDownProperty =
+        internal static readonly DependencyProperty CountDownProperty =
             DependencyProperty.Register("CountDown", typeof(int), typeof(MessageBoxWindow), new PropertyMetadata(default(int)));
-        public static readonly DependencyProperty MessageBoxButtonProperty =
+        internal static readonly DependencyProperty MessageBoxButtonProperty =
             DependencyProperty.Register("MessageBoxButton", typeof(MessageBoxButton), typeof(MessageBoxWindow), new PropertyMetadata(MessageBoxButton.OK));
-        public static readonly DependencyProperty ImageTextProperty =
+        internal static readonly DependencyProperty ImageTextProperty =
             DependencyProperty.Register("ImageText", typeof(string), typeof(MessageBoxWindow), new PropertyMetadata(null));
-        public static readonly DependencyProperty ImageBackgroundProperty =
+        internal static readonly DependencyProperty ImageBackgroundProperty =
             DependencyProperty.Register("ImageBackground", typeof(SolidColorBrush), typeof(MessageBoxWindow), new PropertyMetadata(Brushes.Black));
-        public static readonly DependencyProperty HasImageProperty =
+        internal static readonly DependencyProperty HasImageProperty =
           DependencyProperty.Register("HasImage", typeof(bool), typeof(MessageBoxWindow), new PropertyMetadata(true));
+        internal static readonly DependencyProperty MessageProperty =
+            DependencyProperty.Register("Message", typeof(string), typeof(MessageBoxWindow), new PropertyMetadata(default(string)));
+        internal static readonly DependencyProperty IsAutoCloseProperty =
+            DependencyProperty.Register("IsAutoClose", typeof(bool), typeof(MessageBoxWindow), new PropertyMetadata(default(bool)));
+        internal static readonly DependencyProperty YesButtonTextProperty =
+            DependencyProperty.Register("YesButtonText", typeof(string), typeof(MessageBoxWindow), new PropertyMetadata(CultureInfo.CurrentUICulture.Name == "zh-CN" ? "是" : "Yes"));
+        internal static readonly DependencyProperty NoButtonTextProperty =
+            DependencyProperty.Register("NoButtonText", typeof(string), typeof(MessageBoxWindow), new PropertyMetadata(CultureInfo.CurrentUICulture.Name == "zh-CN" ? "否" : "NO"));
+        internal static readonly DependencyProperty CancelButtonTextProperty =
+            DependencyProperty.Register("CancelButtonText", typeof(string), typeof(MessageBoxWindow), new PropertyMetadata(CultureInfo.CurrentUICulture.Name == "zh-CN" ? "取消" : "Cancel"));
+        internal static readonly DependencyProperty OKButtonTextProperty =
+            DependencyProperty.Register("OKButtonText", typeof(string), typeof(MessageBoxWindow), new PropertyMetadata(CultureInfo.CurrentUICulture.Name == "zh-CN" ? "确定" : "OK"));
+        internal static readonly DependencyProperty WindowKeepTimeProperty =
+            DependencyProperty.Register("WindowKeepTime", typeof(int), typeof(MessageBoxWindow), new PropertyMetadata(5));
 
-        public int CountDown
+        internal int CountDown
         {
             get { return (int)GetValue(CountDownProperty); }
             set { SetValue(CountDownProperty, value); }
         }
 
-        public MessageBoxButton MessageBoxButton
+        internal MessageBoxButton MessageBoxButton
         {
             get { return (MessageBoxButton)GetValue(MessageBoxButtonProperty); }
             set { SetValue(MessageBoxButtonProperty, value); }
         }
-        public string ImageText
+        internal string ImageText
         {
             get { return (string)GetValue(ImageTextProperty); }
             set { SetValue(ImageTextProperty, value); }
         }
-        public SolidColorBrush ImageBackground
+        internal SolidColorBrush ImageBackground
         {
             get { return (SolidColorBrush)GetValue(ImageBackgroundProperty); }
             set { SetValue(ImageBackgroundProperty, value); }
         }
 
-        public bool HasImage
+        internal bool HasImage
         {
             get { return (bool)GetValue(HasImageProperty); }
             set { SetValue(HasImageProperty, value); }
         }
 
-      
+        internal string Message
+        {
+            get { return (string)GetValue(MessageProperty); }
+            set { SetValue(MessageProperty, value); }
+        }
 
+        internal bool IsAutoClose
+        {
+            get { return (bool)GetValue(IsAutoCloseProperty); }
+            set { SetValue(IsAutoCloseProperty, value); }
+        }
+        internal string YesButtonText
+        {
+            get { return (string)GetValue(YesButtonTextProperty); }
+            set { SetValue(YesButtonTextProperty, value); }
+        }
+
+        internal string NoButtonText
+        {
+            get { return (string)GetValue(NoButtonTextProperty); }
+            set { SetValue(NoButtonTextProperty, value); }
+        }
+
+        internal string CancelButtonText
+        {
+            get { return (string)GetValue(CancelButtonTextProperty); }
+            set { SetValue(CancelButtonTextProperty, value); }
+        }
+
+        internal string OKButtonText
+        {
+            get { return (string)GetValue(OKButtonTextProperty); }
+            set { SetValue(OKButtonTextProperty, value); }
+        }
+
+        internal int WindowKeepTime
+        {
+            get { return (int)GetValue(WindowKeepTimeProperty); }
+            set { SetValue(WindowKeepTimeProperty, value); }
+        }
         #endregion
 
         #region  私有方法
@@ -345,11 +393,12 @@ namespace WYW.UI.Controls
         }
         private void AutoClose()
         {
+            int keepTime = WindowKeepTime;
             StoryboardHelper.OpacityChanging(this, 1, 0, WindowKeepTime - 1, WindowKeepTime);
             ThreadPool.QueueUserWorkItem(delegate
             {
                 DateTime startTime = DateTime.Now;
-                for (int i = WindowKeepTime; i > 0; i--)
+                for (int i = keepTime; i > 0; i--)
                 {
                     if (isClosed)
                         return;
@@ -367,6 +416,7 @@ namespace WYW.UI.Controls
                 }));
             });
         }
+        #endregion
         #endregion
     }
 }

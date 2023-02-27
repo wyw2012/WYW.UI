@@ -9,7 +9,10 @@ using System.Windows.Data;
 
 namespace WYW.UI.Converters
 {
-    public class StringFormatConverter : IMultiValueConverter
+    /// <summary>
+    /// 字符格式转换器，
+    /// </summary>
+    internal class StringFormatConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

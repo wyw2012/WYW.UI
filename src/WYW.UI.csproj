@@ -6,15 +6,12 @@
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
-
-  <ItemGroup>
+	<ItemGroup>
     <None Remove="Resources\Fonts\fontawesome-webfont.ttf" />
     <None Remove="Resources\Fonts\Quartz Regular.ttf" />
     <None Remove="Resources\Fonts\SourceHanSansCN-Normal.otf" />
     <None Remove="Resources\Fonts\Viking-Regular.ttf" />
-    <None Remove="Resources\Images\Background.png" />
     <None Remove="Resources\Images\logo.png" />
-    <None Remove="Resources\Images\logo2.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,9 +48,7 @@
     <Resource Include="Resources\Fonts\fontawesome-webfont.ttf" />
     <Resource Include="Resources\Fonts\Quartz Regular.ttf" />
     <Resource Include="Resources\Fonts\Viking-Regular.ttf" />
-    <Resource Include="Resources\Images\Background.png" />
     <Resource Include="Resources\Images\logo.png" />
-    <Resource Include="Resources\Images\logo2.png" />
   </ItemGroup>
 
   <ItemGroup>

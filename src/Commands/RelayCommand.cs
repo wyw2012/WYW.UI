@@ -3,7 +3,10 @@ using System.Windows.Input;
 
 namespace WYW.UI.Commands
 {
-    /// <inheritdoc />
+   /// <summary>
+   /// 中继命令基类
+   /// </summary>
+   /// <typeparam name="T"></typeparam>
     public class RelayCommand<T> : ICommand
     {
         private readonly Action<T> _execute;

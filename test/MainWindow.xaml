@@ -8,9 +8,10 @@
         xmlns:view="clr-namespace:WYW.UI.Test.Views"
         xmlns:wyw="http://wangyanwei.com/ui"  
         Title="" Height="768" Width="1024"
-        FontSize="16" >
+        FontSize="16" WindowStartupLocation="CenterScreen" >
     <Grid Margin="0">
         <TabControl TabStripPlacement="Left" VerticalContentAlignment="Top">
+          
             <TabItem Header="Button">
                 <view:Button/>
             </TabItem>
@@ -99,6 +100,7 @@
             <TabItem Header="Window">
                 <view:V_Window/>
             </TabItem>
+
             <TabItem Header="MessageBoxWindow"
                      wyw:TabItemElement.IcoGeometry="{StaticResource NewGeometry}"
                      wyw:TabItemElement.IcoWidth="40"
@@ -128,6 +130,15 @@
                      wyw:TabItemElement.IcoWidth="40"
                      wyw:TabItemElement.IcoHeight="40">
                 <view:ProgressRing/>
+            </TabItem>
+            <TabItem Header="Shape"
+                     wyw:TabItemElement.IcoGeometry="{StaticResource NewGeometry}"
+                     wyw:TabItemElement.IcoWidth="40"
+                     wyw:TabItemElement.IcoHeight="40">
+                <view:Shape/>
+            </TabItem>
+            <TabItem Header="临时测试">
+                <view:TempTest/>
             </TabItem>
         </TabControl>
     </Grid>

@@ -7,7 +7,7 @@
     <converter:ConstToReverseBooleanConverter x:Key="ConstToReverseBooleanConverter"/>
     <converter:ConstToReverseVisibilityConverter x:Key="ConstToReverseVisibilityConverter"/>
     <converter:ConstToVisibilityConverter x:Key="ConstToVisibilityConverter"/>
-    <converter:MultiBoolConverter x:Key="MultiBoolConverter"/>
+    <converter:MultiBooleanConverter x:Key="MultiBooleanConverter"/>
     <converter:MultiCommandParametersConverter x:Key="MultiCommandParametersConverter"/>
     <converter:MultiplicationConverter x:Key="MultiplicationConverter"/>
     <converter:ProgressBarCornerRadiusConverter x:Key="ProgressBarCornerRadiusConverter"/>

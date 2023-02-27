@@ -7,9 +7,9 @@ namespace WYW.UI.Converters
 {
 
     /// <summary>
-    /// 常量值与Visibility的反向映射，如果绑定值与参数相反，则返回Visibility.Visible
+    /// 常量值与Visibility的逆向转换，例如：1=true=Visibility.Collapsed；0=false=Visibility.Visible；
     /// </summary>
-    public class ConstToReverseVisibilityConverter : IValueConverter
+    internal class ConstToReverseVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

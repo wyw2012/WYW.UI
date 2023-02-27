@@ -9,7 +9,10 @@ using System.Windows.Media;
 
 namespace WYW.UI.Common
 {
-    public static class VisualHelper
+    /// <summary>
+    /// 视觉辅助类
+    /// </summary>
+    internal static class VisualHelper
     {
         /// <summary>
         /// 查找元素的子元素
@@ -19,7 +22,7 @@ namespace WYW.UI.Common
         /// <returns></returns>
         public static T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
         {
-            if(obj==null)
+            if (obj == null)
                 return null;
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
             {
@@ -174,8 +177,8 @@ namespace WYW.UI.Common
                     IEnumerator j = FindVisualChildren<childItem>(child).GetEnumerator();
                     while (j.MoveNext())
                     {
-                        childItem childOfChild = (childItem) j.Current;
-                        
+                        childItem childOfChild = (childItem)j.Current;
+
                         if (childOfChild != null && !(childOfChild as FrameworkElement).Name.Equals(elementName))
                         {
                             FindVisualElement<childItem>(childOfChild, elementName);
@@ -184,7 +187,7 @@ namespace WYW.UI.Common
                         {
                             return childOfChild;
                         }
-                        
+
                     }
                 }
             }
@@ -218,7 +221,6 @@ namespace WYW.UI.Common
                     {
                         return childOfChild;
                     }
-                        
                 }
             }
             return null;

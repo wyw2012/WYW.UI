@@ -7,6 +7,9 @@ using System.Windows.Input;
 
 namespace WYW.UI.Commands
 {
+    /// <summary>
+    /// 通用命令类，通常在控件的构造函数中使用CommandBindings.Add()方法添加命令绑定
+    /// </summary>
     internal class CustomCommand
     {
         public static RoutedCommand OKCommand = new RoutedCommand();

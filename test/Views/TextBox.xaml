@@ -17,6 +17,7 @@
             <GroupBox Grid.Column="0" Header="常规用法">
                 <StackPanel >
                     <TextBox Text="正常显示" />
+                    
                     <TextBox Text="内容只读" IsReadOnly="True" />
                     <TextBox Text="控件禁用" IsEnabled="False"/>
                     <TextBox  Height="60"   VerticalContentAlignment="Top"   TextWrapping="Wrap"  
@@ -27,6 +28,11 @@
                 <StackPanel >
                     <TextBox 
                             wyw:TextBoxElement.Title="显示标题"  />
+                    <TextBox IsReadOnly="True" Text="内容只读"
+                            wyw:TextBoxElement.Title="只读"  />
+                    <TextBox 
+                            wyw:TextBoxElement.Title="显示清除按钮"
+                            wyw:TextBoxElement.ShowClearButton="True"/>
                     <TextBox 
                             wyw:TextBoxElement.Title="必须输入" 
                             wyw:TextBoxElement.IsNecessary="True" />

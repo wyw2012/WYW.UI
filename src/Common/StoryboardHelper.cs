@@ -8,9 +8,12 @@ using System.Windows;
 
 namespace WYW.UI.Common
 {
+    /// <summary>
+    /// 动画辅助类
+    /// </summary>
     internal class StoryboardHelper
     {
-        public static void OpacityChanging(DependencyObject value, double opacityFrom, double opacityTo, double startTime ,double durateTime)
+        public static void OpacityChanging(DependencyObject value, double opacityFrom, double opacityTo, double startTime, double durateTime)
         {
             var sb = new Storyboard();
             var da = new DoubleAnimation();

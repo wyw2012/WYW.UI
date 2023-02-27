@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WYW.UI.Controls
 {
+    /// <summary>
+    /// 消息框图标，替代ystem.Windows.MessageBoxImage
+    /// </summary>
     public enum MessageBoxImage
     {
         None = 0,

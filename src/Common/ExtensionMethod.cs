@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace WYW.UI.Common
 {
-   static class ExtensionMethod
+    /// <summary>
+    /// 扩展方法
+    /// </summary>
+    static class ExtensionMethod
     {
     }
 }

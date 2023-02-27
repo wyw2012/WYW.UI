@@ -1,12 +1,8 @@
 ﻿using WYW.UI.Commands;
 using WYW.UI.Common;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -15,20 +11,125 @@ using System.Windows.Media;
 
 namespace WYW.UI.Controls
 {
+    /// <summary>
+    /// 消息控件，消息以控件的方式追加到当前激活的窗体中
+    /// </summary>
     public class MessageBoxControl : Control
     {
+
+        #region 公开
+        /// <summary>
+        /// 最大显示的消息框数量，如果超过该数目，则自动移除较早的消息框
+        /// </summary>
+        public static int MaxItemsCount { get; set; } = 5;
+        /// <summary>
+        /// 消息框出现的位置
+        /// </summary>
+        public static CornerPlacement Placement { get; set; } = CornerPlacement.BottomRight;
+        /// <summary>
+        /// 成功信息，5s后自动关闭
+        /// </summary>
+        /// <param name="message">消息正文</param>
+        public static void Success(string message)
+        {
+            Show(message, MessageBoxImage.Sucess, true);
+        }
+        /// <summary>
+        /// 自定义信息
+        /// </summary>
+        /// <param name="message">消息正文</param>
+        /// <param name="imageText">自定义图标内容，FontAwesome字体的Unicode码，例如"\uf118"</param>
+        /// <param name="imageColor">自定义图标颜色，例如"#ffffffff"</param>
+        public static void Custom(string message, string imageText = null, string imageColor = "#ffffff")
+        {
+            Show(message, MessageBoxImage.Custom, true, 5, imageText, imageColor);
+        }
+        /// <summary>
+        /// 警告信息，需要手动关闭
+        /// </summary>
+        /// <param name="message">消息正文</param>
+        public static void Warning(string message)
+        {
+            Show(message, MessageBoxImage.Warning, false);
+        }
+        /// <summary>
+        /// 错误信息，需要手动关闭
+        /// </summary>
+        /// <param name="message">消息正文</param>
+        public static void Error(string message)
+        {
+            Show(message, MessageBoxImage.Error, false);
+        }
+        /// <summary>
+        /// 清除所有消息框
+        /// </summary>
+        public static void Clear()
+        {
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                var container = GetContainer();
+                if (container != null)
+                {
+                    container.Children.Clear();
+                }
+            }));
+        }
+        #endregion
+
+        #region 内部
         private bool isRemoved = false;
-        public MessageBoxControl()
+        private Panel owner = null;
+        #region  依赖属性
+
+        internal static readonly DependencyProperty MessageProperty =
+            DependencyProperty.Register("Message", typeof(string), typeof(MessageBoxControl), new PropertyMetadata(default(string)));
+        internal static readonly DependencyProperty ImageTextProperty =
+            DependencyProperty.Register("ImageText", typeof(string), typeof(MessageBoxControl), new PropertyMetadata(null));
+        internal static readonly DependencyProperty ImageBackgroundProperty =
+            DependencyProperty.Register("ImageBackground", typeof(SolidColorBrush), typeof(MessageBoxControl), new PropertyMetadata(Brushes.Black));
+        internal static readonly DependencyProperty HasImageProperty =
+            DependencyProperty.Register("HasImage", typeof(bool), typeof(MessageBoxControl), new PropertyMetadata(true));
+
+
+        internal string Message
+        {
+            get { return (string)GetValue(MessageProperty); }
+            set
+            {
+                SetValue(MessageProperty, $"{value}");
+            }
+        }
+
+        internal string ImageText
+        {
+            get { return (string)GetValue(ImageTextProperty); }
+            set { SetValue(ImageTextProperty, value); }
+        }
+        internal SolidColorBrush ImageBackground
+        {
+            get { return (SolidColorBrush)GetValue(ImageBackgroundProperty); }
+            set { SetValue(ImageBackgroundProperty, value); }
+        }
+
+        internal bool HasImage
+        {
+            get { return (bool)GetValue(HasImageProperty); }
+            set { SetValue(HasImageProperty, value); }
+        }
+
+
+
+        #endregion
+
+        #region 构造函数
+        private MessageBoxControl()
         {
             CommandBindings.Add(new CommandBinding(CustomCommand.RemoveCommand, ManulRemove));
         }
-        public MessageBoxControl(string message, MessageBoxImage icon, bool isAutoRemove, int keepTime, string imageText = null, string imageColor = "#ffffff") : this()
+        private MessageBoxControl(Panel owner, string message, MessageBoxImage icon, bool isAutoRemove, int keepTime, string imageText = null, string imageColor = "#ffffff") : this()
         {
+            this.owner = owner;
             Message = message;
-            if (isAutoRemove)
-            {
-                AutoRemove(keepTime);
-            }
             switch (icon)
             {
                 case MessageBoxImage.None:
@@ -66,101 +167,41 @@ namespace WYW.UI.Controls
                     }
                     break;
             }
-        }
-        #region  属性
 
-        public static readonly DependencyProperty MessageProperty =
-            DependencyProperty.Register("Message", typeof(string), typeof(MessageBoxControl), new PropertyMetadata(default(string)));
-        public static readonly DependencyProperty ImageTextProperty =
-            DependencyProperty.Register("ImageText", typeof(string), typeof(MessageBoxControl), new PropertyMetadata(null));
-        public static readonly DependencyProperty ImageBackgroundProperty =
-            DependencyProperty.Register("ImageBackground", typeof(SolidColorBrush), typeof(MessageBoxControl), new PropertyMetadata(Brushes.Black));
-        public static readonly DependencyProperty HasImageProperty =
-            DependencyProperty.Register("HasImage", typeof(bool), typeof(MessageBoxControl), new PropertyMetadata(true));
-
-
-        public string Message
-        {
-            get { return (string)GetValue(MessageProperty); }
-            set
+            if (isAutoRemove)
             {
-                SetValue(MessageProperty, $"{value}");
+                AutoRemove(keepTime);
             }
         }
-
-        public string ImageText
-        {
-            get { return (string)GetValue(ImageTextProperty); }
-            set { SetValue(ImageTextProperty, value); }
-        }
-        public SolidColorBrush ImageBackground
-        {
-            get { return (SolidColorBrush)GetValue(ImageBackgroundProperty); }
-            set { SetValue(ImageBackgroundProperty, value); }
-        }
-
-        public bool HasImage
-        {
-            get { return (bool)GetValue(HasImageProperty); }
-            set { SetValue(HasImageProperty, value); }
-        }
-
-
-
         #endregion
 
-        #region  静态属性
-        /// <summary>
-        /// 最大显示的消息框数量，如果超过该数目，则自动移除较早的消息框
-        /// </summary>
-        public static int MaxItemsCount { get; set; } = 5;
+        #region 私有方法
 
-        public static CornerPlacement Placement { get; set; }= CornerPlacement.BottomRight;
-
-        #endregion
-
-        #region  静态方法
-
-        /// <summary>
-        /// 成功信息，5s后自动关闭
-        /// </summary>
-        /// <param name="message"></param>
-        public static void Success(string message)
+        private void ManulRemove(object sender, ExecutedRoutedEventArgs e)
         {
-            Show(message, MessageBoxImage.Sucess, true);
-        }
-        public static void Custom(string message, string imageText = null, string imageColor = "#ffffff")
-        {
-            Show(message, MessageBoxImage.Custom, true,5,imageText,imageColor);
-        }
-        /// <summary>
-        /// 警告信息，需要手动关闭
-        /// </summary>
-        /// <param name="message"></param>
-        public static void Warning(string message)
-        {
-            Show(message, MessageBoxImage.Warning, false);
-        }
-        /// <summary>
-        /// 错误信息，需要手动关闭
-        /// </summary>
-        /// <param name="message"></param>
-        public static void Error(string message)
-        {
-            Show(message, MessageBoxImage.Error, false);
-        }
-        public static void Clear()
-        {
-            Application.Current.Dispatcher.Invoke(new Action(() =>
+            if (owner != null)
             {
-                var container = GetContainer();
-                if (container != null)
-                {
-                    container.Children.Clear();
-                }
-            }));
+                owner.Children.Remove(this);
+                isRemoved = true;
+            }
         }
-
+        private void AutoRemove(int keepTime)
+        {
+            ThreadPool.QueueUserWorkItem(delegate
+            {
+                DateTime startTime = DateTime.Now;
+                while ((DateTime.Now - startTime).TotalSeconds < keepTime)
+                {
+                    if (isRemoved)
+                        return;
+                    Thread.Sleep(100);
+                }
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    ManulRemove(null, null);
+                }));
+            });
+        }
         private static Panel CreateContainer()
         {
 
@@ -186,7 +227,7 @@ namespace WYW.UI.Controls
                             Background = Brushes.Transparent,
                             CanVerticallyScroll = true,
                         };
-                        switch(Placement)
+                        switch (Placement)
                         {
                             case CornerPlacement.TopLeft:
                                 container.VerticalAlignment = VerticalAlignment.Top;
@@ -260,7 +301,6 @@ namespace WYW.UI.Controls
         }
         private static void Show(string messageBoxText, MessageBoxImage icon, bool isAutoRemove, int keepTime = 5, string imageText = null, string imageColor = "#ffffff")
         {
-
             Application.Current.Dispatcher.Invoke(new Action(() =>
             {
                 var container = CreateContainer();
@@ -270,38 +310,12 @@ namespace WYW.UI.Controls
                     {
                         container.Children.RemoveAt(0);
                     }
-                    container.Children.Add(new MessageBoxControl(messageBoxText, icon, isAutoRemove, keepTime,imageText,imageColor));
+                    container.Children.Add(new MessageBoxControl(container, messageBoxText, icon, isAutoRemove, keepTime, imageText, imageColor));
                 }
             }));
-
         }
         #endregion
+        #endregion
 
-        private void ManulRemove(object sender, ExecutedRoutedEventArgs e)
-        {
-            var container = GetContainer();
-            if (container != null)
-            {
-                container.Children.Remove(this);
-                isRemoved = true;
-            }
-        }
-        private void AutoRemove(int keepTime)
-        {
-            ThreadPool.QueueUserWorkItem(delegate
-            {
-                DateTime startTime = DateTime.Now;
-                while ((DateTime.Now - startTime).TotalSeconds < keepTime)
-                {
-                    if (isRemoved)
-                        return;
-                    Thread.Sleep(100);
-                }
-                Application.Current.Dispatcher.Invoke(new Action(() =>
-                {
-                    ManulRemove(null, null);
-                }));
-            });
-        }
     }
 }

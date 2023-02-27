@@ -8,6 +8,9 @@ using System.Windows.Input;
 
 namespace WYW.UI.Commands
 {
+    /// <summary>
+    /// Window窗体命令
+    /// </summary>
     class WindowCommand
     {
         public static readonly RelayCommand<Window> CloseWindowCommand = new RelayCommand<Window>((e)=>

@@ -62,7 +62,9 @@ Styles/Assets/TreeViewItem.xaml
 Styles/Assets/UserControl.xaml
 Styles/Assets/Window.xaml
 # --------------------------------------
+Styles/Arc.xaml
 Styles/CheckComboBox.xaml
+Styles/CircleMenu.xaml
 Styles/CircleProgressBar.xaml
 Styles/CornerRadiusMask.xaml
 Styles/MessageBoxControl.xaml

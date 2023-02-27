@@ -12,6 +12,9 @@ using System.Windows.Media;
 
 namespace WYW.UI.Controls
 {
+    /// <summary>
+    /// 圆形进度条
+    /// </summary>
     public class CircleProgressBar : RangeBase
     {
 

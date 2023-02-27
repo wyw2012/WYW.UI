@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\Shape.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Button.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -62,6 +65,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\MessageBoxWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\TempTest.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Windows\CornerRadiusWindow.xaml.cs">
@@ -129,6 +135,9 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Shape.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Button.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -184,6 +193,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MessageBoxWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\TempTest.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Windows\CornerRadiusWindow.xaml">

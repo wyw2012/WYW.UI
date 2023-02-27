@@ -56,6 +56,16 @@
                         <ComboBoxItem Content="条目2"/>
                         <ComboBoxItem Content="条目3"/>
                     </ComboBox>
+                    <ComboBox wyw:ComboBoxElement.Title="只读"   wyw:ComboBoxElement.TitleWidth="0.5*" IsReadOnly="True" SelectedIndex="0" >
+                        <ComboBoxItem Content="条目1"/>
+                        <ComboBoxItem Content="条目2"/>
+                        <ComboBoxItem Content="条目3"/>
+                    </ComboBox>
+                    <ComboBox wyw:ComboBoxElement.Title="禁用"   wyw:ComboBoxElement.TitleWidth="0.5*" IsEnabled="false" SelectedIndex="0" >
+                        <ComboBoxItem Content="条目1"/>
+                        <ComboBoxItem Content="条目2"/>
+                        <ComboBoxItem Content="条目3"/>
+                    </ComboBox>
                 </StackPanel>
                 <Border BorderThickness="1" Padding="10" CornerRadius="5" VerticalAlignment="Bottom">
                     <TextBlock Text="提示：使用ComboBoxElement类中的附加属性实现。"

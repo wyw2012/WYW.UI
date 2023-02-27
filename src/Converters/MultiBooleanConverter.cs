@@ -8,7 +8,10 @@ using System.Windows.Data;
 
 namespace WYW.UI.Converters
 {
-    public class MultiBoolConverter : IMultiValueConverter
+    /// <summary>
+    /// 多个布尔值的与运算
+    /// </summary>
+    internal class MultiBooleanConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

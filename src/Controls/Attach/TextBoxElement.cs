@@ -23,6 +23,8 @@ namespace WYW.UI.Controls.Attach
             = DependencyProperty.RegisterAttached("IsCircleCorner", typeof(bool), typeof(TextBoxElement), new PropertyMetadata(default(bool)));
         public static readonly DependencyProperty CornerRadiusProperty
             = DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(TextBoxElement), new PropertyMetadata(default(CornerRadius)));
+        public static readonly DependencyProperty ShowClearButtonProperty
+            = DependencyProperty.RegisterAttached("ShowClearButton", typeof(bool), typeof(TextBoxElement), new PropertyMetadata(default(bool)));
 
         public static string GetTitle(DependencyObject obj) => (string)obj.GetValue(TitleProperty);
 
@@ -58,6 +60,14 @@ namespace WYW.UI.Controls.Attach
         public static CornerRadius GetCornerRadius(DependencyObject obj) => (CornerRadius)obj.GetValue(CornerRadiusProperty);
 
         public static void SetCornerRadius(DependencyObject obj, CornerRadius value) => obj.SetValue(CornerRadiusProperty, value);
+
+
+
+        public static bool GetShowClearButton(DependencyObject obj) => (bool)obj.GetValue(ShowClearButtonProperty);
+
+        public static void SetShowClearButton(DependencyObject obj, bool value) => obj.SetValue(ShowClearButtonProperty, value);
+
+
 
     }
 }
