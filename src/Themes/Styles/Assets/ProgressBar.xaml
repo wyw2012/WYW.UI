@@ -17,8 +17,9 @@
                             <PointAnimationUsingKeyFrames
                                             Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)"
                                             Storyboard.TargetName="Animation">
-                                <EasingPointKeyFrame KeyTime="0" Value="-0.5,0.5" />
-                                <EasingPointKeyFrame KeyTime="0:0:3" Value="1.5,0.5" />
+                                <EasingPointKeyFrame KeyTime="0" Value="0.1,0.5" />
+                                <EasingPointKeyFrame KeyTime="0:0:2" Value="0.9,0.5" />
+                                <EasingPointKeyFrame KeyTime="0:0:4" Value="0.1,0.5" />
                             </PointAnimationUsingKeyFrames>
                         </Storyboard>
                     </VisualState>
@@ -45,17 +46,19 @@
                                 </MultiBinding>
                             </Border.CornerRadius>
                         </Border>
-                        <Rectangle x:Name="Animation" Fill="{TemplateBinding Foreground}" Visibility="Collapsed"
-                                        RenderTransformOrigin="0.5,0.5">
-                            <Rectangle.RenderTransform>
+                        <Border x:Name="Animation" Background="{TemplateBinding Foreground}" 
+                                   Visibility="Collapsed"  
+                                   RenderTransformOrigin="0.5,0.5" >
+                          
+                            <Border.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform />
                                     <SkewTransform />
                                     <RotateTransform />
                                     <TranslateTransform />
                                 </TransformGroup>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
+                            </Border.RenderTransform>
+                        </Border>
                     </Grid>
                     <Label  x:Name="LableValue" HorizontalAlignment="Center"  VerticalAlignment="Center"
                                Visibility="{Binding Visibility, ElementName=Indicator}"
@@ -87,14 +90,14 @@
         <Setter Property="Foreground" Value="{StaticResource Item.BackgroundSelected}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
-        <Setter Property="Height" Value="{StaticResource TextElement.Height}"/>
+        <Setter Property="Height" Value="{DynamicResource TextElement.Height}"/>
         <Setter Property="Maximum" Value="100"/>
         <Setter Property="attach:RangeElement.IsAttached" Value="true"/>
         <Setter Property="attach:RangeElement.StringFormat" Value="P1"/>
         <Setter Property="Template" Value="{StaticResource ProgressBarHorizontalTemplate}"/>
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Vertical">
-                <Setter Property="Width" Value="{StaticResource TextElement.Height}"/>
+                <Setter Property="Width" Value="{DynamicResource TextElement.Height}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

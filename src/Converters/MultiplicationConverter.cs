@@ -16,6 +16,11 @@ namespace WYW.UI.Converters
             {
                 var original = double.Parse(value.ToString());
                 var para = double.Parse(parameter.ToString());
+
+                if(para==0.1)
+                {
+                    int a =0;
+                }
                 return original*para;
             }
             catch

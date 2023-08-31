@@ -2,29 +2,82 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:control="clr-namespace:WYW.UI.Controls">
     <Style TargetType="control:StatusLight">
+        <Setter Property="Background" Value="Gray"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="control:StatusLight">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Ellipse Width="20" Height="20" Name="Ellipse"/>
-                        <TextBlock Grid.Column="1" Text="{TemplateBinding Text}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Width="20" Height="20" Name="Ellipse" Fill="{TemplateBinding LightColor}"/>
+                            <TextBlock Grid.Column="1" Text="{TemplateBinding Text}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="{DynamicResource Control.LeftMargin}"/>
+                        </Grid>
+                        <Popup Placement="Top" Name="Popup" 
+                               AllowsTransparency="True" 
+                               PopupAnimation="Scroll">
+                            <Border Height="120" Width="300" CornerRadius="{DynamicResource Control.CornerRadius}" 
+                                    BorderThickness="1" 
+                                    Background="{StaticResource Control.Background}" >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.2*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="0.2*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Viewbox Grid.Column="1">
+                                        <TextBlock Text="&#xf057;" FontFamily="{StaticResource AwesomeFontFamily}" Foreground="{TemplateBinding LightColor}" Name="Logo"/>
+                                    </Viewbox>
+                                    <TextBlock Grid.Column="3"  Text="{TemplateBinding PopupText}"
+                                               VerticalAlignment="Center"
+                                               TextWrapping="Wrap"/>
+                                </Grid>
+
+
+                            </Border>
+                        </Popup>
                     </Grid>
+
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsConnected" Value="{x:Null}">
-                            <Setter TargetName="Ellipse" Property="Fill" Value="Gray"/>
-                        </Trigger>
-                        <Trigger Property="IsConnected" Value="False">
-                            <Setter TargetName="Ellipse" Property="Fill" Value="red"/>
-                        </Trigger>
-                        <Trigger Property="IsConnected" Value="True">
-                            <Setter TargetName="Ellipse" Property="Fill" Value="limegreen"/>
-                        </Trigger>
+                      
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsShowPopup" Value="True"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="LightColor" Value="Red"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="IsOpen" TargetName="Popup" Value="true" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsShowPopup" Value="True"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="LightColor" Value="Gray"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="IsOpen" TargetName="Popup" Value="true" />
+                                <Setter Property="Text" TargetName="Logo" Value="&#xf119;" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <!--<MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsShowPopup" Value="True"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="LightColor" Value="LimeGreen"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="IsOpen" TargetName="Popup" Value="true" />
+                                <Setter Property="Text" TargetName="Logo" Value="&#xf118;" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
+   
             </Setter.Value>
         </Setter>
     </Style>

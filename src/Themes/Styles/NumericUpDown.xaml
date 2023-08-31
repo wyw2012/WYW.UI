@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:control="clr-namespace:WYW.UI.Controls"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:attach="clr-namespace:WYW.UI.Controls.Attach">
     <ControlTemplate x:Key="NumericUpDownHorizontalTemplate" TargetType="control:NumericUpDown">
         <Grid>
@@ -10,41 +11,68 @@
                 <ColumnDefinition Width="{Binding SuffixWidth,RelativeSource={RelativeSource AncestorType=control:NumericUpDown}}"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="{TemplateBinding Title}"/>
-            <Grid Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
 
-                <RepeatButton Grid.Column="0" x:Name="DownButton" Command="{x:Static Slider.DecreaseLarge}" 
+            <Border Grid.Column="1"  BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding ButtonWidth,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="{Binding ButtonWidth,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                    </Grid.ColumnDefinitions>
+                    <!--Command="{x:Static Slider.DecreaseLarge}"-->
+                    <RepeatButton Grid.Column="0" x:Name="DownButton" Command="{Binding DownButtonClickCommand,RelativeSource={RelativeSource Mode=TemplatedParent}}" 
                           attach:ButtonElement.IcoGeometry="{StaticResource MinusGeometry}"
-                          attach:ButtonElement.IcoHeight="10"
-                          attach:ButtonElement.IcoWidth="10"
+                          attach:ButtonElement.IcoHeight="{TemplateBinding FontSize}"
+                          attach:ButtonElement.IcoWidth="{TemplateBinding FontSize}"
                           attach:ButtonElement.CornerRadius="3,0,0,3"
-                          Width="{TemplateBinding ButtonWidth}"
-                          BorderBrush="{TemplateBinding BorderBrush}"/>
-                <TextBox Grid.Column="1" Margin="0" BorderThickness="0,1"  x:Name="TextBoxValue" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                         Text="{Binding FormatedValue,RelativeSource={RelativeSource AncestorType=control:NumericUpDown},UpdateSourceTrigger=LostFocus}"/>
-
-                <RepeatButton Grid.Column="2" x:Name="UpButton" Command="{x:Static Slider.IncreaseLarge}"
+                          BorderThickness="0"/>
+                    <Border Grid.Column="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,0">
+                        <Grid>
+                            <TextBox Margin="0" BorderThickness="0"  x:Name="TextBoxValue"
+                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                     Background="{TemplateBinding Background}" 
+                                     Foreground="{TemplateBinding LedForeground}"
+                                     IsReadOnly="{TemplateBinding IsEditable,Converter={StaticResource ReverseConverter}}"
+                                     Text="{Binding FormatedValue,RelativeSource={RelativeSource AncestorType=control:NumericUpDown},UpdateSourceTrigger=LostFocus}"/>
+                            <TextBlock Text="{TemplateBinding Unit}" HorizontalAlignment="Right" Margin="{DynamicResource Control.HorizontalMargin}"/>
+                        </Grid>
+                  
+                        <Border.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding EnterPressedCommand,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        </Border.InputBindings>
+                    </Border>
+                    <!--Command="{x:Static Slider.IncreaseLarge}"-->
+                    <RepeatButton Grid.Column="2" x:Name="UpButton" Command="{Binding UpButtonClickCommand,RelativeSource={RelativeSource Mode=TemplatedParent}}" 
                           attach:ButtonElement.IcoGeometry="{StaticResource AddGeometry}"
-                          attach:ButtonElement.IcoHeight="10"
-                          attach:ButtonElement.IcoWidth="10"
-                          attach:ButtonElement.CornerRadius="0,3,3,0"
-                          Width="{TemplateBinding ButtonWidth}"
-                          BorderBrush="{TemplateBinding BorderBrush}"/>
+                          attach:ButtonElement.IcoHeight="{TemplateBinding FontSize}"
+                          attach:ButtonElement.IcoWidth="{TemplateBinding FontSize}"
+                          attach:ButtonElement.CornerRadius="{DynamicResource Control.CornerRadiusRight}" 
+                           BorderThickness="0"/>
+                </Grid>
+            </Border>
 
-            </Grid>
-            <TextBlock Grid.Column="2" Margin="5,0,0,0" Text="{TemplateBinding Suffix}"/>
+            <TextBlock Grid.Column="2" Margin="{DynamicResource Control.LeftMargin}" Text="{TemplateBinding Suffix}"/>
         </Grid>
         <ControlTemplate.Triggers>
             <DataTrigger Binding="{Binding IsFocused,ElementName=TextBoxValue}" Value="true">
                 <Setter Property="BorderBrush" TargetName="DownButton" Value="{StaticResource BorderBrushFocused}"/>
                 <Setter Property="BorderBrush" TargetName="UpButton" Value="{StaticResource BorderBrushFocused}"/>
             </DataTrigger>
+            <Trigger Property="IsLedFontFamily" Value="True">
+                <Setter TargetName="TextBoxValue" Property="FontFamily" Value="{StaticResource QuartzFontFamily}" />
+                <Setter TargetName="TextBoxValue" Property="FontSize" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=TemplatedParent},  Converter={StaticResource MultiplicationConverter},ConverterParameter=1.8}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource BorderBrushHover}"/>
+            </Trigger>
+            <Trigger SourceName="TextBoxValue" Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource BorderBrushFocused}"/>
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+
     <ControlTemplate x:Key="NumericUpDownVerticalTemplate" TargetType="control:NumericUpDown">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -53,58 +81,78 @@
                 <ColumnDefinition Width="{Binding SuffixWidth,RelativeSource={RelativeSource AncestorType=control:NumericUpDown}}"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="{TemplateBinding Title}"/>
-            <Grid Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBox Grid.RowSpan="2" Grid.Column="0" Margin="0" BorderThickness="1,1,0,1"  x:Name="TextBoxValue"
-                     attach:TextBoxElement.CornerRadius="3,0,0,3" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                     Text="{Binding FormatedValue,RelativeSource={RelativeSource AncestorType=control:NumericUpDown},UpdateSourceTrigger=LostFocus}"/>
+            <Border Grid.Column="1" x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="{Binding TitleWidth,RelativeSource={RelativeSource AncestorType=control:NumericUpDown}}"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Column="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,1,0">
+                        <TextBox Margin="0" x:Name="TextBoxValue"
+                                 attach:TextBoxElement.CornerRadius="3,0,0,3" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                 Text="{Binding FormatedValue,RelativeSource={RelativeSource AncestorType=control:NumericUpDown},UpdateSourceTrigger=LostFocus}"/>
+                        <Border.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding EnterPressedCommand,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        </Border.InputBindings>
+                    </Border>
 
 
-                <RepeatButton Grid.Row="0" Grid.Column="1" x:Name="UpButton" Command="{x:Static Slider.IncreaseLarge}"
+                    <RepeatButton Grid.Row="0" Grid.Column="1" x:Name="UpButton" Command="{Binding DownButtonClickCommand,RelativeSource={RelativeSource Mode=TemplatedParent}}" 
                           attach:ButtonElement.IcoGeometry="{StaticResource UpArrowGeometry}"
                           attach:ButtonElement.IcoHeight="8"
                           attach:ButtonElement.IcoWidth="8"
                           attach:ButtonElement.CornerRadius="0,3,0,0"
-                          Width="{TemplateBinding ButtonWidth}"/>
+                          BorderThickness="0"/>
 
-                <RepeatButton Grid.Row="1" Grid.Column="1" x:Name="DownButton" Command="{x:Static Slider.DecreaseLarge}" 
+                    <RepeatButton Grid.Row="1" Grid.Column="1" x:Name="DownButton" Command="{Binding UpButtonClickCommand,RelativeSource={RelativeSource Mode=TemplatedParent}}" 
                           attach:ButtonElement.IcoGeometry="{StaticResource DownArrowGeometry}"
                           attach:ButtonElement.IcoHeight="8"
                           attach:ButtonElement.IcoWidth="8"
                           attach:ButtonElement.CornerRadius="0,0,3,0"
                           Margin="0,-1,0,0"
-                          Width="{TemplateBinding ButtonWidth}"/>
+                          BorderThickness="0,1,0,0"/>
 
 
-            </Grid>
-            <TextBlock Grid.Column="2" Margin="5,0,0,0" Text="{TemplateBinding Suffix}"/>
+                </Grid>
+            </Border>
+
+            <TextBlock Grid.Column="2" Margin="{DynamicResource Control.LeftMargin}" Text="{TemplateBinding Suffix}"/>
         </Grid>
-       
+
         <ControlTemplate.Triggers>
             <DataTrigger Binding="{Binding IsFocused,ElementName=TextBoxValue}" Value="true">
                 <Setter Property="BorderBrush" TargetName="DownButton" Value="{StaticResource BorderBrushFocused}"/>
                 <Setter Property="BorderBrush" TargetName="UpButton" Value="{StaticResource BorderBrushFocused}"/>
             </DataTrigger>
+            <Trigger Property="IsLedFontFamily" Value="True">
+                <Setter TargetName="TextBoxValue" Property="FontFamily" Value="{StaticResource QuartzFontFamily}" />
+                <Setter TargetName="TextBoxValue" Property="FontSize" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=TemplatedParent},  Converter={StaticResource MultiplicationConverter},ConverterParameter=1.8}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource BorderBrushHover}"/>
+            </Trigger>
+            <Trigger SourceName="TextBoxValue" Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource BorderBrushFocused}"/>
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="control:NumericUpDown">
+    <Style x:Key="NumericUpDownBaseStyle"  TargetType="control:NumericUpDown">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
         <Setter Property="IsMoveToPointEnabled" Value="True"/>
         <Setter Property="Background" Value="{StaticResource Control.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
+        <Setter Property="LedForeground" Value="{StaticResource Foreground}"/>
+        <Setter Property="BorderThickness" Value=" 1"/>
         <Setter Property="Focusable" Value="True"/>
-
-        <Setter Property="Margin" Value="{StaticResource VerticalMargin}"/>
+        <Setter Property="Margin" Value="{DynamicResource Control.VerticalMargin}"/>
         <Setter Property="Template" Value="{StaticResource NumericUpDownHorizontalTemplate}"/>
         <Style.Triggers>
             <Trigger Property="Title" Value="{x:Null}">
@@ -116,15 +164,13 @@
             <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="Template" Value="{StaticResource NumericUpDownVerticalTemplate}"/>
             </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.6"/>
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="{StaticResource BorderBrushHover}"/>
-            </Trigger>
-            <Trigger Property="IsLedFontFamily" Value="True">
-                <Setter Property="FontFamily" Value="{StaticResource QuartzFontFamily}"/>
-            </Trigger>
+
         </Style.Triggers>
+
+    </Style>
+
+    <Style TargetType="control:NumericUpDown" 
+           BasedOn="{StaticResource NumericUpDownBaseStyle}">
+
     </Style>
 </ResourceDictionary>

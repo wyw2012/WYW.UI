@@ -9,7 +9,11 @@ namespace WYW.UI.Test.Models
     internal class Student : ObservableObject
     {
         private int id;
-
+        private string name;
+        private Gender gender;
+        private bool isChecked;
+        private string password = null;
+        private string major;
         /// <summary>
         /// 
         /// </summary>
@@ -19,7 +23,6 @@ namespace WYW.UI.Test.Models
             set => SetProperty(ref id, value);
         }
 
-        private string name;
 
         /// <summary>
         /// 
@@ -30,18 +33,14 @@ namespace WYW.UI.Test.Models
             set => SetProperty(ref name, value);
         }
 
-        private int gender;
-
         /// <summary>
         /// 
         /// </summary>
-        public int Gender
+        public Gender Gender
         {
             get => gender;
             set => SetProperty(ref gender, value);
         }
-
-        private bool isChecked;
 
         /// <summary>
         /// 
@@ -52,8 +51,7 @@ namespace WYW.UI.Test.Models
             set => SetProperty(ref isChecked, value);
         }
 
-        private string password = null;
-
+     
         /// <summary>
         /// 
         /// </summary>
@@ -63,11 +61,31 @@ namespace WYW.UI.Test.Models
             set => SetProperty(ref password, value);
         }
 
+        /// <summary>
+        /// 专业
+        /// </summary>
+        public string Major
+        {
+            get => major;
+            set => SetProperty(ref major, value);
+        }
+
+        private Visibility visibility= Visibility.Visible;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Visibility Visibility { get => visibility; set => SetProperty(ref visibility, value); }
+
+        public override string ToString()
+        {
+            return $@"ID:{ID}，姓名：{Name}，性别：{Gender}，专业：{Major}，是否选中：{IsChecked}";
+        }
 
     }
     public enum Gender
     {
-        Male,
-        Female
+        男,
+        女
     }
 }

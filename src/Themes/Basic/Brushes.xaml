@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <SolidColorBrush x:Key="BorderBrush" Color="{DynamicResource BorderColor}"/>
+    <SolidColorBrush x:Key="BorderBrushHover" Color="{DynamicResource BorderBrushHoverColor}"/>
+    <SolidColorBrush x:Key="BorderBrushFocused" Color="{DynamicResource BorderBrushFocusedColor}"/>
+
+    <SolidColorBrush x:Key="Foreground" Color="{DynamicResource ForegroundColor}"/>
+    <SolidColorBrush x:Key="ForegroundReadOnly" Color="{DynamicResource ForegroundReadOnlyColor}"/>
+    <SolidColorBrush x:Key="ForegroundHover" Color="{DynamicResource ForegroundHoverColor}"/>
+    <SolidColorBrush x:Key="ForegroundDisabled" Color="{DynamicResource ForegroundDisabledColor}"/>
+
+    <SolidColorBrush x:Key="Control.Background" Color="{DynamicResource Control.BackgroundColor}"/>
+    <SolidColorBrush x:Key="Control.BackgroundHover" Color="{DynamicResource Control.BackgroundHoverColor}"/>
+    <SolidColorBrush x:Key="Control.BackgroundDisabled" Color="{DynamicResource Control.BackgroundDisabledColor}"/>
+
+    <SolidColorBrush x:Key="Item.BackgroundAlternation" Color="{DynamicResource Item.BackgroundAlternationColor}"/>
+    <SolidColorBrush x:Key="Item.BackgroundHover" Color="{DynamicResource Item.BackgroundHoverColor}"/>
+    <SolidColorBrush x:Key="Item.BackgroundSelected" Color="{DynamicResource Item.BackgroundSelectedColor}"/>
+    <SolidColorBrush x:Key="Item.ForegroundSelected" Color="{DynamicResource Item.ForegroundSelectedColor}"/>
+    <SolidColorBrush x:Key="Header.Background" Color="{DynamicResource Header.BackgroundColor}"/>
+
+
+    <SolidColorBrush x:Key="TextBox.BackgroundValidationError" Color="{DynamicResource TextBox.BackgroundValidationErrorColor}"/>
+    <SolidColorBrush x:Key="TextBox.ForegroundValidationError" Color="{DynamicResource TextBox.ForegroundValidationErrorColor}"/>
+    <SolidColorBrush x:Key="Thumb.Background" Color="{DynamicResource Thumb.BackgroundColor}"/>
+    <SolidColorBrush x:Key="Thumb.BackgroundHover" Color="{DynamicResource Thumb.BackgroundHoverColor}"/>
+    <SolidColorBrush x:Key="Thumb.BackgroundDragging" Color="{DynamicResource Thumb.BackgroundDraggingColor}"/>
+    <SolidColorBrush x:Key="Thumb.BackgroundDisabled" Color="{DynamicResource Thumb.BackgroundDisabledColor}"/>
+
+    <SolidColorBrush x:Key="Ticker.Background" Color="{DynamicResource Ticker.BackgroundColor}"/>
+    <SolidColorBrush x:Key="Separator.Background" Color="{DynamicResource Separator.BackgroundColor}"/>
+
+    <SolidColorBrush x:Key="RadioButton.BorderBrush" Color="{DynamicResource RadioButton.BorderBrushColor}"/>
+    <SolidColorBrush x:Key="RadioButton.BorderBrushHover" Color="{DynamicResource RadioButton.BorderBrushHoverColor}"/>
+
+
+
+
+</ResourceDictionary>

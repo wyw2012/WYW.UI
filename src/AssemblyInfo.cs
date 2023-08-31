@@ -15,3 +15,9 @@ using System.Windows.Markup;
 
 [assembly: XmlnsDefinition("http://wangyanwei.com/ui", "WYW.UI.Controls.Attach")]
 [assembly: XmlnsPrefix("http://wangyanwei.com/ui", "wyw")]
+
+[assembly: XmlnsDefinition("https://www.unisic-tech.com/", "WYW.UI.Controls")]
+[assembly: XmlnsPrefix("https://www.unisic-tech.com/", "sic")]
+
+[assembly: XmlnsDefinition("https://www.unisic-tech.com/", "WYW.UI.Controls.Attach")]
+[assembly: XmlnsPrefix("https://www.unisic-tech.com/", "sic")]

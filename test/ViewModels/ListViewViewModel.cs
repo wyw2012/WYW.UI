@@ -15,7 +15,7 @@ namespace WYW.UI.Test.ViewModels
             Items = new Student[20];
             for (int i = 0; i < Items.Length; i++)
             {
-                Items[i] = new Student() { ID = i + 1, Gender = i % 2, Name = $"张{i + 1}" };
+                Items[i] = new Student() { ID = i + 1, Gender = (Gender)(i % 2), Name = $"张{i + 1}" };
             }
         }
         public Student[] Items { get; set; }

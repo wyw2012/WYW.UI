@@ -48,7 +48,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" MinHeight="{StaticResource TextElement.Height}"/>
+                            <RowDefinition Height="Auto" MinHeight="{DynamicResource TextElement.Height}"/>
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Border Name="Border" Grid.ColumnSpan="2"
@@ -108,7 +108,7 @@
                                 <Condition Property="HasHeader" Value="false" />
                                 <Condition Property="Height" Value="Auto" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="PART_Header" Property="MinHeight" Value="{StaticResource TextElement.Height}" />
+                            <Setter TargetName="PART_Header" Property="MinHeight" Value="{DynamicResource TextElement.Height}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

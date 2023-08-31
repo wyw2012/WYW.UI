@@ -17,6 +17,7 @@
             <Setter.Value>
                 <ControlTemplate  TargetType="TabControl">
                     <Border  BorderBrush="{TemplateBinding BorderBrush}" 
+                             SnapsToDevicePixels="True"
                              BorderThickness="{TemplateBinding BorderThickness}" 
                              Background="{TemplateBinding Background}">
                         <Grid x:Name="templateRoot" 
@@ -44,6 +45,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                                 Background="{TemplateBinding Background}" 
                                 BorderThickness="0,1,0,0"
+                                SnapsToDevicePixels="True"
                                 Grid.Column="0" Grid.Row="1" 
                                 KeyboardNavigation.DirectionalNavigation="Contained" 
                                 KeyboardNavigation.TabIndex="2"
@@ -111,7 +113,7 @@
                         <Grid x:Name="templateRoot" 
                           Background="{TemplateBinding Background}" 
                           ClipToBounds="true" 
-                          SnapsToDevicePixels="true" 
+                          SnapsToDevicePixels="True"
                           KeyboardNavigation.TabNavigation="Local">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition x:Name="ColumnDefinition0"/>
@@ -124,6 +126,7 @@
                             <Border Grid.Column="0"  Grid.Row="0" x:Name="headerPanel" 
                                     BorderBrush="{TemplateBinding BorderBrush}" 
                                     BorderThickness="1,0,0,0"
+                                    SnapsToDevicePixels="True"
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                 <ScrollViewer Grid.Column="0"  Grid.Row="0" >
@@ -239,6 +242,7 @@
 
                             </Border>
                             <Border x:Name="contentPanel" 
+                                SnapsToDevicePixels="True"
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                                 Background="{TemplateBinding Background}" 
                                 BorderThickness="{TemplateBinding BorderThickness}"

@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:attach="clr-namespace:WYW.UI.Controls.Attach">
 
     <Style x:Key="SliderRepeatButtonHorizontalStyle" TargetType="RepeatButton">
@@ -18,6 +19,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
     <Style x:Key="SliderRepeatButtonVerticalStyle" TargetType="RepeatButton">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -168,9 +170,11 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+    
     <Style x:Key="{x:Type Slider}" TargetType="{x:Type Slider}">
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
         <Setter Property="IsMoveToPointEnabled" Value="True"/>
+        <Setter Property="Maximum" Value="100"/>
         <Setter Property="Background" Value="{StaticResource Ticker.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>

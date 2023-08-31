@@ -15,7 +15,7 @@
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="1" Content="{Binding OKButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
                                 Command="{x:Static command:CustomCommand.OKCommand}" IsDefault="True" 
-                                attach:ButtonElement.CornerRadius="5" x:Name="ButtonOK"/>
+                                attach:ButtonElement.CornerRadius="{DynamicResource Control.CornerRadius}"  x:Name="ButtonOK"/>
                         <TextBlock Grid.Column="1" Text="{Binding CountDown,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow},StringFormat={}( {0}s )}" 
                                    Margin="0,0,10,0" HorizontalAlignment="Right" Foreground="{Binding Foreground,ElementName=ButtonOK}"
                                    Visibility="{Binding IsAutoClose,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow},Converter={StaticResource ConstToVisibilityConverter}}"/>
@@ -39,10 +39,10 @@
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="1" Content="{Binding OKButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
                                 Command="{x:Static command:CustomCommand.OKCommand}" 
-                                attach:ButtonElement.CornerRadius="5"/>
+                                attach:ButtonElement.CornerRadius="{DynamicResource Control.CornerRadius}" />
                         <Button Grid.Column="3" Content="{Binding CancelButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
                                 Command="{x:Static command:CustomCommand.CancelCommand}" 
-                                attach:ButtonElement.CornerRadius="5"/>
+                                attach:ButtonElement.CornerRadius="{DynamicResource Control.CornerRadius}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -62,10 +62,10 @@
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="1" Content="{Binding YesButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
                                 Command="{x:Static command:CustomCommand.YesCommand}" 
-                                attach:ButtonElement.CornerRadius="5"/>
+                                attach:ButtonElement.CornerRadius="{DynamicResource Control.CornerRadius}" />
                         <Button Grid.Column="3"  Content="{Binding NoButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
                                 Command="{x:Static command:CustomCommand.NoCommand}"  
-                                attach:ButtonElement.CornerRadius="5"/>
+                                attach:ButtonElement.CornerRadius="{DynamicResource Control.CornerRadius}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -87,77 +87,85 @@
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="1" Content="{Binding YesButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
                                 Command="{x:Static command:CustomCommand.YesCommand}"
-                                attach:ButtonElement.CornerRadius="5"/>
+                                attach:ButtonElement.CornerRadius="{DynamicResource Control.CornerRadius}" />
                         <Button Grid.Column="3"  Content="{Binding NoButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
                                 Command="{x:Static command:CustomCommand.NoCommand}" 
-                                attach:ButtonElement.CornerRadius="5"/>
+                                attach:ButtonElement.CornerRadius="{DynamicResource Control.CornerRadius}" />
                         <Button Grid.Column="5"  Content="{Binding CancelButtonText,RelativeSource={RelativeSource AncestorType=control:MessageBoxWindow}}"
                                 Command="{x:Static command:CustomCommand.CancelCommand}" 
-                                attach:ButtonElement.CornerRadius="5"/>
+                                attach:ButtonElement.CornerRadius="{DynamicResource Control.CornerRadius}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
     <Style x:Key="MessageBoxWindowStyle" TargetType="control:MessageBoxWindow">
-        <Setter Property="Height" Value="260"/>
-        <Setter Property="Width" Value="450"/>
+        <Setter Property="Height" Value="360"/>
+        <Setter Property="Width" Value="640"/>
         <Setter Property="MinHeight" Value="40"/>
         <Setter Property="MinWidth" Value="40"/>
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="#FF1388F5"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
         <Setter Property="Background" Value="{StaticResource Control.Background}"/>
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="WindowChrome.WindowChrome" >
             <Setter.Value>
-                <WindowChrome CaptionHeight="30"  ResizeBorderThickness="5"  />
+                <WindowChrome CaptionHeight="{DynamicResource CaptionHeight}"  ResizeBorderThickness="5"  />
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="control:MessageBoxWindow">
-                    <Border SnapsToDevicePixels="True" 
+                    <Border x:Name="Border"
+                            SnapsToDevicePixels="True" 
                             BorderThickness="{TemplateBinding BorderThickness}" 
                             BorderBrush="{TemplateBinding BorderBrush}" 
                             Background="{TemplateBinding Background}"
-                            CornerRadius="5" Opacity="{TemplateBinding Opacity}"
+                            CornerRadius="{DynamicResource Control.CornerRadius}" 
+                            Opacity="{TemplateBinding Opacity}"
                             UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
                         <Grid Margin="{TemplateBinding Padding}">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="10"/>
-                                <RowDefinition Height="50"/>
-                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="30*"/>
+                                <RowDefinition Height="150*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="50*"/>
+                                <RowDefinition Height="20*"/>
                             </Grid.RowDefinitions>
-                            <Grid >
+                            <Grid x:Name="GridTitle">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10*"/>
+                                    <ColumnDefinition MinWidth="45"/>
+                                </Grid.ColumnDefinitions>
                                 <TextBlock Text="{TemplateBinding Title}" Margin="10,0,0,0" VerticalAlignment="Center"/>
-                                <Button Width="45" BorderThickness="0" Background="Transparent"
-                                        HorizontalAlignment="Right"
-                                        attach:ButtonElement.CornerRadius="0,5,0,0"
-                                        attach:ButtonElement.IcoGeometry="{StaticResource  CloseGeometry}"    
-                                        attach:ButtonElement.IcoHeight="12"
+                                <Button Grid.Column="1" BorderThickness="0" Background="Transparent"
+                                        attach:ButtonElement.CornerRadius="{Binding CornerRadius, ElementName=Border,Converter={StaticResource CornerRadiusMultiplicationConverter},ConverterParameter='0,1,0,0'}"
+                                        attach:ButtonElement.IcoGeometry="{StaticResource CloseGeometry}"    
+                                        attach:ButtonElement.IcoHeight="{TemplateBinding FontSize}"
+                                        attach:ButtonElement.IcoWidth="{TemplateBinding FontSize}"
                                         WindowChrome.IsHitTestVisibleInChrome="True" 
                                         x:Name="ButtonClose" 
-                                        Command="{x:Static command:CustomCommand.CloseCommand}"
-                                        />
+                                        Command="{x:Static command:CustomCommand.CloseCommand}"/>
                             </Grid>
-                            <Grid Grid.Row="1" Margin="40,0">
+                            <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100" x:Name="IconWidth"/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="40*"/>
+                                    <ColumnDefinition Width="100*" x:Name="IconWidth"/>
+                                    <ColumnDefinition Width="20*"/>
+                                    <ColumnDefinition Width="250*"/>
+                                    <ColumnDefinition Width="40*"/>
                                 </Grid.ColumnDefinitions>
-                                <Viewbox HorizontalAlignment="Center" Margin="0,0,20,0">
+                                <Viewbox Grid.Column="1" HorizontalAlignment="Center">
                                     <TextBlock FontFamily="{StaticResource AwesomeFontFamily}" 
                                                Foreground="{TemplateBinding ImageBackground}" 
                                                Text="{TemplateBinding ImageText}"
                                                x:Name="Icon"/>
                                 </Viewbox>
-                                <ScrollViewer Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Margin="0,5"
+                                <ScrollViewer Grid.Column="3" 
                                               VerticalScrollBarVisibility="Auto">
                                     <TextBlock TextWrapping="Wrap" FontSize="{TemplateBinding FontSize}"
                                                HorizontalAlignment="Center"

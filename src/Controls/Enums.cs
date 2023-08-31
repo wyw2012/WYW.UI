@@ -12,10 +12,14 @@ namespace WYW.UI.Controls
     public enum MessageBoxImage
     {
         None = 0,
-        Question = 0x20,
         Error = 0x10,
-        Warning = 48,
+        Question = 0x20,
+        Warning = 0x30,
         Sucess = 0x40,
+        /// <summary>
+        /// 提示信息
+        /// </summary>
+        Tip=0x50,
         /// <summary>
         /// 自定义图标
         /// </summary>

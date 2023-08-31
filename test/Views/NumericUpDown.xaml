@@ -20,7 +20,6 @@
                                    LargeChange="0.1"/>
                 <wyw:NumericUpDown Maximum="100" Value="40"  
                                    HorizontalContentAlignment="Center"
-                                   FontSize="40"
                                    Height="80" 
                                    ButtonWidth="80"
                                    IsLedFontFamily="True"/>

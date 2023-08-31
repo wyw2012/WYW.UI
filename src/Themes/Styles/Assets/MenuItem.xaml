@@ -105,7 +105,7 @@
                    IsOpen="{Binding Path=IsSubmenuOpen,RelativeSource={RelativeSource TemplatedParent}}"
                    Focusable="false"
                    PopupAnimation="{StaticResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
-                <Grid Margin="4" Background="{TemplateBinding MenuItem.Background}">
+                <Grid Margin="{DynamicResource Control.Margin}" Background="{TemplateBinding MenuItem.Background}">
                     <Grid x:Name="Shdw">
                         <Border Background="#0C000000" BorderBrush="#0F000000" BorderThickness="1" CornerRadius="2.5"
                                 Margin="-1" />
@@ -241,7 +241,8 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
-        <Setter Property="Height" Value="{StaticResource TextElement.Height}" />
+        <Setter Property="Height" Value="{DynamicResource Item.Height}" />
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Template" Value="{StaticResource SubmenuItemTemplate}" />
         <Style.Triggers>

@@ -5,7 +5,8 @@
     <ControlTemplate x:Key="GroupBoxTopTemplate" TargetType="GroupBox">
         <Border  BorderThickness="{TemplateBinding BorderThickness}" 
                  BorderBrush="{TemplateBinding BorderBrush}"
-                 CornerRadius="{StaticResource Control.CornerRadius}">
+                 CornerRadius="{DynamicResource Control.CornerRadius}"
+                 SnapsToDevicePixels="True">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -15,8 +16,10 @@
                 <Border  Name="HeaderControl" 
                          Background="{StaticResource Header.Background}"
                          BorderThickness="0,0,0,1"
-                         Height="{StaticResource Header.Height}"
-                         BorderBrush="{TemplateBinding BorderBrush}">
+                         SnapsToDevicePixels="True"
+                         Height="{DynamicResource Header.Height}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         CornerRadius="{DynamicResource Control.CornerRadiusTop}">
                     <ContentPresenter TextElement.Foreground="{TemplateBinding Foreground}"  
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -28,7 +31,6 @@
                                   Margin="5,0"
                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                 </Border>
-        
                 <ContentPresenter  Grid.Row="1"
                     Margin="{TemplateBinding Padding}" 
                     ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -52,7 +54,8 @@
     <ControlTemplate x:Key="GroupBoxBottomTemplate" TargetType="GroupBox">
         <Border  BorderThickness="{TemplateBinding BorderThickness}" 
                  BorderBrush="{TemplateBinding BorderBrush}"
-                 CornerRadius="{StaticResource Control.CornerRadius}">
+                 CornerRadius="{DynamicResource Control.CornerRadius}"
+                 SnapsToDevicePixels="True">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -62,8 +65,10 @@
                 <Border  Name="HeaderControl"  Grid.Row="1"
                          Background="{StaticResource Header.Background}"
                          BorderThickness="0,1,0,0"
-                         Height="{StaticResource Header.Height}"
-                         BorderBrush="{TemplateBinding BorderBrush}">
+                         Height="{DynamicResource Header.Height}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         CornerRadius="{DynamicResource Control.CornerRadiusBottom}"
+                         SnapsToDevicePixels="True">
                     <ContentPresenter TextElement.Foreground="{TemplateBinding Foreground}"  
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -99,7 +104,8 @@
     <ControlTemplate x:Key="GroupBoxLeftTemplate" TargetType="GroupBox">
         <Border  BorderThickness="{TemplateBinding BorderThickness}" 
                  BorderBrush="{TemplateBinding BorderBrush}"
-                 CornerRadius="{StaticResource Control.CornerRadius}">
+                 CornerRadius="{DynamicResource Control.CornerRadius}"
+                 SnapsToDevicePixels="True">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -109,8 +115,9 @@
                 <Border  Name="HeaderControl" 
                          Background="{StaticResource Header.Background}"
                          BorderThickness="0,0,1,0"
-                         Width="{StaticResource Header.Height}"
-                         BorderBrush="{TemplateBinding BorderBrush}">
+                         Width="{DynamicResource Header.Height}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         CornerRadius="{DynamicResource Control.CornerRadiusLeft}">
                     <ContentPresenter TextElement.Foreground="{TemplateBinding Foreground}"  
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -147,7 +154,8 @@
     <ControlTemplate x:Key="GroupBoxRightTemplate" TargetType="GroupBox">
         <Border  BorderThickness="{TemplateBinding BorderThickness}" 
                  BorderBrush="{TemplateBinding BorderBrush}"
-                 CornerRadius="{StaticResource Control.CornerRadius}">
+                 CornerRadius="{DynamicResource Control.CornerRadius}"
+                 SnapsToDevicePixels="True">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -162,8 +170,10 @@
                 <Border  Name="HeaderControl"  Grid.Column="1"
                          Background="{StaticResource Header.Background}"
                          BorderThickness="1,0,0,0"
-                         Width="{StaticResource Header.Height}"
-                         BorderBrush="{TemplateBinding BorderBrush}">
+                         Width="{DynamicResource Header.Height}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         CornerRadius="{DynamicResource Control.CornerRadiusRight}"
+                         SnapsToDevicePixels="True">
                     <ContentPresenter TextElement.Foreground="{TemplateBinding Foreground}"  
                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -192,14 +202,14 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style  TargetType="GroupBox">
+    <Style x:Key="GroupBoxBaseStyle"  TargetType="GroupBox">
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
         <Setter Property="Background" Value="{StaticResource Control.Background}"/>
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="{StaticResource Panel.Padding}"/>
+        <Setter Property="Padding" Value="{DynamicResource Panel.Padding}"/>
         <Setter Property="Template" Value="{StaticResource GroupBoxTopTemplate}"/>
         <Style.Triggers>
             <Trigger Property="attach:GroupBoxElement.Placement" Value="Left">
@@ -214,4 +224,6 @@
         </Style.Triggers>
        
     </Style>
+
+    <Style TargetType="GroupBox" BasedOn="{StaticResource GroupBoxBaseStyle}"/>
 </ResourceDictionary>

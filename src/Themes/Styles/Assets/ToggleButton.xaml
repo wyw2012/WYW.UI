@@ -55,7 +55,7 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="{StaticResource VerticalMargin}"/>
+        <Setter Property="Margin" Value="{DynamicResource Control.VerticalMargin}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
@@ -75,23 +75,23 @@
                                 <Border Background="{StaticResource Header.Background}" 
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="13"
+                                CornerRadius="13" SnapsToDevicePixels="True"
                                 x:Name="BackBorder"/>
 
                                 <Border Background="White" HorizontalAlignment="Left"
-                                Margin="2"
-                                Width="22" 
-                                CornerRadius="11"
-                                x:Name="ForwardBorder">
+                                        Margin="2"
+                                        Width="22" 
+                                        CornerRadius="11"
+                                        x:Name="ForwardBorder">
                                 </Border>
                             </Grid>
                             <ContentPresenter Grid.Column="1" Focusable="False"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          Margin="5,0,0,0" RecognizesAccessKey="True"
+                                          Margin="{DynamicResource Control.LeftMargin}" RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                           VerticalAlignment="Center" />
                         </Grid>
-                        <TextBlock Grid.Column="3" Margin="5,0,0,0" Text="{Binding Path=(attach:ToggleButtonElement.Suffix),RelativeSource={RelativeSource TemplatedParent}}"/>
+                        <TextBlock Grid.Column="3" Margin="{DynamicResource Control.LeftMargin}" Text="{Binding Path=(attach:ToggleButtonElement.Suffix),RelativeSource={RelativeSource TemplatedParent}}"/>
                     </Grid>
           
                     <ControlTemplate.Triggers>
@@ -154,7 +154,7 @@
     <Style x:Key="ExpanderDownToggleButton" TargetType="ToggleButton">
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="Background" Value="{StaticResource Header.Background}"/>
-        <Setter Property="Height" Value="{StaticResource Header.Height}"/>
+        <Setter Property="Height" Value="{DynamicResource Header.Height}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -201,7 +201,7 @@
     <Style x:Key="ExpanderUpToggleButton" TargetType="ToggleButton">
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="Background" Value="{StaticResource Header.Background}"/>
-        <Setter Property="Height" Value="{StaticResource Header.Height}"/>
+        <Setter Property="Height" Value="{DynamicResource Header.Height}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -248,7 +248,7 @@
     <Style x:Key="ExpanderLeftToggleButton" TargetType="ToggleButton">
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="Background" Value="{StaticResource Header.Background}"/>
-        <Setter Property="Width" Value="{StaticResource Header.Height}"/>
+        <Setter Property="Width" Value="{DynamicResource Header.Height}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -295,7 +295,7 @@
     <Style x:Key="ExpanderRightToggleButton" TargetType="ToggleButton">
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="Background" Value="{StaticResource Header.Background}"/>
-        <Setter Property="Width" Value="{StaticResource Header.Height}"/>
+        <Setter Property="Width" Value="{DynamicResource Header.Height}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>

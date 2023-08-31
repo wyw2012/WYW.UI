@@ -8,11 +8,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <x:Array x:Key="GenderCollection" Type="{x:Type sys:Int32}">
-            <sys:Int32>0</sys:Int32>
-            <sys:Int32>1</sys:Int32>
+        <x:Array x:Key="MajorCollection" Type="{x:Type sys:String}">
+            <sys:String>计算机</sys:String>
+            <sys:String>电子商务</sys:String>
         </x:Array>
-        <ObjectDataProvider x:Key="myEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+        <ObjectDataProvider x:Key="GenderEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
             <ObjectDataProvider.MethodParameters>
                 <x:Type Type="model:Gender"/>
             </ObjectDataProvider.MethodParameters>
@@ -28,21 +28,25 @@
             <StackPanel >
                 <DataGrid ItemsSource="{Binding Items}" HorizontalContentAlignment="Center"  HeadersVisibility="Row">
                     <DataGrid.Columns>
+                        <DataGridCheckBoxColumn Header="选中" Width="*"  Binding="{Binding IsChecked,UpdateSourceTrigger=PropertyChanged}" 
+                                            ElementStyle="{StaticResource DataGridCheckBoxEditStyle}"
+                                            EditingElementStyle="{StaticResource DataGridCheckBoxEditStyle}" />
                         <DataGridTextColumn Header="编号" IsReadOnly="True" Width="*"  Binding="{Binding ID}"/>
                         <DataGridTextColumn Header="姓名" Width="*"  Binding="{Binding Name}" 
                                             EditingElementStyle="{StaticResource DataGridTextEditStyle}"/>
-                        <DataGridComboBoxColumn Header="性别"  Width="*"   IsReadOnly="False" 
-                                            ItemsSource="{StaticResource GenderCollection  }" 
+                        <DataGridComboBoxColumn Header="性别"  Width="*" 
+                                            ItemsSource="{Binding Source={StaticResource GenderEnum} }" 
                                             EditingElementStyle="{StaticResource DataGridComboBoxEditStyle}"  
-                                            SelectedItemBinding="{Binding Gender}" 
-                                            >
+                                            SelectedItemBinding="{Binding Gender,UpdateSourceTrigger=PropertyChanged}" >
                         </DataGridComboBoxColumn>
-                        <DataGridCheckBoxColumn Header="选中" Width="*"  Binding="{Binding IsChecked}" 
-                                                IsReadOnly="True"
-                                            ElementStyle="{StaticResource DataGridCheckBoxEditStyle}"
-                                            EditingElementStyle="{StaticResource DataGridCheckBoxEditStyle}" />
+                        <DataGridComboBoxColumn Header="专业"  Width="*" 
+                                            ItemsSource="{StaticResource MajorCollection }" 
+                                            EditingElementStyle="{StaticResource DataGridComboBoxEditStyle}"  
+                                            SelectedItemBinding="{Binding Major,UpdateSourceTrigger=PropertyChanged}" >
+                        </DataGridComboBoxColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Button Content="验证绑定结果" Margin="0,20,0,0" Command="{Binding TestCommand}"  Height="60"/>
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Column="2" Header="高级用法">

@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:control="clr-namespace:WYW.UI.Controls">
+    <Style TargetType="control:ConnectBox">
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource Foreground}" />
+        <Setter Property="IconBrush" Value="{StaticResource Foreground}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="control:ConnectBox">
+                    <Grid>
+                        <Grid Name="GridUnConnected">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Path Data="{StaticResource UnConnectedGeometry}" Fill="{TemplateBinding IconBrush}"
+                                  Stretch="Uniform" />
+                            <TextBlock Margin="10,0,0,0" Grid.Column="1" VerticalAlignment="Center"
+                                       Text="{TemplateBinding  UnConnectedText}" Foreground="{TemplateBinding Foreground}" />
+                        </Grid>
+                        <Grid Name="GridConnected" Visibility="Hidden">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Path Name="Path" Data="{StaticResource ConnectedGeometry}" Fill="{TemplateBinding IconBrush}"
+                                  Stretch="Uniform" />
+                            <TextBlock Margin="10,0,0,0" Name="TextBlock" Grid.Column="1" VerticalAlignment="Center"
+                                       Text="{TemplateBinding  ConnectedText}" Foreground="{TemplateBinding Foreground}" />
+                        </Grid>
+                    </Grid>
+
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsConnected" Value="true">
+                            <Setter TargetName="GridConnected" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="GridUnConnected" Property="Visibility" Value="Hidden" />
+                            <Setter Property="IconBrush" Value="LimeGreen" />
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

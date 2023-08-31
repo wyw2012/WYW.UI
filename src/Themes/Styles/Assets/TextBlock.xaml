@@ -7,7 +7,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{StaticResource ForegroundDisabled}"/>
+                <Setter Property="Opacity" Value="0.6" />
             </Trigger>
         </Style.Triggers>
     </Style>

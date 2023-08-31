@@ -171,6 +171,7 @@ namespace WYW.UI.Controls
         #region 构造函数
         private MessageBoxWindow()
         {
+            
             Style = Application.Current.Resources["MessageBoxWindowStyle"] as Style;
             // 将当前窗体弹出设置为活动窗体的中央
             Window activedWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
@@ -193,6 +194,10 @@ namespace WYW.UI.Controls
         }
         private MessageBoxWindow(string messageBoxText = "", string caption = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxImage icon = MessageBoxImage.None, bool isAutoClose = false, int windowKeepTime = 5, string imageText = null, string imageColor = "#ffffff") : this()
         {
+            var zoomRatio = SystemParameters.PrimaryScreenHeight / 1080.0;
+            this.Width *= zoomRatio;
+            this.Height *= zoomRatio;
+
             Message = messageBoxText;
             Title = caption;
             MessageBoxButton = button;
@@ -259,7 +264,6 @@ namespace WYW.UI.Controls
             //SetWindowLong(wih.Handle, GWL_STYLE, style | WS_CHILD); // 非激活窗体
         }
         #endregion
-
 
         #region 依赖属性
         internal static readonly DependencyProperty CountDownProperty =

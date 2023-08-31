@@ -70,7 +70,7 @@ namespace WYW.UI.Controls.Attach
 
 
         public static readonly DependencyProperty PasswordProperty
-            = DependencyProperty.RegisterAttached("Password", typeof(string), typeof(PasswordElement), new PropertyMetadata(null, PasswordChanged));
+            = DependencyProperty.RegisterAttached("Password", typeof(string), typeof(PasswordElement), new PropertyMetadata(string.Empty, PasswordChanged));
 
         private static void PasswordChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -78,7 +78,7 @@ namespace WYW.UI.Controls.Attach
             if (sender is PasswordBox passwordBox)
             {
                 passwordBox.PasswordChanged -= PasswordChanged;
-                passwordBox.Password = e.NewValue.ToString();
+                passwordBox.Password = e.NewValue?.ToString();
                 passwordBox.PasswordChanged += PasswordChanged;
                 // 光标移动到最后
                 passwordBox.GetType().GetMethod("Select", BindingFlags.Instance | BindingFlags.NonPublic) .Invoke(passwordBox, new object[] { passwordBox.Password.Length, 0 });

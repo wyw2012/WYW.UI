@@ -47,7 +47,7 @@ namespace WYW.UI.Controls.Attach
         /// 内部使用
         /// </summary>
         internal static readonly DependencyProperty PercentageTextForegroundProperty
-            = DependencyProperty.RegisterAttached("PercentageTextForeground", typeof(SolidColorBrush), typeof(RangeElement), new PropertyMetadata(Application.Current.Resources["Foreground"] as SolidColorBrush));
+            = DependencyProperty.RegisterAttached("PercentageTextForeground", typeof(SolidColorBrush), typeof(RangeElement), new PropertyMetadata(Brushes.Black));
 
         private static void OnAttachedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

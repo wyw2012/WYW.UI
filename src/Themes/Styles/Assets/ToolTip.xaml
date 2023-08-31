@@ -11,7 +11,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HasDropShadow" Value="False" />
         <Setter Property="RenderOptions.ClearTypeHint" Value="Enabled" />
-        <Setter Property="MinHeight" Value="{StaticResource TextElement.Height}" />
+        <Setter Property="MinHeight" Value="{DynamicResource TextElement.Height}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToolTip}">
@@ -21,7 +21,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 Padding="{TemplateBinding Padding}"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                CornerRadius="3">
+                                CornerRadius="{DynamicResource Control.CornerRadius}" >
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />

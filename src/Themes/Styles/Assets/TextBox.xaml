@@ -9,7 +9,8 @@
                 <Border x:Name="errorBorder" Background="{StaticResource TextBox.BackgroundValidationError}" Margin="8,0,0,0" 
                                 Opacity="0" CornerRadius="0"
                                 IsHitTestVisible="False"
-                                MinHeight="{StaticResource TextElement.Height}">
+                        SnapsToDevicePixels="True"
+                                MinHeight="{DynamicResource TextElement.Height}">
                     <TextBlock Text="{Binding ElementName=adorner, Path=AdornedElement.(Validation.Errors).CurrentItem.ErrorContent}"
                                 Foreground="{StaticResource TextBox.ForegroundValidationError}" Margin="5,2" TextWrapping="Wrap" VerticalAlignment="Center"/>
                 </Border>
@@ -55,15 +56,15 @@
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="3,2"/>
+        <Setter Property="Margin" Value="{DynamicResource Control.VerticalMargin}"/>
+        <Setter Property="Padding" Value="{DynamicResource Text.Margin}"/>
         <Setter Property="AllowDrop" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-        
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="SelectionBrush" Value="{StaticResource Item.BackgroundSelected}"/>
-        <Setter Property="MinHeight" Value="{StaticResource TextElement.Height}"/>
-        <Setter Property="Margin" Value="{StaticResource VerticalMargin}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource TextElement.Height}"/>
+
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource TextBoxErrorTemplate}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -105,7 +106,8 @@
                             <Popup x:Name="PopupHint" PlacementTarget="{Binding ElementName=PART_ContentHost}" AllowsTransparency="True" Focusable="False" Placement="Top"  PopupAnimation="Slide">
                                 <Grid Visibility="{Binding Path=(attach:TextBoxElement.PopupHint),RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource ConstToVisibilityConverter}}">
                                     <StackPanel>
-                                        <Border CornerRadius="3"
+                                        <Border CornerRadius="{DynamicResource Control.CornerRadius}" 
+                                                SnapsToDevicePixels="True"
                                                 BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}"
                                                 Background="{StaticResource Item.BackgroundSelected}">
                                             <TextBlock Text="{Binding Path=(attach:TextBoxElement.PopupHint),RelativeSource={RelativeSource TemplatedParent}}" Margin="8,6" 
@@ -120,7 +122,7 @@
                                 </Grid>
                             </Popup>
                         </Grid>
-                        <TextBlock Grid.Column="3" Margin="5,0,0,0" Text="{Binding Path=(attach:TextBoxElement.Suffix),RelativeSource={RelativeSource TemplatedParent}}"/>
+                        <TextBlock Grid.Column="3" Margin="{DynamicResource Control.LeftMargin}" Text="{Binding Path=(attach:TextBoxElement.Suffix),RelativeSource={RelativeSource TemplatedParent}}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="attach:TextBoxElement.Title" Value="{x:Null}">
@@ -161,9 +163,8 @@
                             <Setter TargetName="PopupHint" Property="IsOpen" Value="true"/>
                             <Setter TargetName="InputHint" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
-                        
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" Value="0.6"/>
+                            <Setter TargetName="MainGrid" Property="Opacity" Value="0.6"/>
                             <Setter TargetName="InputHint" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -179,6 +180,6 @@
         <Setter Property="MinHeight"  Value="10"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Margin" Value="0"/>
-        <Setter Property="Padding" Value="3,2"/>
+        <Setter Property="Padding" Value="{DynamicResource Text.HorizontalMargin}"/>
     </Style>
 </ResourceDictionary>

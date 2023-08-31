@@ -10,9 +10,10 @@
         <Setter Property="Background" Value="{StaticResource Control.Background}"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}"/>
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}"/>
         <Setter Property="WindowChrome.WindowChrome" >
             <Setter.Value>
-                <WindowChrome CaptionHeight="35"  ResizeBorderThickness="5"  />
+                <WindowChrome CaptionHeight="{DynamicResource CaptionHeight}"  ResizeBorderThickness="5"  />
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
@@ -25,32 +26,37 @@
                             Background="{TemplateBinding Background}" >
                         <Grid Margin="{TemplateBinding Padding}"  ClipToBounds="True">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="35" />
-                                <RowDefinition/>
+                                <RowDefinition MinHeight="{DynamicResource CaptionHeight}"/>
+                                <RowDefinition Height="21*"/>
                             </Grid.RowDefinitions>
-                            <Grid Background="{TemplateBinding Background}"  >
+                            <Grid Background="{TemplateBinding Background}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="1" Name="ButtonPanel" WindowChrome.IsHitTestVisibleInChrome="True" UseLayoutRounding="True" 
-                                            HorizontalAlignment="Right" Orientation="Horizontal" Background="Transparent">
-                                    <Button Width="45" attach:ButtonElement.IcoGeometry="{StaticResource  WindowMinGeometry}"  Style="{StaticResource SystemButtonStyle}"
+                                <Grid  Name="ButtonPanel" WindowChrome.IsHitTestVisibleInChrome="True" UseLayoutRounding="True" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30*"/>
+                                        <ColumnDefinition MinWidth="45"/>
+                                        <ColumnDefinition MinWidth="45"/>
+                                        <ColumnDefinition MinWidth="45"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Grid.Column="1"  attach:ButtonElement.IcoGeometry="{StaticResource  WindowMinGeometry}"  Style="{StaticResource SystemButtonStyle}"
                                             x:Name="ButtonMin" Command="{x:Static command:WindowCommand.MinimizeWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
-                                    <Button Width="45" attach:ButtonElement.IcoGeometry="{StaticResource  WindowMaxGeometry}"  Style="{StaticResource SystemButtonStyle}"
+                                    <Button Grid.Column="2" attach:ButtonElement.IcoGeometry="{StaticResource  WindowMaxGeometry}" Style="{StaticResource SystemButtonStyle}"
                                             x:Name="ButtonMax" Command="{x:Static command:WindowCommand.MaximizeWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
-                                    <Button Width="45" attach:ButtonElement.IcoGeometry="{StaticResource  WindowRestoreGeometry}"  Style="{StaticResource SystemButtonStyle}"
+                                    <Button Grid.Column="2"  attach:ButtonElement.IcoGeometry="{StaticResource  WindowRestoreGeometry}"  Style="{StaticResource SystemButtonStyle}"
                                             x:Name="ButtonRestore" Command="{x:Static command:WindowCommand.RestoreWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
-                                    <Button Width="45" attach:ButtonElement.IcoGeometry="{StaticResource  CloseGeometry}"     Style="{StaticResource SystemButtonStyle}"
+                                    <Button Grid.Column="3"  attach:ButtonElement.IcoGeometry="{StaticResource  CloseGeometry}"   Style="{StaticResource SystemButtonStyle}"
                                             x:Name="ButtonClose" Command="{x:Static command:WindowCommand.CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
-                                </StackPanel>
+                                </Grid>
                                 <Grid Grid.Column="0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="{TemplateBinding Icon}" x:Name="Icon" Margin="10,6,0,6"/>
+                                    <Image Source="{TemplateBinding Icon}" x:Name="Icon" Margin="10,6,0,6" Stretch="Uniform"/>
                                     <TextBlock Grid.Column="1" Text="{TemplateBinding Title}" Padding="10,0,0,0" Name="Title" VerticalAlignment="Center"/>
                                     <ContentPresenter WindowChrome.IsHitTestVisibleInChrome="True" Grid.Column="2" 
                                                       x:Name="ContentPresenterMain" Margin="10,0,0,0" 
@@ -125,10 +131,11 @@
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="Background" Value="{StaticResource Control.Background}"/>
         <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}"/>
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}"/>
         <Setter Property="WindowChrome.WindowChrome" >
             <Setter.Value>
-                <WindowChrome CaptionHeight="35"  ResizeBorderThickness="5"  />
+                <WindowChrome CaptionHeight="{DynamicResource CaptionHeight}"  ResizeBorderThickness="5"  />
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
@@ -144,7 +151,7 @@
                             <AdornerDecorator>
                                 <Grid>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition MinHeight="35"/>
+                                        <RowDefinition MinHeight="{DynamicResource CaptionHeight}"/>
                                         <RowDefinition Height="21*"/>
                                     </Grid.RowDefinitions>
                                     <Grid>

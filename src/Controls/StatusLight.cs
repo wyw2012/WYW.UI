@@ -5,20 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace WYW.UI.Controls
 {
     /// <summary>
-    /// 状态灯，已连接用绿色表示；未连接用红色表示；null用灰色表示
+    /// 状态灯
     /// </summary>
-    public class StatusLight:Control
+    public class StatusLight : Control
     {
-        public static readonly DependencyProperty IsConnectedProperty =
-         DependencyProperty.Register("IsConnected", typeof(bool?), typeof(StatusLight), new PropertyMetadata(default(bool?)));
-
-
         public static readonly DependencyProperty TextProperty =
           DependencyProperty.Register("Text", typeof(string), typeof(StatusLight), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty PopupTextProperty =
+          DependencyProperty.Register("PopupText", typeof(string), typeof(StatusLight), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty LightColorProperty =
+            DependencyProperty.Register("LightColor", typeof(Brush), typeof(StatusLight), new PropertyMetadata(Brushes.Gray));
+        public static readonly DependencyProperty IsShowPopupProperty =
+            DependencyProperty.Register("IsShowPopup", typeof(bool), typeof(StatusLight), new PropertyMetadata(false));
 
         public string Text
         {
@@ -26,11 +29,27 @@ namespace WYW.UI.Controls
             set { SetValue(TextProperty, value); }
         }
 
-        public bool? IsConnected
+        public Brush LightColor
         {
-            get { return (bool?)GetValue(IsConnectedProperty); }
-            set { SetValue(IsConnectedProperty, value); }
+            get { return (Brush)GetValue(LightColorProperty); }
+            set { SetValue(LightColorProperty, value); }
+        }
+
+
+        public string PopupText
+        {
+            get { return (string)GetValue(PopupTextProperty); }
+            set { SetValue(PopupTextProperty, value); }
+        }
+
+
+        public bool IsShowPopup
+        {
+            get { return (bool)GetValue(IsShowPopupProperty); }
+            set { SetValue(IsShowPopupProperty, value); }
         }
 
     }
+
+
 }

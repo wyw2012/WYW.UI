@@ -22,5 +22,8 @@ namespace WYW.UI.Controls.Attach
         public static CornerRadius GetCornerRadius(DependencyObject obj) => (CornerRadius)obj.GetValue(CornerRadiusProperty);
 
         public static void SetCornerRadius(DependencyObject obj, CornerRadius value) => obj.SetValue(CornerRadiusProperty, value);
+
+
+
     }
 }

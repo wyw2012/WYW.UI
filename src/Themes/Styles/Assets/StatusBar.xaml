@@ -36,7 +36,7 @@
         <Setter Property="Background" Value="{StaticResource Control.Background}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="MinHeight" Value="{StaticResource Header.Height}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource Header.Height}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type StatusBar}">

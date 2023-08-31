@@ -20,8 +20,8 @@
                             TextElement.Foreground="{TemplateBinding Foreground}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Margin="5,1,5,1" />
-                        <Path x:Name="Blackout" Opacity=".5" Visibility="Collapsed" Margin="3"
+                            Margin="{DynamicResource Control.HorizontalMargin}" />
+                        <Path x:Name="Blackout" Opacity="0.5" Visibility="Collapsed" Margin="{DynamicResource Control.Margin}"
                               HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                               Fill="{TemplateBinding Foreground}" Stretch="Fill"
                               Data="M8.1772461,11.029181 L10.433105,11.029181 L11.700684,12.801641 L12.973633,11.029181 L15.191895,11.029181 L12.844727,13.999395 L15.21875,17.060919 L12.962891,17.060919 L11.673828,15.256231 L10.352539,17.060919 L8.1396484,17.060919 L10.519043,14.042364 z" />
@@ -121,7 +121,7 @@
                             <TextBlock x:Name="Text" FontWeight="Bold"
                                        HorizontalAlignment="Center"
                                        Text="{Binding}"
-                                       Margin="0,6,0,6"
+                                       Margin="{DynamicResource Control.VerticalMargin}"
                                        VerticalAlignment="Center" />
                         </DataTemplate>
                     </ControlTemplate.Resources>
@@ -129,7 +129,8 @@
                         <Border
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}">
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30" />
@@ -167,8 +168,8 @@
                                         attach:ButtonElement.IsNoBorder="True"/>
 
                                 <Grid x:Name="PART_MonthView" Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0"
-                                      Visibility="Visible" Width="270" Height="270"
-                                      Margin="8" HorizontalAlignment="Center">
+                                      Visibility="Visible" Width="{DynamicResource Calendar.Width}" Height="{DynamicResource Calendar.Height}"
+                                      Margin="{DynamicResource Control.Margin}" HorizontalAlignment="Center">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
@@ -190,7 +191,7 @@
                                 </Grid>
 
                                 <Grid x:Name="PART_YearView" Grid.Row="1" Grid.ColumnSpan="3" Visibility="Hidden"
-                                      Margin="8" Width="270" Height="270" HorizontalAlignment="Center">
+                                      Margin="{DynamicResource Control.Margin}" Width="{DynamicResource Calendar.Width}" Height="{DynamicResource Calendar.Height}" HorizontalAlignment="Center">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />

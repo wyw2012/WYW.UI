@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WYW.UI.Test.Views"
+             xmlns:wyw="http://wangyanwei.com/ui"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="20">
@@ -32,13 +33,11 @@
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                 </ListBox>
-
-
                 <Grid Height="10"/>
                 <ListBox HorizontalContentAlignment="Center" ItemsSource="{Binding Items}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="3" />
+                            <UniformGrid Columns="5"/>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                 </ListBox>
@@ -47,6 +46,19 @@
         <GroupBox Grid.Column="2" Header="高级用法">
             <Grid>
                 <StackPanel >
+                    <ListBox Grid.Column="2"  ItemsSource="{Binding  Students}"
+                    Height="300" Style="{StaticResource ListBoxUniformGridStyle}"
+                             wyw:ListBoxElement.Rows="5">
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="15" Visibility="{Binding Visibility}" MaxHeight="40">
+                                    <Path Data="{StaticResource EllipseGeometry}" Stroke="{StaticResource Foreground}" />
+                                    <TextBlock Text="{Binding ID}" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </StackPanel>
                 <Border BorderThickness="1" Padding="10" CornerRadius="5" VerticalAlignment="Bottom">
                     <TextBlock Text="提示："

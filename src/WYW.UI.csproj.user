@@ -2,6 +2,9 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Page Update="Themes\Basic\Colors\LightColor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Themes\Basic\Converters.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -11,7 +14,7 @@
     <Page Update="Themes\Basic\Fonts.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\Basic\DarkBrushes.xaml">
+    <Page Update="Themes\Basic\Colors\DarkColor.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\Styles\Arc.xaml">
@@ -27,6 +30,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\Styles\Assets\CheckBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Styles\ConnectBox.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\Styles\Assets\Path.xaml">
@@ -110,7 +116,7 @@
     <Page Update="Themes\Basic\Sizes.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\Basic\LightBrushes.xaml">
+    <Page Update="Themes\Basic\Brushes.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\Basic\Geometries.xaml">

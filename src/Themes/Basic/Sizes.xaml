@@ -2,12 +2,40 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <!--该值为1920*1080分辨率下的默认值-->
-    <sys:Double x:Key="TextElement.Height">32.0</sys:Double>
-    <sys:Double x:Key="Header.Height">40.0</sys:Double>
-    <Thickness x:Key="Panel.Padding">20,10</Thickness>
-    <Thickness x:Key="VerticalMargin">0,5</Thickness>
-    <Thickness x:Key="HorizontalMargin">5,0</Thickness>
-    <CornerRadius x:Key="Control.CornerRadius">3</CornerRadius>
+    <!--该值为1920*1080分辨率下的默认值，可以通过Theme.AutoFitResolution方法改变-->
+    <sys:Double x:Key="DefaultFontSize">18.0</sys:Double>
+    <sys:Double x:Key="DefaultLEDFontSize">32.0</sys:Double>
 
+    <sys:Double x:Key="TextElement.Height">36.0</sys:Double>
+    <sys:Double x:Key="Item.Height">36.0</sys:Double>
+    <sys:Double x:Key="TabItem.Height">60.0</sys:Double>
+    <sys:Double x:Key="TabItem.Width">200.0</sys:Double>
+    <sys:Double x:Key="Header.Height">40.0</sys:Double>
+    <sys:Double x:Key="CaptionHeight">40.0</sys:Double>
+    <sys:Double x:Key="RingThickness">10.0</sys:Double>
+    <sys:Double x:Key="DataGridItem.Width">120.0</sys:Double>
+    <sys:Double x:Key="Button.Width">140.0</sys:Double>
+    <sys:Double x:Key="Button.Height">70.0</sys:Double>
+    <sys:Double x:Key="Calendar.Width">300.0</sys:Double>
+    <sys:Double x:Key="Calendar.Height">300.0</sys:Double>
+
+    <sys:Double x:Key="Panel.Space">20.0</sys:Double>
+    <Thickness x:Key="Panel.Margin">20,20</Thickness>
+    <Thickness x:Key="Panel.Padding">20,10</Thickness>
+    
+    <Thickness x:Key="Control.Margin">5</Thickness>
+    <Thickness x:Key="Control.VerticalMargin">0,5</Thickness>
+    <Thickness x:Key="Control.HorizontalMargin">5,0</Thickness>
+    <Thickness x:Key="Control.LeftMargin">5,0,0,0</Thickness>
+    <Thickness x:Key="Control.RightMargin">0,0,5,0</Thickness>
+    
+    <Thickness x:Key="Text.Margin">3</Thickness>
+    <Thickness x:Key="Text.VerticalMargin">0,3</Thickness>
+    <Thickness x:Key="Text.HorizontalMargin">3,0</Thickness>
+
+    <CornerRadius x:Key="Control.CornerRadius">5</CornerRadius>
+    <CornerRadius x:Key="Control.CornerRadiusTop">5,5,0,0</CornerRadius>
+    <CornerRadius x:Key="Control.CornerRadiusBottom">0,0,5,5</CornerRadius>
+    <CornerRadius x:Key="Control.CornerRadiusLeft">5,0,0,5</CornerRadius>
+    <CornerRadius x:Key="Control.CornerRadiusRight">0,5,5,0</CornerRadius>
 </ResourceDictionary>

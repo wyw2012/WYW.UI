@@ -6,13 +6,15 @@
     <!--TabItem宽度根据TabControl宽度均分-->
     <Style x:Key="DivideTabItemStyle" TargetType="{x:Type TabItem}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="MinHeight" Value="{StaticResource Header.Height}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource Header.Height}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
-        <Setter Property="attach:TabItemElement.HeaderForeground" Value="{StaticResource Foreground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
         <Setter Property="BorderThickness" Value="0,0,1,0"/>
         <Setter Property="Padding" Value="0,0,-1,0"/>
+        <Setter Property="attach:TabItemElement.HeaderForeground" Value="{StaticResource Foreground}"/>
+        <Setter Property="attach:TabItemElement.IcoHeight" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+        <Setter Property="attach:TabItemElement.IcoWidth" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
@@ -20,6 +22,7 @@
                                             BorderThickness="{TemplateBinding BorderThickness}"
                                             Background="{TemplateBinding Background}"
                                             Margin="{TemplateBinding Padding}"
+                                            SnapsToDevicePixels="True"
                               TextElement.Foreground="{Binding Path=(attach:TabItemElement.HeaderForeground),RelativeSource={RelativeSource TemplatedParent}}">
                         <Grid  Margin="10,0">
                             <Grid.ColumnDefinitions>
@@ -86,13 +89,13 @@
 
     <Style x:Key="MenuTabItemStyle" TargetType="{x:Type TabItem}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="MinHeight" Value="{StaticResource Header.Height}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource Header.Height}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
         <Setter Property="attach:TabItemElement.HeaderForeground" Value="{StaticResource Foreground}"/>
-        <Setter Property="attach:TabItemElement.IcoWidth" Value="30"/>
-        <Setter Property="attach:TabItemElement.IcoHeight" Value="30"/>
+        <Setter Property="attach:TabItemElement.IcoHeight" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+        <Setter Property="attach:TabItemElement.IcoWidth" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
@@ -100,8 +103,9 @@
                                             BorderThickness="{TemplateBinding BorderThickness}"
                                             Background="{TemplateBinding Background}"
                                             Margin="{TemplateBinding Padding}"
+                                            SnapsToDevicePixels="True"
                               TextElement.Foreground="{Binding Path=(attach:TabItemElement.HeaderForeground),RelativeSource={RelativeSource TemplatedParent}}">
-                        <Grid  Margin="10,15,10,10">
+                        <Grid Margin="{Binding Height,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource ThicknessMultiplicationConverter},ConverterParameter='0.1,0.15,0.1,0.1'}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="auto"/>
@@ -116,7 +120,8 @@
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Center"/>
                             </Grid>
-                            <ContentPresenter Grid.Row="1" x:Name="contentPresenter" Margin="0,10,0,0"
+                            <ContentPresenter Grid.Row="1" x:Name="contentPresenter" 
+                                              Margin="{Binding Height,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource ThicknessMultiplicationConverter},ConverterParameter='0,0.1,0,0'}"
                                               ContentSource="Header"
                                               Focusable="False"
                                               RecognizesAccessKey="True"
@@ -145,13 +150,15 @@
 
     <Style TargetType="{x:Type TabItem}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="MinHeight" Value="{StaticResource Header.Height}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource Header.Height}"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="attach:TabItemElement.HeaderForeground" Value="{StaticResource Foreground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
         <Setter Property="BorderThickness" Value="1,1,1,0"/>
         <Setter Property="Padding" Value="-1,0,0,0"/>
+        <Setter Property="attach:TabItemElement.IcoHeight" Value="{Binding FontSize,RelativeSource={RelativeSource  Mode=Self}}"/>
+        <Setter Property="attach:TabItemElement.IcoWidth" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=Self}}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
@@ -204,10 +211,13 @@
                         </Trigger>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType=TabControl}}" Value="Left">
                             <Setter Property="BorderThickness" Value="1,0,0,1" />
-               
+                            <Setter Property="Height" Value="{DynamicResource TabItem.Height}" />
+                            <Setter Property="Width" Value="{DynamicResource TabItem.Width}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType=TabControl}}" Value="Right">
                             <Setter Property="BorderThickness" Value="0,0,1,1" />
+                            <Setter Property="Height" Value="{DynamicResource TabItem.Height}" />
+                            <Setter Property="Width" Value="{DynamicResource TabItem.Width}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType=TabControl}}" Value="Bottom">
                             <Setter Property="BorderThickness" Value="0,0,1,1" />

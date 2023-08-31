@@ -3,7 +3,7 @@
                     xmlns:control="clr-namespace:WYW.UI.Controls">
     <Style TargetType="control:CircleProgressBar">
         <Setter Property="Maximum" Value="100"/>
-        <Setter Property="RingThickness" Value="10.0"/>
+        <Setter Property="RingThickness" Value="{DynamicResource RingThickness}"/>
         <Setter Property="MinHeight" Value="50.0"/>
         <Setter Property="MinWidth" Value="50.0"/>
         <Setter Property="Foreground" Value="{StaticResource Item.BackgroundSelected}"/>

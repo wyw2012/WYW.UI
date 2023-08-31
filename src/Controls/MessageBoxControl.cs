@@ -45,6 +45,14 @@ namespace WYW.UI.Controls
             Show(message, MessageBoxImage.Custom, true, 5, imageText, imageColor);
         }
         /// <summary>
+        /// 提示信息，需要手动关闭
+        /// </summary>
+        /// <param name="message">消息正文</param>
+        public static void Tip(string message)
+        {
+            Show(message, MessageBoxImage.Tip, false);
+        }
+        /// <summary>
         /// 警告信息，需要手动关闭
         /// </summary>
         /// <param name="message">消息正文</param>
@@ -150,6 +158,10 @@ namespace WYW.UI.Controls
                 case MessageBoxImage.Error:
                     ImageText = "\uf057";
                     ImageBackground = (SolidColorBrush)new BrushConverter().ConvertFrom("#ffe81123");
+                    break;
+                case MessageBoxImage.Tip:
+                    ImageText = "\uf0A2";
+                    ImageBackground = (SolidColorBrush)new BrushConverter().ConvertFrom("#ffFFCC00");
                     break;
                 case MessageBoxImage.Custom:
                     if (string.IsNullOrEmpty(imageText))
@@ -299,7 +311,7 @@ namespace WYW.UI.Controls
             }
             return panel;
         }
-        private static void Show(string messageBoxText, MessageBoxImage icon, bool isAutoRemove, int keepTime = 5, string imageText = null, string imageColor = "#ffffff")
+        private static void Show(string messageBoxText, MessageBoxImage icon, bool isAutoRemove, int keepTime = 3, string imageText = null, string imageColor = "#ffffff")
         {
             Application.Current.Dispatcher.Invoke(new Action(() =>
             {

@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <Color x:Key="BorderColor">#FFE0E0E0</Color>
+    <Color x:Key="BorderBrushHoverColor">#FFC8C8C8</Color>
+    <Color x:Key="BorderBrushFocusedColor">#FF84C1FF</Color>
+
+    <Color x:Key="ForegroundColor">#FF111111</Color>
+    <Color x:Key="ForegroundReadOnlyColor">#FFAAAAAA</Color>
+    <Color x:Key="ForegroundHoverColor">#FF333333</Color>
+    <Color x:Key="ForegroundDisabledColor">#FF888888</Color>
+
+    <Color x:Key="Control.BackgroundColor">#FFFFFFFF</Color>
+    <Color x:Key="Control.BackgroundHoverColor">#FFF0F0F0</Color>
+    <Color x:Key="Control.BackgroundDisabledColor">#FFDDDDDD</Color>
+
+    <Color x:Key="Item.BackgroundAlternationColor">#FFfafafa</Color>
+    <Color x:Key="Item.BackgroundHoverColor">#FFB2DEF9</Color>
+    <Color x:Key="Item.BackgroundSelectedColor">#FF326CF3</Color>
+    <Color x:Key="Item.ForegroundSelectedColor">#FFFFFFFF</Color>
+    <Color x:Key="Header.BackgroundColor">#FFEEEEEE</Color>
+
+
+    <Color x:Key="TextBox.BackgroundValidationErrorColor">#FFDC000C</Color>
+    <Color x:Key="TextBox.ForegroundValidationErrorColor">#ffffffff</Color>
+    <Color x:Key="Thumb.BackgroundColor">#FFcccccc</Color>
+    <Color x:Key="Thumb.BackgroundHoverColor">#FFbbbbbb</Color>
+    <Color x:Key="Thumb.BackgroundDraggingColor">#ffaaaaaa</Color>
+    <Color x:Key="Thumb.BackgroundDisabledColor">#ffdddddd</Color>
+
+    <Color x:Key="Ticker.BackgroundColor">#fff0f0f0</Color>
+    <Color x:Key="Separator.BackgroundColor">#FFC8C8C8</Color>
+
+    <Color x:Key="RadioButton.BorderBrushColor">#FFE0E0E0</Color>
+    <Color x:Key="RadioButton.BorderBrushHoverColor">#FFC8C8C8</Color>
+</ResourceDictionary>

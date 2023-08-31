@@ -17,7 +17,7 @@
                 <ListView ItemsSource="{Binding Items}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="编号" Width="80" DisplayMemberBinding="{Binding ID}"/>
+                            <GridViewColumn Header="编号" Width="100" DisplayMemberBinding="{Binding ID}"/>
                             <GridViewColumn Header="姓名" Width="100" DisplayMemberBinding="{Binding Name}"/>
                             <GridViewColumn Header="性别" Width="100" DisplayMemberBinding="{Binding Gender}"/>
                         </GridView>

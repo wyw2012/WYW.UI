@@ -22,8 +22,10 @@ namespace WYW.UI.Controls.Attach
             = DependencyProperty.RegisterAttached("SuffixWidth", typeof(string), typeof(ComboBoxElement), new PropertyMetadata("0.5*"));
         public static readonly DependencyProperty CornerRadiusProperty
             = DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(ComboBoxElement), new PropertyMetadata(default(CornerRadius)));
-        public static readonly DependencyProperty ComboBoxItemHeightProperty
-            = DependencyProperty.RegisterAttached("ComboBoxItemHeight", typeof(double), typeof(ComboBoxElement), new PropertyMetadata(default(double)));
+        public static readonly DependencyProperty IsLedFontFamilyProperty
+          = DependencyProperty.RegisterAttached("IsLedFontFamily", typeof(bool), typeof(ComboBoxElement), new PropertyMetadata(default(bool)));
+
+
         public static string GetTitle(DependencyObject obj) => (string)obj.GetValue(TitleProperty);
 
         public static void SetTitle(DependencyObject obj, string value) => obj.SetValue(TitleProperty, value);
@@ -52,8 +54,16 @@ namespace WYW.UI.Controls.Attach
 
         public static void SetCornerRadius(DependencyObject obj, CornerRadius value) => obj.SetValue(CornerRadiusProperty, value);
 
-        public static double GetComboBoxItemHeight(DependencyObject obj) => (double)obj.GetValue(ComboBoxItemHeightProperty);
 
-        public static void SetComboBoxItemHeight(DependencyObject obj, double value) => obj.SetValue(ComboBoxItemHeightProperty, value);
+
+
+        public static bool GetIsLedFontFamily(DependencyObject obj) => (bool)obj.GetValue(IsLedFontFamilyProperty);
+
+        public static void SetIsLedFontFamily(DependencyObject obj, bool value) => obj.SetValue(IsLedFontFamilyProperty, value);
+
+    
+
+
+
     }
 }

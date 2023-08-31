@@ -43,7 +43,7 @@
                    Margin="1"
                    IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                    PopupAnimation="{StaticResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
-                    <Grid Margin="4" MinWidth="{Binding ElementName=MainGrid,Path=ActualWidth}"
+                    <Grid Margin="{DynamicResource Control.Margin}" MinWidth="{Binding ElementName=MainGrid,Path=ActualWidth}"
                       MaxHeight="{TemplateBinding MaxDropDownHeight}">
                         <Border Background="#0C000000" BorderBrush="#0F000000" BorderThickness="1" CornerRadius="2.5"
                             Margin="-1"/>
@@ -94,12 +94,13 @@
                 <Popup x:Name="PopupHint" PlacementTarget="{Binding ElementName=PART_EditableTextBox}" AllowsTransparency="True" Focusable="False" Placement="Top"  PopupAnimation="Slide">
                     <Grid Visibility="{Binding Path=(attach:ComboBoxElement.PopupHint),RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource ConstToVisibilityConverter}}">
                         <StackPanel>
-                            <Border CornerRadius="3"
-                                                BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}"
-                                                Background="{StaticResource Item.BackgroundSelected}">
+                            <Border CornerRadius="{DynamicResource Control.CornerRadius}" 
+                                    SnapsToDevicePixels="True"
+                                    BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}"
+                                    Background="{StaticResource Item.BackgroundSelected}">
                                 <TextBlock Text="{Binding Path=(attach:ComboBoxElement.PopupHint),RelativeSource={RelativeSource TemplatedParent}}" Margin="8,6" 
-                                                       Foreground="{StaticResource Item.ForegroundSelected}" 
-                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                           Foreground="{StaticResource Item.ForegroundSelected}" 
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <Polygon Points="0,0 10,0 5,5 0,0" 
                                                  Stroke="{TemplateBinding BorderBrush}" StrokeThickness="0"
@@ -109,7 +110,7 @@
                     </Grid>
                 </Popup>
             </Grid>
-            <TextBlock Grid.Column="2" Padding="5,0,0,0" Text="{Binding Path=(attach:ComboBoxElement.Suffix),RelativeSource={RelativeSource TemplatedParent}}"/>
+            <TextBlock Grid.Column="2" Margin="{DynamicResource Control.LeftMargin}" Text="{Binding Path=(attach:ComboBoxElement.Suffix),RelativeSource={RelativeSource TemplatedParent}}"/>
         </Grid>
      
         <ControlTemplate.Triggers>
@@ -151,7 +152,7 @@
                 <Setter TargetName="InputHint" Property="Visibility" Value="Collapsed"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Foreground" Value="{StaticResource ForegroundDisabled}"/>
+                <Setter Property="Opacity" Value="0.6"/>
                 <Setter TargetName="InputHint" Property="Visibility" Value="Collapsed"/>
             </Trigger>
         </ControlTemplate.Triggers>
@@ -164,15 +165,15 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="Padding" Value="3,2"/>
-        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="Margin" Value="{DynamicResource Control.VerticalMargin}"/>
+        <Setter Property="Padding" Value="{DynamicResource Text.Margin}"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="MinHeight" Value="{StaticResource TextElement.Height}"/>
+        <Setter Property="MinHeight" Value="{DynamicResource TextElement.Height}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="{StaticResource VerticalMargin}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
@@ -186,7 +187,7 @@
                         <Grid Grid.Column="1" Name="MainGrid" SnapsToDevicePixels="true">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="auto" MinWidth="25"/>
                             </Grid.ColumnDefinitions>
                             <Popup Name="PART_Popup"
                                AllowsTransparency="true"
@@ -195,7 +196,7 @@
                                Margin="1"
                                IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{StaticResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
-                                <Grid Margin="4" MinWidth="{Binding ElementName=MainGrid,Path=ActualWidth}"
+                                <Grid Margin="{DynamicResource Control.Margin}" MinWidth="{Binding ElementName=MainGrid,Path=ActualWidth}"
                                   MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                     <Border Background="#0C000000" BorderBrush="#0F000000" BorderThickness="1"
                                         CornerRadius="2.5" Margin="-1"/>
@@ -206,6 +207,7 @@
                                         Background="{TemplateBinding Background}"
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="1"
+                                        SnapsToDevicePixels="True"
                                         Margin="0,-1,0,0">
                                         <!-- popup border thickness not dependent on BorderThickness property-->
                                         <ScrollViewer Name="DropDownScrollViewer">
@@ -233,12 +235,13 @@
                                       Background="{TemplateBinding Background}"
                                       BorderBrush="{TemplateBinding BorderBrush}"
                                       BorderThickness="0"
+                                      SnapsToDevicePixels="True"
                                       attach:ButtonElement.CornerRadius="{Binding Path=(attach:ComboBoxElement.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                       IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"/>
 
                             </Border>
 
-                            <ContentPresenter Grid.Column="0"  IsHitTestVisible="false" x:Name="ContentPresenter"
+                            <ContentPresenter Grid.Column="0" Grid.ColumnSpan="1"  IsHitTestVisible="false" x:Name="ContentPresenter"
                                           Margin="{TemplateBinding Padding}"
                                           Content="{TemplateBinding SelectionBoxItem}"
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
@@ -248,7 +251,7 @@
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
 
                         </Grid>
-                        <TextBlock Grid.Column="2" Margin="5,0,0,0" Text="{Binding Path=(attach:ComboBoxElement.Suffix),RelativeSource={RelativeSource TemplatedParent}}"  />
+                        <TextBlock Grid.Column="2" Margin="{DynamicResource Control.LeftMargin}" Text="{Binding Path=(attach:ComboBoxElement.Suffix),RelativeSource={RelativeSource TemplatedParent}}"  />
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -257,6 +260,13 @@
                         </Trigger>
                         <Trigger Property="attach:ComboBoxElement.Suffix" Value="{x:Null}">
                             <Setter Property="attach:ComboBoxElement.SuffixWidth" Value="0"/>
+                        </Trigger>
+                        <Trigger Property="attach:ComboBoxElement.IsLedFontFamily" Value="True">
+                            <Setter TargetName="ContentPresenter" Property="TextElement.FontFamily" Value="{StaticResource QuartzFontFamily}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.FontSize" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=TemplatedParent},  Converter={StaticResource MultiplicationConverter},ConverterParameter=1.8}" />
+                        </Trigger>
+                        <Trigger Property="HorizontalContentAlignment" Value="Center">
+                            <Setter TargetName="ContentPresenter" Property="Grid.ColumnSpan" Value="2"/>
                         </Trigger>
                         <Trigger Property="HasItems" Value="false">
                             <Setter TargetName="DropDownBorder" Property="Height" Value="95"/>
@@ -270,8 +280,7 @@
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
                         </Trigger>
-                        <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll"
-                                 Value="false">
+                        <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false">
                             <Setter TargetName="OpaqueRect"
                                     Property="Canvas.Top"
                                     Value="{Binding ElementName=DropDownScrollViewer, Path=VerticalOffset}"/>
@@ -281,11 +290,10 @@
                         </Trigger>
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter Property="Visibility" TargetName="ToggleButton" Value="Collapsed"/>
-                            <Setter Property="Opacity" Value="0.6" TargetName="ContentPresenter"/>
                         </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{StaticResource ForegroundDisabled}"/>
-                        </Trigger>
+                        <!--<Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.6"/>
+                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -293,7 +301,6 @@
         <Style.Triggers>
             <Trigger Property="IsEditable" Value="true">
                 <Setter Property="IsTabStop" Value="false"/>
-                <Setter Property="Padding" Value="3"/>
                 <Setter Property="Template" Value="{StaticResource ComboBoxEditableTemplate}"/>
             </Trigger>
         </Style.Triggers>
@@ -304,7 +311,7 @@
     <Style x:Key="ComboBoxNoArrowStyle"  TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ComboBoxBaseStyle}">
         <Setter Property="HorizontalContentAlignment"  Value="Center"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Margin" Value="{DynamicResource Control.VerticalMargin}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
@@ -316,7 +323,7 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Path=(attach:ComboBoxElement.Title),RelativeSource={RelativeSource TemplatedParent}}"/>
                         
-                        <Grid Grid.Column="1" Name="MainGrid" SnapsToDevicePixels="true">
+                        <Grid Grid.Column="1" Name="MainGrid" SnapsToDevicePixels="true" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="30"/>
@@ -328,7 +335,7 @@
                                Margin="1"
                                IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{StaticResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
-                                <Grid Margin="4" MinWidth="{Binding ElementName=MainGrid,Path=ActualWidth}"
+                                <Grid Margin="{DynamicResource Control.Margin}" MinWidth="{Binding ElementName=MainGrid,Path=ActualWidth}"
                                   MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                     <Border Background="#0C000000" BorderBrush="#0F000000" BorderThickness="1"
                                         CornerRadius="2.5" Margin="-1"/>
@@ -366,8 +373,8 @@
                                       attach:ButtonElement.CornerRadius="{Binding Path=(attach:ComboBoxElement.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                       IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"/>
 
-                            <ContentPresenter Grid.Column="0"  IsHitTestVisible="false" x:Name="ContentPresenter"
-                                          Margin="{TemplateBinding Padding}"
+                            <ContentPresenter Grid.Column="0" Grid.ColumnSpan="2"  IsHitTestVisible="false" x:Name="ContentPresenter"
+                                          Margin="{TemplateBinding Padding}"  
                                           Content="{TemplateBinding SelectionBoxItem}"
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                                           ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
@@ -376,7 +383,7 @@
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
 
                         </Grid>
-                        <TextBlock Grid.Column="2" Margin="5,0,0,0" Text="{Binding Path=(attach:ComboBoxElement.Suffix),RelativeSource={RelativeSource TemplatedParent}}"  />
+                        <TextBlock Grid.Column="2" Margin="{DynamicResource Control.LeftMargin}" Text="{Binding Path=(attach:ComboBoxElement.Suffix),RelativeSource={RelativeSource TemplatedParent}}"  />
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -385,6 +392,10 @@
                         </Trigger>
                         <Trigger Property="attach:ComboBoxElement.Suffix" Value="{x:Null}">
                             <Setter Property="attach:ComboBoxElement.SuffixWidth" Value="0"/>
+                        </Trigger>
+                        <Trigger Property="attach:ComboBoxElement.IsLedFontFamily" Value="True">
+                            <Setter TargetName="ContentPresenter" Property="TextElement.FontFamily" Value="{StaticResource QuartzFontFamily}" />
+                            <Setter TargetName="ContentPresenter" Property="TextElement.FontSize" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=TemplatedParent},  Converter={StaticResource MultiplicationConverter},ConverterParameter=1.8}" />
                         </Trigger>
                         <Trigger Property="HasItems" Value="false">
                             <Setter TargetName="DropDownBorder" Property="Height" Value="95"/>
@@ -413,7 +424,7 @@
 
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{StaticResource ForegroundDisabled}"/>
+                            <Setter TargetName="ContentPresenter" Property="Opacity" Value="0.6"/>
                             <Setter Property="Background" Value="{StaticResource Control.BackgroundDisabled}"/>
                             <Setter Property="BorderThickness" Value="0"/>
                         </Trigger>
