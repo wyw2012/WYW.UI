@@ -45,12 +45,12 @@ namespace WYW.UI.Controls
             Show(message, MessageBoxImage.Custom, true, 5, imageText, imageColor);
         }
         /// <summary>
-        /// 提示信息，需要手动关闭
+        /// 通知信息，自动关闭
         /// </summary>
         /// <param name="message">消息正文</param>
         public static void Tip(string message)
         {
-            Show(message, MessageBoxImage.Tip, false);
+            Show(message, MessageBoxImage.Tip, true);
         }
         /// <summary>
         /// 警告信息，需要手动关闭

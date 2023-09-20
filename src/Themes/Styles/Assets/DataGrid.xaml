@@ -213,17 +213,8 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="FontWeight" Value="Bold" />
                 <Setter Property="Foreground" Value="{StaticResource ForegroundHover}" />
+                <Setter Property="Background" Value="{StaticResource Item.BackgroundHover}" />
             </Trigger>
- 
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding SelectionUnit, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Value="Cell"/>
-                    <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <MultiDataTrigger.Setters>
-                    <Setter Property="Background" Value="{StaticResource Item.BackgroundHover}" />
-                </MultiDataTrigger.Setters>
-            </MultiDataTrigger>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{StaticResource Item.BackgroundSelected}" />
                 <Setter Property="Foreground" Value="{StaticResource Item.ForegroundSelected}" />

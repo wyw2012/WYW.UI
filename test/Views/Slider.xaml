@@ -19,6 +19,7 @@
                 <Slider Maximum="100" Margin="5" Value="10" Orientation="Vertical" Height="100" HorizontalAlignment="Center" />
                 <Slider Maximum="100" Margin="5" Value="20" IsEnabled="False"/>
                 <Slider Maximum="100" Margin="5" Value="30" TickPlacement="Both" TickFrequency="20" />
+                <Slider Maximum="100" Margin="5" Value="20" TickPlacement="Both" Ticks="10,20,50,80,100" />
                 <Slider Maximum="100" Margin="5" Value="40"  IsSelectionRangeEnabled="True" SelectionStart="60" SelectionEnd="100"/>
             </StackPanel>
         </GroupBox>
