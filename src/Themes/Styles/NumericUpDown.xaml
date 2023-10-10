@@ -150,7 +150,8 @@
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="LedForeground" Value="{StaticResource Foreground}"/>
-        <Setter Property="BorderThickness" Value=" 1"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Maximum" Value="65535"/>
         <Setter Property="Focusable" Value="True"/>
         <Setter Property="Margin" Value="{DynamicResource Control.VerticalMargin}"/>
         <Setter Property="Template" Value="{StaticResource NumericUpDownHorizontalTemplate}"/>

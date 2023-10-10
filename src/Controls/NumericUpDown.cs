@@ -17,7 +17,7 @@ namespace WYW.UI.Controls
         private double lastCorrectValue = 0; // 最后一次正确的值
         public NumericUpDown()
         {
-            Maximum = UInt32.MaxValue; // 系统默认最大值是10，如果绑定的默认值大于10，则自动设置为10，所以在这里修改最大值。
+            //Maximum = UInt32.MaxValue; // 系统默认最大值是10，如果绑定的默认值大于10，则自动设置为10，所以在这里修改最大值。
             UpButtonClickCommand = new RelayCommand(()=>
             {
                 Slider.IncreaseLarge.Execute(null, null);
