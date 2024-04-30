@@ -22,6 +22,11 @@ namespace WYW.UI.Controls
         /// 最大显示的消息框数量，如果超过该数目，则自动移除较早的消息框
         /// </summary>
         public static int MaxItemsCount { get; set; } = 5;
+
+        /// <summary>
+        /// 显示时间
+        /// </summary>
+        public static bool IsShowTime { get; set; } = false;
         /// <summary>
         /// 消息框出现的位置
         /// </summary>
@@ -137,7 +142,8 @@ namespace WYW.UI.Controls
         private MessageBoxControl(Panel owner, string message, MessageBoxImage icon, bool isAutoRemove, int keepTime, string imageText = null, string imageColor = "#ffffff") : this()
         {
             this.owner = owner;
-            Message = message;
+           
+            Message = IsShowTime?$"[{DateTime.Now:HH:mm:ss}] {message}":message;
             switch (icon)
             {
                 case MessageBoxImage.None:
@@ -245,6 +251,10 @@ namespace WYW.UI.Controls
                                 container.VerticalAlignment = VerticalAlignment.Top;
                                 container.HorizontalAlignment = HorizontalAlignment.Left;
                                 break;
+                            case CornerPlacement.TopCenter:
+                                container.VerticalAlignment = VerticalAlignment.Top;
+                                container.HorizontalAlignment = HorizontalAlignment.Center;
+                                break;
                             case CornerPlacement.TopRight:
                                 container.VerticalAlignment = VerticalAlignment.Top;
                                 container.HorizontalAlignment = HorizontalAlignment.Right;
@@ -253,9 +263,17 @@ namespace WYW.UI.Controls
                                 container.VerticalAlignment = VerticalAlignment.Bottom;
                                 container.HorizontalAlignment = HorizontalAlignment.Left;
                                 break;
+                            case CornerPlacement.BottomCenter:
+                                container.VerticalAlignment = VerticalAlignment.Bottom;
+                                container.HorizontalAlignment = HorizontalAlignment.Center;
+                                break;
                             case CornerPlacement.BottomRight:
                                 container.VerticalAlignment = VerticalAlignment.Bottom;
                                 container.HorizontalAlignment = HorizontalAlignment.Right;
+                                break;
+                            case CornerPlacement.Center:
+                                container.VerticalAlignment = VerticalAlignment.Center;
+                                container.HorizontalAlignment = HorizontalAlignment.Center;
                                 break;
                         }
                         SampleAdorner adorner = new SampleAdorner(layer)
@@ -274,6 +292,10 @@ namespace WYW.UI.Controls
                                 container.VerticalAlignment = VerticalAlignment.Top;
                                 container.HorizontalAlignment = HorizontalAlignment.Left;
                                 break;
+                            case CornerPlacement.TopCenter:
+                                container.VerticalAlignment = VerticalAlignment.Top;
+                                container.HorizontalAlignment = HorizontalAlignment.Center;
+                                break;
                             case CornerPlacement.TopRight:
                                 container.VerticalAlignment = VerticalAlignment.Top;
                                 container.HorizontalAlignment = HorizontalAlignment.Right;
@@ -282,9 +304,17 @@ namespace WYW.UI.Controls
                                 container.VerticalAlignment = VerticalAlignment.Bottom;
                                 container.HorizontalAlignment = HorizontalAlignment.Left;
                                 break;
+                            case CornerPlacement.BottomCenter:
+                                container.VerticalAlignment = VerticalAlignment.Bottom;
+                                container.HorizontalAlignment = HorizontalAlignment.Center;
+                                break;
                             case CornerPlacement.BottomRight:
                                 container.VerticalAlignment = VerticalAlignment.Bottom;
                                 container.HorizontalAlignment = HorizontalAlignment.Right;
+                                break;
+                            case CornerPlacement.Center:
+                                container.VerticalAlignment = VerticalAlignment.Center;
+                                container.HorizontalAlignment = HorizontalAlignment.Center;
                                 break;
                         }
                     }

@@ -11,9 +11,11 @@
             <Border x:Name="BorderHeader" 
                     CornerRadius="{DynamicResource Control.CornerRadius}" 
                     SnapsToDevicePixels="True"
+                    Background="{StaticResource Header.Background}"
                     BorderBrush="{TemplateBinding BorderBrush}" 
                     BorderThickness="{TemplateBinding BorderThickness}">
                 <ToggleButton Style="{StaticResource ExpanderDownToggleButton}"
+                              Margin="5,0"
                               Content="{TemplateBinding Header}"
                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -65,9 +67,11 @@
             <Border x:Name="BorderHeader" Grid.Row="1"
                     CornerRadius="{DynamicResource Control.CornerRadius}"  
                     BorderBrush="{TemplateBinding BorderBrush}" 
+                    Background="{StaticResource Header.Background}"
                     BorderThickness="{TemplateBinding BorderThickness}">
                 <ToggleButton Style="{StaticResource ExpanderUpToggleButton}"
                               Content="{TemplateBinding Header}"
+                              Margin="5,0"
                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                               IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
@@ -107,7 +111,8 @@
             </Border>
             <Border x:Name="BorderHeader" Grid.Column="1"
                     CornerRadius="{DynamicResource Control.CornerRadius}"  
-                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    Background="{StaticResource Header.Background}"
                     BorderThickness="{TemplateBinding BorderThickness}">
                 <ToggleButton Style="{StaticResource ExpanderLeftToggleButton}"
                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
@@ -155,6 +160,7 @@
             <Border x:Name="BorderHeader" Grid.Column="0"
                     CornerRadius="{DynamicResource Control.CornerRadius}"  
                     SnapsToDevicePixels="True"
+                    Background="{StaticResource Header.Background}"
                     BorderBrush="{TemplateBinding BorderBrush}" 
                     BorderThickness="{TemplateBinding BorderThickness}">
                 <ToggleButton Style="{StaticResource ExpanderRightToggleButton}"

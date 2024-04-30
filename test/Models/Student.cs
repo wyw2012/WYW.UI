@@ -70,6 +70,12 @@ namespace WYW.UI.Test.Models
             set => SetProperty(ref major, value);
         }
 
+        private int groupIndex;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int GroupIndex { get => groupIndex; set => SetProperty(ref groupIndex, value); }
         private Visibility visibility= Visibility.Visible;
 
         /// <summary>
@@ -79,7 +85,7 @@ namespace WYW.UI.Test.Models
 
         public override string ToString()
         {
-            return $@"ID:{ID}，姓名：{Name}，性别：{Gender}，专业：{Major}，是否选中：{IsChecked}";
+            return $@"ID:{ID}，姓名：{Name}，性别：{Gender}，专业：{Major}，分组索引：{GroupIndex}，是否选中：{IsChecked}";
         }
 
     }

@@ -12,12 +12,15 @@
     <converter:ConstToVisibilityConverter x:Key="ConstToVisibilityConverter"/>
     <converter:CornerRadiusMultiplicationConverter x:Key="CornerRadiusMultiplicationConverter"/>
     <converter:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
+    <converter:EnumToInt32Converter x:Key="EnumToInt32Converter"/>
     <converter:MoreThanToBooleanConverter x:Key="MoreThanToBooleanConverter"/>
     <converter:MultiBooleanConverter x:Key="MultiBooleanConverter"/>
     <converter:MultiCommandParametersConverter x:Key="MultiCommandParametersConverter"/>
     <converter:MultiplicationConverter x:Key="MultiplicationConverter"/>
+    <converter:NullableToBooleanConverter x:Key="NullableToBooleanConverter"/>
     <converter:ProgressBarCornerRadiusConverter x:Key="ProgressBarCornerRadiusConverter"/>
     <converter:ReverseConverter x:Key="ReverseConverter"/>
+    <converter:RoundedRectangleConverter x:Key="RoundedRectangleConverter"/>
     <converter:StringFormatConverter x:Key="StringFormatConverter"/>
     <converter:ThicknessMultiplicationConverter x:Key="ThicknessMultiplicationConverter"/>
     

@@ -79,6 +79,9 @@
             <TabItem Header="TabControl">
                 <view:TabControl/>
             </TabItem>
+            <TabItem Header="Tag">
+                <view:Tag/>
+            </TabItem>
             <TabItem Header="TextBlock">
                 <view:TextBlock/>
             </TabItem>

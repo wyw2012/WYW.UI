@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace WYW.UI.Test.Views
 {
     /// <summary>
-    /// NumericUpDown.xaml 的交互逻辑
+    /// Tag.xaml 的交互逻辑
     /// </summary>
-    public partial class NumericUpDown : UserControl
+    public partial class Tag : UserControl
     {
-        public NumericUpDown()
+        public Tag()
         {
             InitializeComponent();
-            this.DataContext = new NumericUpDownViewModel();
+            this.DataContext=new TagViewModel();
         }
     }
 }

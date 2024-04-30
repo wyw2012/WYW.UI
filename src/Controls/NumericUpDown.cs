@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,12 +14,18 @@ namespace WYW.UI.Controls
     /// 数字输入框
     /// </summary>
     public class NumericUpDown : Slider
-    {     
+    {
         private double lastCorrectValue = 0; // 最后一次正确的值
+        static NumericUpDown()
+        {
+            // 解决了如下问题
+            // 1、Value触发会早于Maximum触发，Maximum默认值为10，导致初始的Value≤10
+            // 2、Maximum进行依赖绑定时，会先跳到10，然后跳到绑定的值，从而引发Value≤10。
+            MaximumProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(double.MaxValue, FrameworkPropertyMetadataOptions.AffectsMeasure));
+        }
         public NumericUpDown()
         {
-            //Maximum = UInt32.MaxValue; // 系统默认最大值是10，如果绑定的默认值大于10，则自动设置为10，所以在这里修改最大值。
-            UpButtonClickCommand = new RelayCommand(()=>
+            UpButtonClickCommand = new RelayCommand(() =>
             {
                 Slider.IncreaseLarge.Execute(null, null);
                 UpButtonClick?.Invoke(this, null);
@@ -32,9 +39,8 @@ namespace WYW.UI.Controls
             {
                 MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             });
-          
-        }
 
+        }
         #region 公共事件
         public event EventHandler UpButtonClick;
         public event EventHandler DownButtonClick;
@@ -62,15 +68,16 @@ namespace WYW.UI.Controls
             DependencyProperty.Register("IcoHeight", typeof(double), typeof(NumericUpDown), new PropertyMetadata(10.0));
         public static readonly DependencyProperty CornerRadiusProperty =
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(NumericUpDown), new PropertyMetadata(new CornerRadius(3.0)));
-
         public static readonly DependencyProperty IsEditableProperty =
-         DependencyProperty.Register("IsEditable", typeof(bool), typeof(NumericUpDown), new PropertyMetadata(true));
+            DependencyProperty.Register("IsEditable", typeof(bool), typeof(NumericUpDown), new PropertyMetadata(true));
         public static readonly DependencyProperty UnitProperty =
-          DependencyProperty.Register("Unit", typeof(string), typeof(NumericUpDown), new PropertyMetadata(default(string)));
+            DependencyProperty.Register("Unit", typeof(string), typeof(NumericUpDown), new PropertyMetadata(default(string)));
         public static readonly DependencyProperty LedForegroundProperty =
             DependencyProperty.Register("LedForeground", typeof(Brush), typeof(NumericUpDown), new PropertyMetadata(default(Brush)));
-
-
+        public static readonly DependencyProperty IsCheckedProperty =
+            DependencyProperty.Register("IsChecked", typeof(bool), typeof(NumericUpDown), new PropertyMetadata(true));
+        public static readonly DependencyProperty CheckBoxVisibilityProperty =
+            DependencyProperty.Register("CheckBoxVisibility", typeof(Visibility), typeof(NumericUpDown), new PropertyMetadata(Visibility.Collapsed));
 
         internal static readonly DependencyProperty FormatedValueProperty =
            DependencyProperty.Register("FormatedValue", typeof(string), typeof(NumericUpDown), new PropertyMetadata("0", OnFormatedValueChanged));
@@ -100,7 +107,7 @@ namespace WYW.UI.Controls
             get { return (string)GetValue(StringFormatProperty); }
             set { SetValue(StringFormatProperty, value); }
         }
-    
+
         public string ButtonWidth
         {
             get { return (string)GetValue(ButtonWidthProperty); }
@@ -139,16 +146,11 @@ namespace WYW.UI.Controls
             set { SetValue(IsEditableProperty, value); }
         }
 
-
-
         public string Unit
         {
             get { return (string)GetValue(UnitProperty); }
             set { SetValue(UnitProperty, value); }
         }
-
-
-
 
         public Brush LedForeground
         {
@@ -156,10 +158,17 @@ namespace WYW.UI.Controls
             set { SetValue(LedForegroundProperty, value); }
         }
 
+        public bool? IsChecked
+        {
+            get { return (bool)GetValue(IsCheckedProperty); }
+            set { SetValue(IsCheckedProperty, value); }
+        }
+        public Visibility CheckBoxVisibility
+        {
+            get { return (Visibility)GetValue(CheckBoxVisibilityProperty); }
+            set { SetValue(CheckBoxVisibilityProperty, value); }
+        }
     
-
-
-
         internal string FormatedValue
         {
             get { return (string)GetValue(FormatedValueProperty); }
@@ -197,14 +206,14 @@ namespace WYW.UI.Controls
             double value = 0;
             if (newValue != null && double.TryParse(newValue.ToString(), out value))
             {
-                if (value > Maximum)
-                {
-                    value = Maximum;
-                }
-                if (value < Minimum)
-                {
-                    value = Minimum;
-                }
+                //if (value > Maximum)
+                //{
+                //    value = Maximum;
+                //}
+                //if (value < Minimum)
+                //{
+                //    value = Minimum;
+                //}
                 Value = value;
                 lastCorrectValue = value;
             }

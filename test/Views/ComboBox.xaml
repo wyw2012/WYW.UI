@@ -39,7 +39,11 @@
             <Grid>
                 <StackPanel >
                     <ComboBox wyw:ComboBoxElement.Title="请选择" 
-                                             wyw:ComboBoxElement.TitleWidth="0.5*"/>
+                                             wyw:ComboBoxElement.TitleWidth="0.5*">
+                        <ComboBoxItem Content="条目1"/>
+                        <ComboBoxItem Content="条目2"/>
+                        <ComboBoxItem Content="条目3"/>
+                    </ComboBox>
                     <ComboBox wyw:ComboBoxElement.Title="可编辑" 
                                              wyw:ComboBoxElement.TitleWidth="0.5*"
                                              wyw:ComboBoxElement.InputHint="请输入或选择正确的信息" 

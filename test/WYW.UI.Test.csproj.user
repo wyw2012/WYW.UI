@@ -67,6 +67,9 @@
     <Compile Update="Views\MessageBoxWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Tag.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\TempTest.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -193,6 +196,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MessageBoxWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tag.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\TempTest.xaml">

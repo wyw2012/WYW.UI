@@ -70,9 +70,12 @@ Styles/CircleMenu.xaml
 Styles/CircleProgressBar.xaml
 Styles/ConnectBox.xaml
 Styles/CornerRadiusMask.xaml
+Styles/Legend.xaml
 Styles/MessageBoxControl.xaml
 Styles/MessageBoxWindow.xaml
 Styles/NumericUpDown.xaml
 Styles/ProgressRing.xaml
 Styles/StatusLight.xaml
-
+Styles/TagBox.xaml
+Styles/TagBoxItem.xaml
+Styles/TextBlockEx.xaml

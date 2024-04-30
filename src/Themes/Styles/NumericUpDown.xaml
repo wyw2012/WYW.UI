@@ -9,13 +9,14 @@
                 <ColumnDefinition Width="{Binding TitleWidth,RelativeSource={RelativeSource AncestorType=control:NumericUpDown}}"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="{Binding SuffixWidth,RelativeSource={RelativeSource AncestorType=control:NumericUpDown}}"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="{TemplateBinding Title}"/>
 
             <Border Grid.Column="1"  BorderBrush="{TemplateBinding BorderBrush}" 
                     BorderThickness="{TemplateBinding BorderThickness}"
                     CornerRadius="{TemplateBinding CornerRadius}">
-                <Grid >
+                <Grid IsEnabled="{TemplateBinding IsChecked}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{Binding ButtonWidth,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         <ColumnDefinition Width="*" />
@@ -38,7 +39,7 @@
                                      Text="{Binding FormatedValue,RelativeSource={RelativeSource AncestorType=control:NumericUpDown},UpdateSourceTrigger=LostFocus}"/>
                             <TextBlock Text="{TemplateBinding Unit}" HorizontalAlignment="Right" Margin="{DynamicResource Control.HorizontalMargin}"/>
                         </Grid>
-                  
+
                         <Border.InputBindings>
                             <KeyBinding Key="Enter" Command="{Binding EnterPressedCommand,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         </Border.InputBindings>
@@ -49,11 +50,11 @@
                           attach:ButtonElement.IcoHeight="{TemplateBinding FontSize}"
                           attach:ButtonElement.IcoWidth="{TemplateBinding FontSize}"
                           attach:ButtonElement.CornerRadius="{DynamicResource Control.CornerRadiusRight}" 
-                           BorderThickness="0"/>
+                          BorderThickness="0"/>
                 </Grid>
             </Border>
-
             <TextBlock Grid.Column="2" Margin="{DynamicResource Control.LeftMargin}" Text="{TemplateBinding Suffix}"/>
+            <CheckBox Grid.Column="3" Margin="10,0,0,0" IsChecked="{Binding IsChecked,RelativeSource={RelativeSource AncestorType=control:NumericUpDown},Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="{TemplateBinding CheckBoxVisibility}"/>
         </Grid>
         <ControlTemplate.Triggers>
             <DataTrigger Binding="{Binding IsFocused,ElementName=TextBoxValue}" Value="true">
@@ -79,22 +80,29 @@
                 <ColumnDefinition Width="{Binding TitleWidth,RelativeSource={RelativeSource AncestorType=control:NumericUpDown}}"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="{Binding SuffixWidth,RelativeSource={RelativeSource AncestorType=control:NumericUpDown}}"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="{TemplateBinding Title}"/>
-            <Border Grid.Column="1" x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                <Grid>
+            <Border Grid.Column="1" x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="3">
+                <Grid IsEnabled="{TemplateBinding IsChecked}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="{Binding TitleWidth,RelativeSource={RelativeSource AncestorType=control:NumericUpDown}}"/>
+                        <ColumnDefinition Width="{Binding ButtonWidth,RelativeSource={RelativeSource AncestorType=control:NumericUpDown}}"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Column="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,1,0">
+                    <Border Grid.Column="0" Grid.RowSpan="2"  
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="0">
                         <TextBox Margin="0" x:Name="TextBoxValue"
-                                 attach:TextBoxElement.CornerRadius="3,0,0,3" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                 BorderThickness="0"
+                                 attach:TextBoxElement.CornerRadius="3,0,0,3" 
+                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                  Text="{Binding FormatedValue,RelativeSource={RelativeSource AncestorType=control:NumericUpDown},UpdateSourceTrigger=LostFocus}"/>
                         <Border.InputBindings>
                             <KeyBinding Key="Enter" Command="{Binding EnterPressedCommand,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
@@ -107,7 +115,7 @@
                           attach:ButtonElement.IcoHeight="8"
                           attach:ButtonElement.IcoWidth="8"
                           attach:ButtonElement.CornerRadius="0,3,0,0"
-                          BorderThickness="0"/>
+                          BorderThickness="1,0,0,0"/>
 
                     <RepeatButton Grid.Row="1" Grid.Column="1" x:Name="DownButton" Command="{Binding UpButtonClickCommand,RelativeSource={RelativeSource Mode=TemplatedParent}}" 
                           attach:ButtonElement.IcoGeometry="{StaticResource DownArrowGeometry}"
@@ -115,13 +123,14 @@
                           attach:ButtonElement.IcoWidth="8"
                           attach:ButtonElement.CornerRadius="0,0,3,0"
                           Margin="0,-1,0,0"
-                          BorderThickness="0,1,0,0"/>
+                          BorderThickness="1,1,0,0"/>
 
 
                 </Grid>
             </Border>
-
             <TextBlock Grid.Column="2" Margin="{DynamicResource Control.LeftMargin}" Text="{TemplateBinding Suffix}"/>
+            <CheckBox Grid.Column="3" Margin="10,0,0,0" IsChecked="{TemplateBinding IsChecked}"/>
+
         </Grid>
 
         <ControlTemplate.Triggers>
@@ -151,7 +160,6 @@
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="LedForeground" Value="{StaticResource Foreground}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Maximum" Value="65535"/>
         <Setter Property="Focusable" Value="True"/>
         <Setter Property="Margin" Value="{DynamicResource Control.VerticalMargin}"/>
         <Setter Property="Template" Value="{StaticResource NumericUpDownHorizontalTemplate}"/>

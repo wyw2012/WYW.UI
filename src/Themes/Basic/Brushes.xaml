@@ -4,6 +4,7 @@
     <SolidColorBrush x:Key="BorderBrush" Color="{DynamicResource BorderColor}"/>
     <SolidColorBrush x:Key="BorderBrushHover" Color="{DynamicResource BorderBrushHoverColor}"/>
     <SolidColorBrush x:Key="BorderBrushFocused" Color="{DynamicResource BorderBrushFocusedColor}"/>
+    <SolidColorBrush x:Key="WindowBorderBrush" Color="{DynamicResource WindowBorderColor}"/>
 
     <SolidColorBrush x:Key="Foreground" Color="{DynamicResource ForegroundColor}"/>
     <SolidColorBrush x:Key="ForegroundReadOnly" Color="{DynamicResource ForegroundReadOnlyColor}"/>

@@ -29,9 +29,9 @@
     <Thickness x:Key="Control.LeftMargin">5,0,0,0</Thickness>
     <Thickness x:Key="Control.RightMargin">0,0,5,0</Thickness>
     
-    <Thickness x:Key="Text.Margin">3</Thickness>
+    <Thickness x:Key="Text.Margin">5</Thickness>
     <Thickness x:Key="Text.VerticalMargin">0,3</Thickness>
-    <Thickness x:Key="Text.HorizontalMargin">3,0</Thickness>
+    <Thickness x:Key="Text.HorizontalMargin">5,0</Thickness>
 
     <CornerRadius x:Key="Control.CornerRadius">5</CornerRadius>
     <CornerRadius x:Key="Control.CornerRadiusTop">5,5,0,0</CornerRadius>

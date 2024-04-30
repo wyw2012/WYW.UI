@@ -5,7 +5,8 @@
     <Color x:Key="BorderColor">#FFE0E0E0</Color>
     <Color x:Key="BorderBrushHoverColor">#FFC8C8C8</Color>
     <Color x:Key="BorderBrushFocusedColor">#FF84C1FF</Color>
-
+    <Color x:Key="WindowBorderColor">#FFC8C8C8</Color>
+    
     <Color x:Key="ForegroundColor">#FF111111</Color>
     <Color x:Key="ForegroundReadOnlyColor">#FFAAAAAA</Color>
     <Color x:Key="ForegroundHoverColor">#FF333333</Color>

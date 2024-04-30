@@ -140,7 +140,19 @@
     <Page Update="Themes\Styles\ProgressRing.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Themes\Styles\Legend.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Themes\Styles\StatusLight.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Styles\TagBoxItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Styles\TagBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Styles\TextBlockEx.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

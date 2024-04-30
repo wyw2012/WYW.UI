@@ -5,6 +5,7 @@
     <TargetFrameworks>net452;net6.0-windows</TargetFrameworks>
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 	<ItemGroup>
     <None Remove="Resources\Fonts\fontawesome-webfont.ttf" />

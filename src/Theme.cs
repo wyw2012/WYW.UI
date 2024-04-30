@@ -86,16 +86,16 @@ namespace WYW.UI
             };
             Application.Current.Resources["Text.Margin"] = new Thickness()
             {
-                Left = Math.Round(3.0 * zoomRatio),
-                Top = Math.Round(3.0 * zoomRatio),
-                Right = Math.Round(3.0 * zoomRatio),
-                Bottom = Math.Round(3.0 * zoomRatio),
+                Left = Math.Round(5.0 * zoomRatio),
+                Top = Math.Round(5.0 * zoomRatio),
+                Right = Math.Round(5.0 * zoomRatio),
+                Bottom = Math.Round(5.0 * zoomRatio),
             };
             Application.Current.Resources["Text.HorizontalMargin"] = new Thickness()
             {
-                Left = Math.Round(3.0 * zoomRatio),
+                Left = Math.Round(5.0 * zoomRatio),
                 Top = 0,
-                Right = Math.Round(3.0 * zoomRatio),
+                Right = Math.Round(5.0 * zoomRatio),
                 Bottom = 0,
             };
 

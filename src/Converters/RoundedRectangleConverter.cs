@@ -1,32 +1,32 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace WYW.UI.Converters
 {
     /// <summary>
-    /// 乘法转换器，返回value与parameter的乘积
+    /// 圆角矩形转换器
     /// </summary>
-    public class MultiplicationConverter : IValueConverter
+    public class RoundedRectangleConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
             {
-                var original = double.Parse(value.ToString());
-                var para = double.Parse(parameter.ToString());
-                return original*para;
+                double height = double.Parse(value.ToString());
+                return new CornerRadius(height / 2);
             }
             catch
             {
-                return -1;
+                return new CornerRadius();
             }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
     }
 }

@@ -204,7 +204,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             SnapsToDevicePixels="True">
                         <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -226,6 +226,36 @@
     </Style>
 
     <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellBaseStyle}"/>
+
+    <Style x:Key="DataGridCellNoSelectedStyle"  TargetType="DataGridCell" >
+        <Setter Property="Background"
+                Value="{Binding Background,RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="Padding" Value="{DynamicResource Text.HorizontalMargin}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Border Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            SnapsToDevicePixels="True">
+                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Opacity" Value="0.6" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="{x:Type DataGrid}" TargetType="{x:Type DataGrid}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
@@ -264,6 +294,7 @@
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
                                         <Button Command="ApplicationCommands.SelectAll" Focusable="False" 
                                                 Style="{StaticResource DateGridHeaderAllVisibility}"
@@ -293,7 +324,7 @@
                                                    ViewportSize="{TemplateBinding ViewportHeight}" />
 
                                         <ScrollBar x:Name="PART_HorizontalScrollBar"
-                                                   Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"
+                                                   Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"
                                                        Maximum="{TemplateBinding ScrollableWidth}"
                                                        Orientation="Horizontal" VerticalAlignment="Bottom"
                                                        Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"

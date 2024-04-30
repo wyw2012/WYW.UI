@@ -15,10 +15,14 @@
         </Grid.ColumnDefinitions>
         <GroupBox Grid.Column="0" Header="常规用法">
             <StackPanel >
-                <wyw:NumericUpDown Maximum="100" Value="40"  Orientation="Horizontal"  StringFormat="N3" />
-                <wyw:NumericUpDown Maximum="100" Value="10"  Orientation="Vertical"  StringFormat="N1"
+                <TextBox   Text="{Binding Maximum}" wyw:TextBoxElement.Title="最大值"/>
+                <wyw:NumericUpDown Value="{Binding Value}" Maximum="{Binding Maximum}"/>
+              
+                <!--<wyw:NumericUpDown Maximum="100" Value="40"  Orientation="Horizontal"  StringFormat="N3" />
+                <wyw:NumericUpDown Maximum="100" Value="20"  Orientation="Vertical"  StringFormat="N1"
                                    LargeChange="0.1"/>
-                <wyw:NumericUpDown Maximum="100" Value="40"  
+                <wyw:NumericUpDown Value="{Binding Value}"   />
+                <wyw:NumericUpDown Value="40"  
                                    HorizontalContentAlignment="Center"
                                    Height="80" 
                                    ButtonWidth="80"
@@ -27,7 +31,7 @@
                                    Orientation="Vertical"
                                    ButtonWidth="80"/>
                 <wyw:NumericUpDown Maximum="100" Value="40" Title="请输入数值"/>
-                <wyw:NumericUpDown Maximum="100" Value="40" Title="请输入数值" Orientation="Vertical"/>
+                <wyw:NumericUpDown Maximum="100" Value="40" Title="请输入数值" Orientation="Vertical"/>-->
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Column="2" Header="高级用法">

@@ -17,8 +17,8 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Path Data="{StaticResource UnConnectedGeometry}" Fill="{TemplateBinding IconBrush}"
-                                  Stretch="Uniform" />
-                            <TextBlock Margin="10,0,0,0" Grid.Column="1" VerticalAlignment="Center"
+                                  Stretch="Uniform" Height="{TemplateBinding FontSize,Converter={StaticResource MultiplicationConverter},ConverterParameter=1.5}" />
+                            <TextBlock Margin="5,0,0,0" Grid.Column="1" VerticalAlignment="Center"
                                        Text="{TemplateBinding  UnConnectedText}" Foreground="{TemplateBinding Foreground}" />
                         </Grid>
                         <Grid Name="GridConnected" Visibility="Hidden">
@@ -27,8 +27,8 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Path Name="Path" Data="{StaticResource ConnectedGeometry}" Fill="{TemplateBinding IconBrush}"
-                                  Stretch="Uniform" />
-                            <TextBlock Margin="10,0,0,0" Name="TextBlock" Grid.Column="1" VerticalAlignment="Center"
+    Stretch="Uniform" Height="{TemplateBinding FontSize,Converter={StaticResource MultiplicationConverter},ConverterParameter=1.5}" />
+                            <TextBlock Margin="5,0,0,0" Name="TextBlock" Grid.Column="1" VerticalAlignment="Center"
                                        Text="{TemplateBinding  ConnectedText}" Foreground="{TemplateBinding Foreground}" />
                         </Grid>
                     </Grid>

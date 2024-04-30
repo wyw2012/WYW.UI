@@ -95,8 +95,8 @@
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="UseLayoutRounding" Value="true"/>
         <Setter Property="attach:ButtonElement.CornerRadius" Value="0"/>
-        <Setter Property="attach:ButtonElement.IcoHeight" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=Self},Converter={StaticResource MultiplicationConverter},ConverterParameter=1.8}"/>
-        <Setter Property="attach:ButtonElement.IcoWidth" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=Self},Converter={StaticResource MultiplicationConverter},ConverterParameter=1.8}"/>
+        <Setter Property="attach:ButtonElement.IcoHeight" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=Self},Converter={StaticResource MultiplicationConverter},ConverterParameter=1.5}"/>
+        <Setter Property="attach:ButtonElement.IcoWidth" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=Self},Converter={StaticResource MultiplicationConverter},ConverterParameter=1.5}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
@@ -108,7 +108,7 @@
                             SnapsToDevicePixels="true"
                             CornerRadius="{Binding Path=(attach:ButtonElement.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}"
                             ClipToBounds="True">
-                        <Grid HorizontalAlignment="Center" x:Name="GridContent">
+                        <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" x:Name="GridContent">
                             <StackPanel Orientation="Horizontal" Name="StackPanel">
                                 <Grid  x:Name="GridIco" 
                                        Height="{Binding Path=(attach:ButtonElement.IcoHeight),RelativeSource={RelativeSource TemplatedParent}}"

@@ -105,9 +105,10 @@
                                             Margin="{TemplateBinding Padding}"
                                             SnapsToDevicePixels="True"
                               TextElement.Foreground="{Binding Path=(attach:TabItemElement.HeaderForeground),RelativeSource={RelativeSource TemplatedParent}}">
-                        <Grid Margin="{Binding Height,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource ThicknessMultiplicationConverter},ConverterParameter='0.1,0.15,0.1,0.1'}">
+                        <Grid Margin="{Binding ActualHeight,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource ThicknessMultiplicationConverter},ConverterParameter='0.1,0.15,0.1,0.1'}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
+                                <RowDefinition Height="0.1*" />
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
                             <Grid x:Name="GridIco">
@@ -115,13 +116,13 @@
                                       Data="{Binding Path=(attach:TabItemElement.IcoGeometry),RelativeSource={RelativeSource TemplatedParent}}" 
                                       Height="{Binding Path=(attach:TabItemElement.IcoHeight),RelativeSource={RelativeSource TemplatedParent}}" 
                                       Width="{Binding Path=(attach:TabItemElement.IcoWidth),RelativeSource={RelativeSource TemplatedParent}}" 
-
                                       Stretch="Uniform"
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Center"/>
                             </Grid>
-                            <ContentPresenter Grid.Row="1" x:Name="contentPresenter" 
-                                              Margin="{Binding Height,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource ThicknessMultiplicationConverter},ConverterParameter='0,0.1,0,0'}"
+                            <!--Margin="{Binding ActualHeight,RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource ThicknessMultiplicationConverter},ConverterParameter='0,0.1,0,0'}"-->
+                            <ContentPresenter Grid.Row="2" x:Name="contentPresenter" 
+                                            
                                               ContentSource="Header"
                                               Focusable="False"
                                               RecognizesAccessKey="True"

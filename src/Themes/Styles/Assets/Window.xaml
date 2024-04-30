@@ -5,12 +5,14 @@
                     xmlns:command="clr-namespace:WYW.UI.Commands">
     <Style x:Key="WindowNormalStyle" TargetType="{x:Type Window}">
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource WindowBorderBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="Background" Value="{StaticResource Control.Background}"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}"/>
         <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="WindowChrome.WindowChrome" >
             <Setter.Value>
                 <WindowChrome CaptionHeight="{DynamicResource CaptionHeight}"  ResizeBorderThickness="5"  />
@@ -23,7 +25,8 @@
                             CornerRadius="{Binding Path=(attach:WindowElement.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}"
                             BorderThickness="{TemplateBinding BorderThickness}" 
                             BorderBrush="{TemplateBinding BorderBrush}" 
-                            Background="{TemplateBinding Background}" >
+                            Background="{TemplateBinding Background}"
+                            UseLayoutRounding="{TemplateBinding UseLayoutRounding}">
                         <Grid Margin="{TemplateBinding Padding}"  ClipToBounds="True">
                             <Grid.RowDefinitions>
                                 <RowDefinition MinHeight="{DynamicResource CaptionHeight}"/>
@@ -34,6 +37,7 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
+                                
                                 <Grid  Name="ButtonPanel" WindowChrome.IsHitTestVisibleInChrome="True" UseLayoutRounding="True" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="30*"/>
@@ -50,7 +54,7 @@
                                     <Button Grid.Column="3"  attach:ButtonElement.IcoGeometry="{StaticResource  CloseGeometry}"   Style="{StaticResource SystemButtonStyle}"
                                             x:Name="ButtonClose" Command="{x:Static command:WindowCommand.CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                                 </Grid>
-                                <Grid Grid.Column="0">
+                               <Grid Grid.Column="0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
@@ -65,7 +69,7 @@
                                 </Grid>
                             </Grid>
                             <AdornerDecorator Grid.Row="1">
-                                <ContentPresenter ClipToBounds="True"/>
+                                <ContentPresenter ClipToBounds="True" Name="ContentPresenter"/>
                             </AdornerDecorator>
                             <ResizeGrip Width="10" Height="10" x:Name="ResizeGrip" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" IsTabStop="False" Visibility="Collapsed" WindowChrome.ResizeGripDirection="BottomRight" />
                         </Grid>
@@ -111,6 +115,7 @@
                         <Trigger Property="Title" Value="">
                             <Setter Property="Visibility" TargetName="Title" Value="Collapsed"/>
                         </Trigger>
+                     
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="ResizeMode" Value="CanResizeWithGrip"/>

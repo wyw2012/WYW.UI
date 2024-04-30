@@ -17,7 +17,7 @@ namespace WYW.UI.Controls.Attach
         public static void SetTitleAreaContent(DependencyObject obj, object value) => obj.SetValue(TitleAreaContentProperty, value);
 
         public static readonly DependencyProperty CornerRadiusProperty
-       = DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(WindowElement), new PropertyMetadata(default(CornerRadius)));
+            = DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(WindowElement), new PropertyMetadata(default(CornerRadius)));
 
         public static CornerRadius GetCornerRadius(DependencyObject obj) => (CornerRadius)obj.GetValue(CornerRadiusProperty);
 

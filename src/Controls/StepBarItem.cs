@@ -10,8 +10,6 @@ namespace WYW.UI.Controls
 {
     internal class StepBarItem:Control
     {
-
-
         public int Index
         {
             get { return (int)GetValue(IndexProperty); }

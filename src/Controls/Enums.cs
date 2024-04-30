@@ -19,11 +19,11 @@ namespace WYW.UI.Controls
         /// <summary>
         /// 提示信息
         /// </summary>
-        Tip=0x50,
+        Tip = 0x50,
         /// <summary>
         /// 自定义图标
         /// </summary>
-        Custom=0x80,
+        Custom = 0x80,
     }
     public enum CornerPlacement
     {
@@ -43,6 +43,16 @@ namespace WYW.UI.Controls
         /// 右下角
         /// </summary>
         BottomRight,
+
+        TopCenter,
+        /// <summary>
+        /// 右下角
+        /// </summary>
+        BottomCenter,
+        /// <summary>
+        /// 中心
+        /// </summary>
+        Center,
     }
     /// <summary>
     /// StepBarItem的状态
