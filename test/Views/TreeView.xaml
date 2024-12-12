@@ -39,9 +39,20 @@
                 </StackPanel>
             </GroupBox>
             <GroupBox Grid.Column="2" Header="高级用法">
-                <UniformGrid  Columns="2"  Rows="10">
-
-                </UniformGrid>
+               
+                <TreeView ItemsSource="{Binding Items}">
+                    <TreeView.ItemTemplate>
+                        <DataTemplate>
+                            <TreeViewItem Header="{Binding Name}" ItemsSource="{Binding Scores}">
+                                <TreeViewItem.Template>
+                                    <ControlTemplate>
+                                        <TreeViewItem Header="{Binding}"/>
+                                    </ControlTemplate>
+                                </TreeViewItem.Template>
+                            </TreeViewItem>
+                        </DataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
             </GroupBox>
         </Grid>
     </Grid>

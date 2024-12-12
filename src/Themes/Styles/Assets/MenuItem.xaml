@@ -231,7 +231,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="{x:Type MenuItem}" TargetType="{x:Type MenuItem}">
+    <Style x:Key="MenuItemBase" TargetType="{x:Type MenuItem}">
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Background" Value="{StaticResource Control.Background}" />
@@ -241,7 +241,7 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
-        <Setter Property="Height" Value="{DynamicResource Item.Height}" />
+        <Setter Property="Height" Value="{DynamicResource MenuItem.Height}" />
         <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Padding" Value="{StaticResource Control.HorizontalMargin}"/>
@@ -259,5 +259,5 @@
 
         </Style.Triggers>
     </Style>
-
+    <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MenuItemBase}"/>
 </ResourceDictionary>

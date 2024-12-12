@@ -23,6 +23,7 @@ namespace WYW.UI.Test.Views
         public TreeView()
         {
             InitializeComponent();
+            this.DataContext=new TreeViewModel();
         }
     }
 }

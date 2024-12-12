@@ -37,6 +37,7 @@
         <GroupBox Grid.Column="2" Header="高级用法">
             <Grid>
                 <StackPanel >
+                    <wyw:NumericUpDown Value="{Binding Value}" ValueRange="21,23,25" Maximum="24"/>
                 </StackPanel>
                 <Border BorderThickness="1" Padding="10" CornerRadius="5" VerticalAlignment="Bottom">
                     <TextBlock Text="提示："

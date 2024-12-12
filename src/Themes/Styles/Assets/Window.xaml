@@ -30,7 +30,7 @@
                         <Grid Margin="{TemplateBinding Padding}"  ClipToBounds="True">
                             <Grid.RowDefinitions>
                                 <RowDefinition MinHeight="{DynamicResource CaptionHeight}"/>
-                                <RowDefinition Height="21*"/>
+                                <RowDefinition Height="20*"/>
                             </Grid.RowDefinitions>
                             <Grid Background="{TemplateBinding Background}">
                                 <Grid.ColumnDefinitions>
@@ -79,6 +79,14 @@
                             <Setter Property="Opacity" Value="0.8" TargetName="ContentPresenterMain"/>
                             <Setter Property="Opacity" Value="0.8" TargetName="ButtonPanel"/>
                         </Trigger>
+                        <Trigger Property="WindowStyle" Value="ToolWindow">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMin"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonRestore"/>
+                        </Trigger>
+                        <Trigger Property="WindowStyle" Value="None">
+                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonPanel"/>
+                        </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter Property="Padding" Value="10"/>
                             <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
@@ -97,14 +105,7 @@
                             <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
                             <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonRestore"/>
                         </Trigger>
-                        <Trigger Property="WindowStyle" Value="ToolWindow">
-                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMin"/>
-                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax"/>
-                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonRestore"/>
-                        </Trigger>
-                        <Trigger Property="WindowStyle" Value="None">
-                            <Setter Property="Visibility" Value="Collapsed" TargetName="ButtonPanel"/>
-                        </Trigger>
+                        
                         <Trigger Property="IsMouseOver" Value="True" SourceName="ButtonClose">
                             <Setter Property="Background" TargetName="ButtonClose" Value="#ffe81123"/>
                             <Setter Property="Foreground" TargetName="ButtonClose" Value="white"/>

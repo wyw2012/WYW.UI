@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <GroupBox Grid.Column="0" Header="常规用法">
             <StackPanel >
-
+                <Calendar/>
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Column="2" Header="高级用法">

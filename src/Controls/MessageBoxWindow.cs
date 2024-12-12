@@ -197,7 +197,6 @@ namespace WYW.UI.Controls
             var zoomRatio = SystemParameters.PrimaryScreenHeight / 1080.0;
             this.Width *= zoomRatio;
             this.Height *= zoomRatio;
-
             Message = messageBoxText;
             Title = caption;
             MessageBoxButton = button;
@@ -281,13 +280,13 @@ namespace WYW.UI.Controls
         internal static readonly DependencyProperty IsAutoCloseProperty =
             DependencyProperty.Register("IsAutoClose", typeof(bool), typeof(MessageBoxWindow), new PropertyMetadata(default(bool)));
         internal static readonly DependencyProperty YesButtonTextProperty =
-            DependencyProperty.Register("YesButtonText", typeof(string), typeof(MessageBoxWindow), new PropertyMetadata(CultureInfo.CurrentUICulture.Name == "zh-CN" ? "是" : "Yes"));
+            DependencyProperty.Register("YesButtonText", typeof(string), typeof(MessageBoxWindow), new PropertyMetadata(CultureInfo.DefaultThreadCurrentUICulture.Name == "zh-CN" ? "是" : "Yes"));
         internal static readonly DependencyProperty NoButtonTextProperty =
-            DependencyProperty.Register("NoButtonText", typeof(string), typeof(MessageBoxWindow), new PropertyMetadata(CultureInfo.CurrentUICulture.Name == "zh-CN" ? "否" : "NO"));
+            DependencyProperty.Register("NoButtonText", typeof(string), typeof(MessageBoxWindow), new PropertyMetadata(CultureInfo.DefaultThreadCurrentUICulture.Name == "zh-CN" ? "否" : "NO"));
         internal static readonly DependencyProperty CancelButtonTextProperty =
-            DependencyProperty.Register("CancelButtonText", typeof(string), typeof(MessageBoxWindow), new PropertyMetadata(CultureInfo.CurrentUICulture.Name == "zh-CN" ? "取消" : "Cancel"));
+            DependencyProperty.Register("CancelButtonText", typeof(string), typeof(MessageBoxWindow), new PropertyMetadata(CultureInfo.DefaultThreadCurrentUICulture.Name == "zh-CN" ? "取消" : "Cancel"));
         internal static readonly DependencyProperty OKButtonTextProperty =
-            DependencyProperty.Register("OKButtonText", typeof(string), typeof(MessageBoxWindow), new PropertyMetadata(CultureInfo.CurrentUICulture.Name == "zh-CN" ? "确定" : "OK"));
+            DependencyProperty.Register("OKButtonText", typeof(string), typeof(MessageBoxWindow), new PropertyMetadata(CultureInfo.DefaultThreadCurrentUICulture.Name == "zh-CN" ? "确定" : "OK"));
         internal static readonly DependencyProperty WindowKeepTimeProperty =
             DependencyProperty.Register("WindowKeepTime", typeof(int), typeof(MessageBoxWindow), new PropertyMetadata(5));
 
@@ -398,7 +397,7 @@ namespace WYW.UI.Controls
         private void AutoClose()
         {
             int keepTime = WindowKeepTime;
-            StoryboardHelper.OpacityChanging(this, 1, 0, WindowKeepTime - 1, WindowKeepTime);
+            AnimationHelper.OpacityChanging(this, 1, 0, WindowKeepTime - 1, WindowKeepTime);
             ThreadPool.QueueUserWorkItem(delegate
             {
                 DateTime startTime = DateTime.Now;

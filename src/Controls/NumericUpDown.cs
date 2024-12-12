@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -78,6 +79,13 @@ namespace WYW.UI.Controls
             DependencyProperty.Register("IsChecked", typeof(bool), typeof(NumericUpDown), new PropertyMetadata(true));
         public static readonly DependencyProperty CheckBoxVisibilityProperty =
             DependencyProperty.Register("CheckBoxVisibility", typeof(Visibility), typeof(NumericUpDown), new PropertyMetadata(Visibility.Collapsed));
+        public static readonly DependencyProperty ValueRangeProperty =
+            DependencyProperty.Register("ValueRange", typeof(DoubleCollection), typeof(NumericUpDown), new PropertyMetadata(default(DoubleCollection)));
+        public static readonly DependencyProperty RangeModeProperty =
+            DependencyProperty.Register("RangeMode", typeof(ValueRangeMode), typeof(NumericUpDown), new PropertyMetadata(default(ValueRangeMode)));
+
+
+        
 
         internal static readonly DependencyProperty FormatedValueProperty =
            DependencyProperty.Register("FormatedValue", typeof(string), typeof(NumericUpDown), new PropertyMetadata("0", OnFormatedValueChanged));
@@ -168,7 +176,18 @@ namespace WYW.UI.Controls
             get { return (Visibility)GetValue(CheckBoxVisibilityProperty); }
             set { SetValue(CheckBoxVisibilityProperty, value); }
         }
-    
+        public DoubleCollection ValueRange
+        {
+            get { return (DoubleCollection)GetValue(ValueRangeProperty); }
+            set { SetValue(ValueRangeProperty, value); }
+        }
+
+        public ValueRangeMode RangeMode
+        {
+            get { return (ValueRangeMode)GetValue(RangeModeProperty); }
+            set { SetValue(RangeModeProperty, value); }
+        }
+
         internal string FormatedValue
         {
             get { return (string)GetValue(FormatedValueProperty); }
@@ -197,6 +216,50 @@ namespace WYW.UI.Controls
         {
             base.OnValueChanged(oldValue, newValue);
             Format();
+        }
+        protected override void OnDecreaseLarge()
+        {
+            if (ValueRange == default)
+            {
+                base.OnDecreaseLarge();
+            }
+            else
+            {
+                var values = ValueRange.Where(x => x < Value && x >= Minimum);
+                if (values.Any())
+                {
+                    Value = values.Last();
+                }
+                else
+                {
+                    if(RangeMode== ValueRangeMode.Contains)
+                    {
+                        base.OnDecreaseLarge();
+                    }
+                }
+            }
+        }
+        protected override void OnIncreaseLarge()
+        {
+            if (ValueRange == default)
+            {
+                base.OnIncreaseLarge();
+            }
+            else
+            {
+                var values = ValueRange.Where(x => x > Value && x <= Maximum);
+                if (values.Any())
+                {
+                    Value = values.First();
+                }
+                else
+                {
+                    if (RangeMode == ValueRangeMode.Contains)
+                    {
+                        base.OnIncreaseLarge();
+                    }
+                }
+            }
         }
         #endregion
 
@@ -232,8 +295,22 @@ namespace WYW.UI.Controls
             }
             else
             {
-                FormatedValue = Value.ToString();
+                FormatedValue = ((decimal)Value).ToString();
             }
+        }
+        /// <summary>
+        /// ValueRange匹配模式
+        /// </summary>
+        public enum ValueRangeMode
+        {
+            /// <summary>
+            /// NumericUpDown的值只在ValueRange范围内
+            /// </summary>
+            All,
+            /// <summary>
+            /// NumericUpDown的值包含ValueRange
+            /// </summary>
+            Contains,
         }
         #endregion
     }

@@ -19,17 +19,17 @@
         </Grid.RowDefinitions>
         <GroupBox Grid.Column="0"  Grid.Row="0" Header="常规用法">
             <StackPanel>
-                <wyw:Tag  Content="标签1"/>
-                <wyw:Tag  Header="1" Content="标签2"/>
-                <wyw:Tag  Header="2" Content="标签3" ShowCloseButton="True"/>
-                <wyw:Tag  Header="3" Content="标签4" ShowCloseButton="True"/>
+                <wyw:TagBoxItem  Content="标签1"/>
+                <wyw:TagBoxItem  Header="1" Content="标签2"/>
+                <wyw:TagBoxItem  Header="2" Content="标签3" ShowCloseButton="True"/>
+                <wyw:TagBoxItem  Header="3" Content="标签4" ShowCloseButton="True"/>
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Column="0"  Grid.Row="1" Header="绑定集合" Margin="0,20,0,0">
             <wyw:TagBox ItemsSource="{Binding Items}">
                 <wyw:TagBox.ItemTemplate>
                     <DataTemplate>
-                        <wyw:Tag Header="{Binding ID}"  Content="{Binding Name}" ShowCloseButton="{Binding IsChecked}"/>
+                        <wyw:TagBoxItem Header="{Binding ID}"  Content="{Binding Name}" ShowCloseButton="{Binding IsChecked}"/>
                     </DataTemplate>
                 </wyw:TagBox.ItemTemplate>
             </wyw:TagBox>

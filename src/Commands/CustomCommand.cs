@@ -19,5 +19,14 @@ namespace WYW.UI.Commands
         public static RoutedCommand CloseCommand = new RoutedCommand();
         public static RoutedCommand RemoveCommand = new RoutedCommand();
         public static RoutedCommand RemoveAllCommand = new RoutedCommand();
+
+        public static RoutedCommand OpenCommand = new RoutedCommand();
+        public static RoutedCommand SaveCommand = new RoutedCommand();
+        public static RoutedCommand RestoreCommand = new RoutedCommand();
+        public static RoutedCommand ReduceCommand = new RoutedCommand();
+        public static RoutedCommand EnlargeCommand = new RoutedCommand();
+        public static RoutedCommand RotateLeftCommand = new RoutedCommand();
+        public static RoutedCommand RotateRightCommand = new RoutedCommand();
+        public static RoutedCommand MouseMoveCommand = new RoutedCommand();
     }
 }

@@ -48,6 +48,7 @@
 	<converter:MultiCommandParametersConverter x:Key="MultiCommandParametersConverter" />
 	<converter:MultiplicationConverter x:Key="MultiplicationConverter" />
 	<converter:NullableToBooleanConverter x:Key="NullableToBooleanConverter" />
+	<converter:NullableToVisibilityConverter x:Key="NullableToVisibilityConverter" />
 	<converter:ProgressBarCornerRadiusConverter x:Key="ProgressBarCornerRadiusConverter" />
 	<converter:ReverseConverter x:Key="ReverseConverter" />
 	<converter:RoundedRectangleConverter x:Key="RoundedRectangleConverter" />
@@ -191,6 +192,7 @@
 	<sys:Double x:Key="TabItem.Height">60.0</sys:Double>
 	<sys:Double x:Key="TabItem.Width">200.0</sys:Double>
 	<sys:Double x:Key="Header.Height">40.0</sys:Double>
+	<sys:Double x:Key="MenuItem.Height">50.0</sys:Double>
 	<sys:Double x:Key="CaptionHeight">40.0</sys:Double>
 	<sys:Double x:Key="RingThickness">10.0</sys:Double>
 	<sys:Double x:Key="DataGridItem.Width">120.0</sys:Double>
@@ -2396,6 +2398,47 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+	<Style x:Key="MenuButtonStyle" TargetType="Menu">
+		<Setter Property="FocusVisualStyle" Value="{x:Null}" />
+		<Setter Property="Foreground" Value="{StaticResource Foreground}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="attach:MenuElement.CornerRadius" Value="{StaticResource Control.CornerRadius}" />
+		<Setter Property="attach:MenuElement.IcoHeight" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=Self},Converter={StaticResource MultiplicationConverter},ConverterParameter=1.5}" />
+		<Setter Property="attach:MenuElement.IcoWidth" Value="{Binding FontSize,RelativeSource={RelativeSource Mode=Self},Converter={StaticResource MultiplicationConverter},ConverterParameter=1.5}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Menu">
+					<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="{Binding Path=(attach:MenuElement.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}" SnapsToDevicePixels="true">
+						<Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" x:Name="GridContent">
+							<StackPanel Orientation="Horizontal" Name="StackPanel">
+								<Grid x:Name="GridIco" Height="{Binding Path=(attach:MenuElement.IcoHeight),RelativeSource={RelativeSource TemplatedParent}}" Width="{Binding Path=(attach:MenuElement.IcoWidth),RelativeSource={RelativeSource TemplatedParent}}">
+									<Path Fill="{TemplateBinding Foreground}" Data="{Binding Path=(attach:MenuElement.IcoGeometry),RelativeSource={RelativeSource TemplatedParent}}" Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center" />
+								</Grid>
+								<Grid x:Name="GridSpace" Width="{Binding Path=(attach:MenuElement.IcoSpace),RelativeSource={RelativeSource TemplatedParent}}" Height="{Binding Path=(attach:MenuElement.IcoSpace),RelativeSource={RelativeSource TemplatedParent}}" />
+								<Grid IsItemsHost="True" Name="ItemsPresenter" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" KeyboardNavigation.DirectionalNavigation="Contained" TextElement.Foreground="{TemplateBinding Foreground}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+							</StackPanel>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="{StaticResource ForegroundDisabled}" />
+							<Setter Property="Background" Value="{StaticResource Control.BackgroundDisabled}" />
+							<Setter Property="BorderThickness" Value="0" />
+						</Trigger>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" Value="{StaticResource Control.BackgroundHover }" />
+							<Setter Property="BorderBrush" Value="{StaticResource BorderBrushHover}" />
+							<Setter Property="Foreground" Value="{StaticResource ForegroundHover}" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 	<Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="{x:Type Separator}">
 		<Setter Property="Template">
 			<Setter.Value>
@@ -2565,7 +2608,7 @@
 			</MultiTrigger>
 		</ControlTemplate.Triggers>
 	</ControlTemplate>
-	<Style x:Key="{x:Type MenuItem}" TargetType="{x:Type MenuItem}">
+	<Style x:Key="MenuItemBase" TargetType="{x:Type MenuItem}">
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="Background" Value="{StaticResource Control.Background}" />
@@ -2575,7 +2618,7 @@
 		<Setter Property="FocusVisualStyle" Value="{x:Null}" />
 		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
-		<Setter Property="Height" Value="{DynamicResource Item.Height}" />
+		<Setter Property="Height" Value="{DynamicResource MenuItem.Height}" />
 		<Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
 		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
 		<Setter Property="Padding" Value="{StaticResource Control.HorizontalMargin}" />
@@ -2592,6 +2635,7 @@
 			</Trigger>
 		</Style.Triggers>
 	</Style>
+	<Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource MenuItemBase}" />
 	<Style TargetType="{x:Type PasswordBox}">
 		<Setter Property="FocusVisualStyle" Value="{x:Null}" />
 		<Setter Property="Foreground" Value="{StaticResource Foreground}" />
@@ -3876,6 +3920,7 @@
 		<Setter Property="Focusable" Value="False" />
 		<Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
 		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Foreground" Value="{StaticResource Foreground}" />
 		<Setter Property="Padding" Value="0" />
 		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
 		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
@@ -3940,6 +3985,7 @@
 		<Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
 		<Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
 		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Foreground" Value="{StaticResource Foreground}" />
 		<Setter Property="FocusVisualStyle" Value="{x:Null}" />
 		<Setter Property="Template">
 			<Setter.Value>
@@ -4033,7 +4079,7 @@
 						<Grid Margin="{TemplateBinding Padding}" ClipToBounds="True">
 							<Grid.RowDefinitions>
 								<RowDefinition MinHeight="{DynamicResource CaptionHeight}" />
-								<RowDefinition Height="21*" />
+								<RowDefinition Height="20*" />
 							</Grid.RowDefinitions>
 							<Grid Background="{TemplateBinding Background}">
 								<Grid.ColumnDefinitions>
@@ -4074,6 +4120,14 @@
 							<Setter Property="Opacity" Value="0.8" TargetName="ContentPresenterMain" />
 							<Setter Property="Opacity" Value="0.8" TargetName="ButtonPanel" />
 						</Trigger>
+						<Trigger Property="WindowStyle" Value="ToolWindow">
+							<Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMin" />
+							<Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax" />
+							<Setter Property="Visibility" Value="Collapsed" TargetName="ButtonRestore" />
+						</Trigger>
+						<Trigger Property="WindowStyle" Value="None">
+							<Setter Property="Visibility" Value="Collapsed" TargetName="ButtonPanel" />
+						</Trigger>
 						<Trigger Property="WindowState" Value="Maximized">
 							<Setter Property="Padding" Value="10" />
 							<Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax" />
@@ -4091,14 +4145,6 @@
 						<Trigger Property="ResizeMode" Value="CanMinimize">
 							<Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax" />
 							<Setter Property="Visibility" Value="Collapsed" TargetName="ButtonRestore" />
-						</Trigger>
-						<Trigger Property="WindowStyle" Value="ToolWindow">
-							<Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMin" />
-							<Setter Property="Visibility" Value="Collapsed" TargetName="ButtonMax" />
-							<Setter Property="Visibility" Value="Collapsed" TargetName="ButtonRestore" />
-						</Trigger>
-						<Trigger Property="WindowStyle" Value="None">
-							<Setter Property="Visibility" Value="Collapsed" TargetName="ButtonPanel" />
 						</Trigger>
 						<Trigger Property="IsMouseOver" Value="True" SourceName="ButtonClose">
 							<Setter Property="Background" TargetName="ButtonClose" Value="#ffe81123" />
@@ -4478,7 +4524,7 @@
 									<ColumnDefinition MinWidth="45" />
 								</Grid.ColumnDefinitions>
 								<TextBlock Text="{TemplateBinding Title}" Margin="10,0,0,0" VerticalAlignment="Center" />
-								<Button Grid.Column="1" BorderThickness="0" Background="Transparent" attach:ButtonElement.CornerRadius="{Binding CornerRadius, ElementName=Border,Converter={StaticResource CornerRadiusMultiplicationConverter},ConverterParameter='0,1,0,0'}" attach:ButtonElement.IcoGeometry="{StaticResource CloseGeometry}" attach:ButtonElement.IcoHeight="{TemplateBinding FontSize}" attach:ButtonElement.IcoWidth="{TemplateBinding FontSize}" WindowChrome.IsHitTestVisibleInChrome="True" x:Name="ButtonClose" Command="{x:Static command:CustomCommand.CloseCommand}" />
+								<Button Grid.Column="1" BorderThickness="0" Background="Transparent" attach:ButtonElement.CornerRadius="{Binding CornerRadius, ElementName=Border,Converter={StaticResource CornerRadiusMultiplicationConverter},ConverterParameter='0,1,0,0'}" attach:ButtonElement.IcoGeometry="{StaticResource CloseGeometry}" attach:ButtonElement.IcoHeight="{TemplateBinding FontSize}" attach:ButtonElement.IcoWidth="{TemplateBinding FontSize}" WindowChrome.IsHitTestVisibleInChrome="True" x:Name="ButtonClose" Visibility="Collapsed" Command="{x:Static command:CustomCommand.CloseCommand}" />
 							</Grid>
 							<Grid Grid.Row="1">
 								<Grid.ColumnDefinitions>
@@ -4638,6 +4684,7 @@
 		<Setter Property="LedForeground" Value="{StaticResource Foreground}" />
 		<Setter Property="BorderThickness" Value="1" />
 		<Setter Property="Focusable" Value="True" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
 		<Setter Property="Margin" Value="{DynamicResource Control.VerticalMargin}" />
 		<Setter Property="Template" Value="{StaticResource NumericUpDownHorizontalTemplate}" />
 		<Style.Triggers>

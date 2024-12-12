@@ -11,6 +11,7 @@
     <sys:Double x:Key="TabItem.Height">60.0</sys:Double>
     <sys:Double x:Key="TabItem.Width">200.0</sys:Double>
     <sys:Double x:Key="Header.Height">40.0</sys:Double>
+    <sys:Double x:Key="MenuItem.Height">50.0</sys:Double>
     <sys:Double x:Key="CaptionHeight">40.0</sys:Double>
     <sys:Double x:Key="RingThickness">10.0</sys:Double>
     <sys:Double x:Key="DataGridItem.Width">120.0</sys:Double>

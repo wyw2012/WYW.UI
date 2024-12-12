@@ -87,7 +87,7 @@ namespace WYW.UI.Test.Models
         {
             return $@"ID:{ID}，姓名：{Name}，性别：{Gender}，专业：{Major}，分组索引：{GroupIndex}，是否选中：{IsChecked}";
         }
-
+        public double[] Scores { get; set; }
     }
     public enum Gender
     {

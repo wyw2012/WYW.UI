@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 
@@ -17,7 +18,8 @@ namespace WYW.UI
             {
                 Application.Current.Resources["TextElement.Height"] = Math.Round(zoomRatio * 40);
                 Application.Current.Resources["Item.Height"] = Math.Round(zoomRatio * 40);
-                Application.Current.Resources["Header.Height"] = Math.Round(zoomRatio * 45);
+                Application.Current.Resources["Header.Height"] = Math.Round(zoomRatio * 40);
+                Application.Current.Resources["MenuItem.Height"] = Math.Round(zoomRatio * 55);
                 Application.Current.Resources["TabItem.Height"] = Math.Round(zoomRatio * 70);
             }
             else
@@ -25,7 +27,9 @@ namespace WYW.UI
                 Application.Current.Resources["TextElement.Height"] = Math.Round(zoomRatio * 36);
                 Application.Current.Resources["Item.Height"] = Math.Round(zoomRatio * 36);
                 Application.Current.Resources["Header.Height"] = Math.Round(zoomRatio * 40);
+                Application.Current.Resources["MenuItem.Height"] = Math.Round(zoomRatio * 50);
                 Application.Current.Resources["TabItem.Height"] = Math.Round(zoomRatio * 60);
+                
 
             }
             Application.Current.Resources["DefaultFontSize"] = Math.Round(zoomRatio * 18);
@@ -165,6 +169,10 @@ namespace WYW.UI
             }
 
             return false;
+        }
+        public static void SetLanguage(string language)
+        {
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(language);
         }
     }
 
